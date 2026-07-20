@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triple A Gas — Website Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16191c;
+    --cylinder-blue:#0B3B5C;
+    --cylinder-blue-light:#14507A;
+    --cylinder-blue-pale:#E4ECF1;
+    --flame:#D6491C;
+    --flame-light:#F0703F;
+    --flame-pale:#FBE7DE;
+    --hazard:#F0A202;
+    --hazard-pale:#FDF0D6;
+    --safe:#2E7D32;
+    --safe-pale:#E4F1E5;
+    --danger:#B3261E;
+    --danger-pale:#F7E2E0;
+    --cloud:#F3F5F7;
+    --paper:#FFFFFF;
+    --steel-100:#E7EBEE;
+    --steel-300:#C4CCD2;
+    --steel-400:#8A97A1;
+    --steel-600:#4B5860;
+    --admin-bg:#14181C;
+    --admin-panel:#1E2429;
+    --admin-panel-2:#242B31;
+    --admin-border:#2B333A;
+    --admin-text:#DCE3E8;
+    --admin-text-dim:#8A97A1;
+    --display:'Archivo Expanded', sans-serif;
+    --body:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --radius:10px;
+    --sidebar-w:280px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--body);
+    background:var(--cloud);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cylinder-blue);}
+
+  /* ---------- Shell layout ---------- */
+  .shell{display:flex;min-height:100vh;}
+
+  .sidebar{
+    width:var(--sidebar-w);
+    flex-shrink:0;
+    background:var(--ink);
+    color:#fff;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    padding:28px 0 28px;
+  }
+  .sidebar-brand{
+    display:flex;align-items:center;gap:12px;
+    padding:0 24px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    margin-bottom:14px;
+  }
+  .mark{width:38px;height:38px;flex-shrink:0;}
+  .sidebar-brand-text{font-family:var(--display);font-weight:800;font-size:15.5px;letter-spacing:.02em;line-height:1.2;}
+  .sidebar-brand-text span{display:block;font-family:var(--body);font-weight:500;font-size:10.5px;letter-spacing:.14em;color:var(--steel-300);text-transform:uppercase;margin-top:3px;}
+
+  .nav-group-label{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--steel-400);padding:14px 24px 6px;font-weight:600;
+  }
+  .navlist{list-style:none;margin:0;padding:0 12px;}
+  .navlist li{margin:1px 0;}
+  .navlist button{
+    all:unset;
+    display:flex;align-items:baseline;gap:10px;
+    width:100%;padding:9px 12px;border-radius:8px;
+    cursor:pointer;font-size:13.5px;color:#C9D2D8;
+    transition:background .12s ease, color .12s ease;
+  }
+  .navlist button .num{font-family:var(--mono);font-size:11px;color:var(--steel-400);width:16px;flex-shrink:0;}
+  .navlist button:hover{background:rgba(255,255,255,.06);color:#fff;}
+  .navlist button.active{background:var(--flame);color:#fff;}
+  .navlist button.active .num{color:rgba(255,255,255,.75);}
+
+  .main{
+    flex:1;
+    min-width:0;
+    padding:52px 64px 120px;
+    max-width:1180px;
+  }
+  .page{display:none;animation:fade .25s ease;}
+  .page.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  .page-kicker{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:12px;color:var(--flame);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;
+  }
+  .page-kicker::before{content:"";width:22px;height:2px;background:var(--flame);display:inline-block;}
+  h1.page-title{
+    font-family:var(--display);font-weight:800;font-size:38px;
+    margin:0 0 8px;color:var(--ink);letter-spacing:-.01em;
+  }
+  .page-sub{font-size:16px;color:var(--steel-600);max-width:760px;margin:0 0 40px;}
+
+  h2{font-family:var(--display);font-weight:700;font-size:22px;margin:44px 0 14px;color:var(--ink);}
+  h2:first-of-type{margin-top:0;}
+  h3{font-family:var(--body);font-weight:700;font-size:15px;margin:26px 0 10px;color:var(--ink);}
+  p{margin:0 0 14px;color:#333a3f;}
+  ul.std, ol.std{margin:0 0 16px;padding-left:20px;color:#333a3f;}
+  ul.std li, ol.std li{margin-bottom:6px;}
+
+  .callout{
+    border-left:3px solid var(--flame);
+    background:var(--flame-pale);
+    padding:14px 18px;border-radius:6px;
+    font-size:14px;color:#5c2a15;margin:18px 0 26px;
+  }
+  .callout.blue{border-color:var(--cylinder-blue);background:var(--cylinder-blue-pale);color:var(--cylinder-blue);}
+  .callout.amber{border-color:var(--hazard);background:var(--hazard-pale);color:#6b4a02;}
+
+  .grid{display:grid;gap:18px;}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .grid-3{grid-template-columns:1fr 1fr 1fr;}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  @media (max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--paper);border:1px solid var(--steel-100);
+    border-radius:var(--radius);padding:20px;
+  }
+
+  table.spec{width:100%;border-collapse:collapse;margin:10px 0 26px;font-size:13.5px;}
+  table.spec th{
+    text-align:left;font-family:var(--mono);font-size:11px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--steel-600);border-bottom:2px solid var(--steel-100);
+    padding:8px 12px;
+  }
+  table.spec td{padding:10px 12px;border-bottom:1px solid var(--steel-100);vertical-align:top;}
+  table.spec tr:last-child td{border-bottom:none;}
+
+  /* ---------- color swatches ---------- */
+  .swatch{border-radius:var(--radius);overflow:hidden;border:1px solid var(--steel-100);}
+  .swatch-color{height:84px;}
+  .swatch-meta{padding:12px 14px;background:var(--paper);}
+  .swatch-name{font-weight:700;font-size:13.5px;}
+  .swatch-hex{font-family:var(--mono);font-size:12px;color:var(--steel-600);}
+  .swatch-use{font-size:12px;color:var(--steel-600);margin-top:4px;}
+
+  /* ---------- type specimens ---------- */
+  .type-row{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--steel-100);padding:18px 0;gap:20px;}
+  .type-row:first-of-type{border-top:1px solid var(--steel-100);}
+  .type-sample{font-family:var(--display);font-weight:800;}
+  .type-label{font-family:var(--mono);font-size:11px;color:var(--steel-600);flex-shrink:0;text-align:right;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--body);font-weight:700;font-size:14px;
+    padding:12px 22px;border-radius:8px;border:none;cursor:pointer;
+    text-decoration:none;
+  }
+  .btn-primary{background:var(--flame);color:#fff;}
+  .btn-secondary{background:var(--cylinder-blue);color:#fff;}
+  .btn-ghost{background:transparent;color:var(--cylinder-blue);border:1.5px solid var(--cylinder-blue);}
+  .btn-whatsapp{background:#25D366;color:#0b3b23;}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0 26px;align-items:center;}
+
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.04em;}
+  .badge-safe{background:var(--safe-pale);color:var(--safe);}
+  .badge-hazard{background:var(--hazard-pale);color:#8a5c02;}
+  .badge-danger{background:var(--danger-pale);color:var(--danger);}
+  .badge-blue{background:var(--cylinder-blue-pale);color:var(--cylinder-blue);}
+
+  /* gauge motif */
+  .gauge{position:relative;width:96px;height:96px;}
+  .gauge svg{width:100%;height:100%;}
+  .gauge-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+  .gauge-value{font-family:var(--mono);font-weight:600;font-size:18px;color:var(--ink);}
+  .gauge-unit{font-size:9px;color:var(--steel-600);text-transform:uppercase;letter-spacing:.06em;}
+
+  /* ---------- mockups ---------- */
+  .mock{border-radius:14px;overflow:hidden;border:1px solid var(--steel-100);box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .mock-browserbar{background:#E9EDEF;padding:8px 12px;display:flex;gap:6px;align-items:center;}
+  .mock-dot{width:8px;height:8px;border-radius:50%;background:#C4CCD2;}
+  .mock-url{margin-left:8px;font-family:var(--mono);font-size:10.5px;color:var(--steel-600);background:#fff;border-radius:5px;padding:3px 10px;}
+
+  .site-nav{background:var(--cylinder-blue);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;font-size:12px;}
+  .site-nav .links{display:flex;gap:18px;font-weight:600;}
+  .site-nav .logo{font-family:var(--display);font-weight:800;letter-spacing:.02em;font-size:14px;}
+  .site-hero{background:linear-gradient(135deg,var(--cylinder-blue) 0%,var(--cylinder-blue-light) 55%, var(--flame) 165%);color:#fff;padding:46px 32px;}
+  .site-hero h4{font-family:var(--display);font-size:26px;margin:0 0 8px;max-width:420px;line-height:1.15;}
+  .site-hero p{color:rgba(255,255,255,.85);max-width:400px;font-size:13px;}
+  .stat-bar{display:flex;background:var(--ink);color:#fff;padding:18px 24px;gap:32px;flex-wrap:wrap;}
+  .stat{text-align:left;}
+  .stat b{display:block;font-family:var(--display);font-size:20px;color:var(--hazard);}
+  .stat span{font-size:10.5px;color:var(--steel-300);text-transform:uppercase;letter-spacing:.05em;}
+  .card-row{display:flex;gap:14px;padding:24px;background:#fff;flex-wrap:wrap;}
+  .prod-card{flex:1;min-width:130px;border:1px solid var(--steel-100);border-radius:10px;padding:14px;text-align:center;}
+  .prod-card .cyl{width:34px;height:48px;margin:0 auto 10px;background:var(--cylinder-blue);border-radius:8px 8px 4px 4px;position:relative;}
+  .prod-card .cyl::before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:14px;height:10px;background:var(--steel-600);border-radius:3px 3px 0 0;}
+  .prod-card b{display:block;font-size:13px;}
+  .prod-card span{font-size:11px;color:var(--steel-600);}
+
+  .site-footer{background:var(--ink);color:var(--steel-300);padding:20px 24px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  /* admin mockup */
+  .admin-shell{display:flex;background:var(--admin-bg);color:var(--admin-text);min-height:340px;font-size:12px;}
+  .admin-side{width:150px;background:var(--admin-panel);border-right:1px solid var(--admin-border);padding:16px 12px;flex-shrink:0;}
+  .admin-side .item{padding:8px 10px;border-radius:6px;margin-bottom:2px;color:var(--admin-text-dim);}
+  .admin-side .item.on{background:var(--flame);color:#fff;}
+  .admin-main{flex:1;padding:18px 22px;}
+  .admin-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .admin-title{font-family:var(--display);font-weight:700;font-size:15px;}
+  .admin-cards{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .admin-card{background:var(--admin-panel-2);border:1px solid var(--admin-border);border-radius:8px;padding:12px 14px;min-width:110px;}
+  .admin-card b{display:block;font-family:var(--mono);font-size:17px;}
+  .admin-card span{font-size:10px;color:var(--admin-text-dim);text-transform:uppercase;letter-spacing:.05em;}
+  table.admintbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;}
+  table.admintbl th{text-align:left;color:var(--admin-text-dim);font-weight:500;padding:6px 10px;border-bottom:1px solid var(--admin-border);text-transform:uppercase;letter-spacing:.04em;font-size:9.5px;}
+  table.admintbl td{padding:7px 10px;border-bottom:1px solid var(--admin-border);}
+
+  .diagram{background:#fff;border:1px solid var(--steel-100);border-radius:var(--radius);padding:24px;}
+  .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;}
+  .flow .node{background:var(--cylinder-blue-pale);color:var(--cylinder-blue);padding:8px 12px;border-radius:6px;font-weight:600;}
+  .flow .node.alt{background:var(--flame-pale);color:var(--flame);}
+  .flow .arrow{color:var(--steel-400);}
+
+  .checklist{list-style:none;padding:0;margin:0 0 20px;}
+  .checklist li{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--steel-100);font-size:13.5px;}
+  .checklist li::before{content:"✓";color:var(--safe);font-weight:700;}
+
+  .dont::before{content:"✕";color:var(--danger);font-weight:700;}
+
+  .pill-nav{position:sticky;top:0;background:rgba(243,245,247,.92);backdrop-filter:blur(6px);padding:12px 0 18px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;z-index:5;}
+  .pill{font-family:var(--mono);font-size:11px;color:var(--steel-600);}
+  .nextbtn{all:unset;cursor:pointer;font-family:var(--body);font-weight:700;font-size:12.5px;color:var(--flame);display:flex;align-items:center;gap:6px;}
+
+  .refnote{font-size:11.5px;color:var(--steel-400);margin-top:2px;}
+
+  .mobile-toggle{display:none;}
+  @media (max-width:920px){
+    .sidebar{position:fixed;left:-100%;transition:left .2s;z-index:20;box-shadow:0 0 40px rgba(0,0,0,.4);}
+    .sidebar.open{left:0;}
+    .main{padding:24px 20px 100px;}
+    .mobile-toggle{display:flex;position:fixed;top:16px;left:16px;z-index:21;background:var(--ink);color:#fff;border:none;border-radius:8px;padding:10px 12px;font-size:13px;align-items:center;gap:6px;cursor:pointer;}
+  }
+  @media print{
+    .sidebar,.mobile-toggle,.pill-nav{display:none;}
+    .page{display:block !important;page-break-after:always;}
+    .main{padding:20px;max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰ Pages</button>
+
+<div class="shell">
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 38px; height: 38px; vertical-align: middle;">
+        <defs>
+          <linearGradient id="outerFlameGuide" x1="50" y1="5" x2="50" y2="95" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00F2FE"/>
+            <stop offset="100%" stop-color="#0072FF"/>
+          </linearGradient>
+          <linearGradient id="midFlameGuide" x1="50" y1="25" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00C6FF"/>
+            <stop offset="100%" stop-color="#0891B2"/>
+          </linearGradient>
+          <linearGradient id="innerFlameGuide" x1="50" y1="50" x2="50" y2="85" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F59E0B"/>
+            <stop offset="100%" stop-color="#EF4444"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 5 C50 5 85 55 85 85 C85 90 75 95 65 95 C55 95 50 88 50 88 C50 88 45 95 35 95 C25 95 15 90 15 85 C15 55 50 5 50 5 Z" fill="url(#outerFlameGuide)" opacity="0.85"/>
+        <path d="M50 25 C50 25 73 60 73 82 C73 86 66 90 58 90 C50 90 50 84 50 84 C50 84 50 90 42 90 C34 90 27 86 27 82 C27 60 50 25 50 25 Z" fill="url(#midFlameGuide)"/>
+        <path d="M50 50 C50 50 60 68 60 80 C60 83 55 85 50 85 C45 85 40 83 40 80 C40 68 50 50 50 50 Z" fill="url(#innerFlameGuide)"/>
+      </svg>
+      <div class="sidebar-brand-text">TRIPLE A GAS<span>Website Style Guide</span></div>
+    </div>
+
+    <div class="nav-group-label">Foundations</div>
+    <ul class="navlist" id="nav"></ul>
+  </nav>
+
+  <main class="main">
+    <div id="pages"></div>
+  </main>
+</div>
+
+<script>
+const pages = [
+  {id:'cover', group:'Foundations', label:'Cover & How to Use This Guide'},
+  {id:'research', group:'Foundations', label:'Competitive Research Findings'},
+  {id:'brand', group:'Foundations', label:'Brand Foundations'},
+  {id:'color', group:'Visual System', label:'Color System'},
+  {id:'type', group:'Visual System', label:'Typography'},
+  {id:'icon', group:'Visual System', label:'Iconography, Photography & the Gauge Mark'},
+  {id:'components', group:'Visual System', label:'UI Components'},
+  {id:'publicsite', group:'Public Site', label:'Public Site — Information Architecture'},
+  {id:'templates', group:'Public Site', label:'Public Site — Page Templates'},
+  {id:'admin', group:'Admin Portal', label:'Admin Portal — Concept & IA'},
+  {id:'adminui', group:'Admin Portal', label:'Admin Portal — Screens & Components'},
+  {id:'voice', group:'Content', label:'Voice, Tone & Bilingual Content'},
+  {id:'access', group:'Technical', label:'Accessibility, Responsive & Low-Bandwidth Rules'},
+  {id:'dos', group:'Technical', label:"Do's, Don'ts & Build Checklist"},
+];
+
+const navEl = document.getElementById('nav');
+const pagesEl = document.getElementById('pages');
+let lastGroup = '';
+pages.forEach((p,i)=>{
+  if(p.group !== lastGroup){
+    lastGroup = p.group;
+  }
+  const li = document.createElement('li');
+  li.innerHTML = `<button data-id="${p.id}"><span class="num">${String(i+1).padStart(2,'0')}</span>${p.label}</button>`;
+  navEl.appendChild(li);
+});
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.navlist button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelector(`.navlist button[data-id="${id}"]`).classList.add('active');
+  document.querySelector('.main').scrollTo(0,0);
+  window.scrollTo(0,0);
+  if(window.innerWidth<=920) document.querySelector('.sidebar').classList.remove('open');
+}
+navEl.addEventListener('click', e=>{
+  const btn = e.target.closest('button');
+  if(btn) showPage(btn.dataset.id);
+});
+</script>
+
+<div id="pages">
+<!-- ============ PAGE 1 : COVER ============ -->
+<section class="page" id="page-cover">
+  <div class="page-kicker">Page 01 / 14</div>
+  <h1 class="page-title">Triple A Gas — Website Style Guide</h1>
+  <p class="page-sub">A design system for a dual-purpose site: a public storefront for customers across Ghana, and an internal operations tool for the Triple A Gas team — built from a study of how LPG and fuel marketing companies across Ghana and West Africa actually build their websites.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0;">What this document is</h3>
+      <p style="margin-bottom:0;">A page-by-page reference covering research findings, brand foundations, color, type, components, page templates for the public site, and a separate design language for the internal admin/logs portal. Treat it the way a design or development team would treat a client style guide — pull tokens and rules directly from it when building.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;">Who it's for</h3>
+      <ul class="std" style="margin-bottom:0;">
+        <li>Whoever builds the public-facing Triple A Gas site</li>
+        <li>Whoever builds the internal logs/notes admin tool</li>
+        <li>Station managers and staff who will use the admin day-to-day</li>
+        <li>Anyone commissioning a logo, signage, or print material later</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The dual-purpose concept</h2>
+  <p>Every LPG company site researched for this guide (GOIL, GASO Petroleum, Trinity Oil, XpressGas in Ghana; Techno Oil in Nigeria) is public-only — a storefront with no visible internal tooling. Triple A Gas is different by design: one codebase, two experiences, split cleanly at the login wall.</p>
+
+  <div class="diagram">
+    <div class="flow">
+      <div class="node">triplaagas.com</div>
+      <div class="arrow">→</div>
+      <div class="node">Public site<br>(no login)</div>
+      <div class="arrow">···</div>
+      <div class="node alt">triplaagas.com/portal</div>
+      <div class="arrow">→</div>
+      <div class="node alt">Staff login</div>
+      <div class="arrow">→</div>
+      <div class="node alt">Admin dashboard<br>(logs, notes, inventory)</div>
+    </div>
+  </div>
+  <p style="margin-top:14px;">These two halves intentionally <em>look</em> different — the public site is warm, promotional, and photo-led; the admin portal is dark, dense, and data-led — while sharing the same color, type, and mark vocabulary so the whole product still feels like one company. Pages 10–11 cover the admin portal in full; pages 8–9 cover the public site.</p>
+
+  <div class="callout blue">This guide does not include a final logo file. Page 3 defines a simple, buildable mark (the "gauge mark") that a designer can refine, and rules for how it should behave — enough to build the site now without blocking on a full brand identity project.</div>
+</section>
+
+<!-- ============ PAGE 2 : RESEARCH ============ -->
+<section class="page" id="page-research">
+  <div class="page-kicker">Page 02 / 14</div>
+  <h1 class="page-title">Competitive Research Findings</h1>
+  <p class="page-sub">Patterns observed across GOIL, GASO Petroleum, Trinity Oil Co. Ltd, and XpressGas (Ghana), plus Techno Oil (Nigeria), as of July 2026. These are the conventions Ghanaian customers already expect from an LPG company's website — Triple A Gas should meet them, then differentiate through the gauge-mark identity and the admin portal.</p>
+
+  <h2>1. Navigation is need-based, not feature-based</h2>
+  <p>Every site studied organizes its main navigation around <em>who the visitor is and what they came to do</em>, not around internal company structure. GOIL splits its entire header into <strong>Individual</strong> vs <strong>Corporate</strong> visitors before anything else. GASO groups pages under plain-language headers like <strong>Who We Are</strong>, <strong>What We Do</strong>, and <strong>Sustainability</strong> rather than jargon. A persistent, high-contrast <strong>Find a Station</strong> / <strong>Station Locator</strong> link appears in the header on every site that has more than one location.</p>
+
+  <h2>2. Trust signals are front and center, not buried</h2>
+  <ul class="std">
+    <li><strong>Licensing & certification badges</strong> — GOIL displays ISO 9001 / ISO 14001 marks in the header on every page. XpressGas's own materials lead with its National Petroleum Authority license.</li>
+    <li><strong>Named leadership</strong> — Trinity Oil lists its directors by name on the About page; GOIL has a full Board of Directors and Executive Management section.</li>
+    <li><strong>Scale numbers</strong> — GASO runs a literal "GASO in Numbers" stat strip (litres delivered, employee count, station count, years of experience) directly on the homepage. This is the single most consistent homepage device across every site studied.</li>
+    <li><strong>Safety as a named pillar</strong>, not a footnote — GOIL has a dedicated HSSEQ section (profile, policy, vision) and an LPG Safety Tips page; GASO's "Why Choose Us" tab panel opens on <em>Safety</em> before price or product.</li>
+  </ul>
+
+  <h2>3. The station/outlet list is core content, not an afterthought</h2>
+  <p>GOIL publishes a full sortable table of every LPG filling plant it works with, by location. Trinity Oil lists every outlet by town (Accra, Kumasi, Sunyani, Asikuma, Kade, Koforidua, Somanya) with a direct phone number per outlet. This is treated as primary content, often ranking as one of the top navigation items, not tucked into a general contact page.</p>
+
+  <h2>4. Contact is phone-first and WhatsApp-first</h2>
+  <p>Phone numbers are large, tap-to-call, and repeated in the header, the footer, and a dedicated outlets/contact section on every site. GOIL surfaces a direct WhatsApp link in its header alongside its toll-free numbers. Formal contact forms exist but are secondary to a phone number a customer can call immediately — appropriate for a market where many customers order gas by phone rather than by web form.</p>
+
+  <h2>5. Visual identity leans corporate-industrial, not playful</h2>
+  <p>Across the set, primary palettes are dominated by a deep corporate blue or red (GOIL red, GASO's photography-led blue/white, Trinity's blue) with imagery of trucks, cylinders, filling plants, and staff in branded workwear. None of the sites studied use a flame or bright warning-orange as a <em>primary</em> brand color — orange/amber shows up only as a hazard or safety-signage accent, which is the gap this guide uses deliberately for Triple A Gas's flame accent (page 4).</p>
+
+  <h2>6. Product presentation is practical, not lifestyle marketing</h2>
+  <p>Cylinder sizes, refill vs. exchange, and delivery vs. pickup are explained plainly, often as a short service list rather than styled product cards: "LPG (Cooking Gas)," "Door to Door Delivery," "Distribution & Transportation" is a fairly literal example of how Trinity Oil frames its service list. Triple A Gas can raise the visual craft here (page 9) without abandoning the plain, task-first language customers are used to.</p>
+
+  <h2>7. Footers are consistent utility blocks</h2>
+  <p>Every footer studied repeats: physical head-office address, phone, email, social icons (Facebook is universal; LinkedIn and Instagram common; X/Twitter present but declining in emphasis), and a copyright line. Several sites (GOIL, GASO) also credit their web developer in the footer — a small local-industry convention worth keeping for Triple A Gas.</p>
+
+  <div class="callout">Net takeaway for Triple A Gas: don't reinvent the public IA — a customer arriving from Google should immediately recognize "this is an LPG company site." Spend the design budget on craft (type, color, the gauge mark, photography direction) and on the admin portal, which none of these competitors have publicly at all.</div>
+</section>
+
+<!-- ============ PAGE 3 : BRAND ============ -->
+<section class="page" id="page-brand">
+  <div class="page-kicker">Page 03 / 14</div>
+  <h1 class="page-title">Brand Foundations</h1>
+  <p class="page-sub">What Triple A Gas should feel like before any pixel is placed.</p>
+
+  <h2>Positioning</h2>
+  <p>Triple A Gas is a dependable, safety-first LPG supplier serving households and businesses in Ghana. The "AAA" name should read the way it does in other industries — a mark of top-tier reliability — reinforced visually, not just claimed in copy.</p>
+
+  <h2>Three brand attributes</h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="badge badge-blue">Trustworthy</div>
+      <p style="margin-top:12px;margin-bottom:0;">Steady, plain-spoken, never oversells. Communicated through the deep Cylinder Blue, generous whitespace, and named/verifiable facts (license numbers, real outlet addresses, real phone lines).</p>
+    </div>
+    <div class="card">
+      <div class="badge badge-hazard">Safety-literate</div>
+      <p style="margin-top:12px;margin-bottom:0;">Safety is treated as a craft the company is proud of, not a legal disclaimer. Communicated through the Hazard Amber accent, the gauge motif, and a dedicated Safety section with real content, not boilerplate.</p>
+    </div>
+    <div class="card">
+      <div class="badge" style="background:var(--flame-pale);color:var(--flame);">Energetic</div>
+      <p style="margin-top:12px;margin-bottom:0;">The flame accent and Archivo Expanded display type give the brand more warmth and momentum than its more corporate-blue competitors, without tipping into "consumer lifestyle brand."</p>
+    </div>
+  </div>
+
+  <h2>The brand mark</h2>
+  <p>The Triple A Gas logo consists of three stylized letter 'A's that merge to form the shape of a clean blue LPG gas flame, styled in an elegant blue and orange/amber color palette. The mark represents safe, clean, and premium energy:</p>
+  <div class="grid grid-2">
+    <div class="card" style="display:flex;gap:20px;align-items:center;">
+      <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; vertical-align: middle;">
+        <defs>
+          <linearGradient id="outerFlameShow" x1="50" y1="5" x2="50" y2="95" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00F2FE"/>
+            <stop offset="100%" stop-color="#0072FF"/>
+          </linearGradient>
+          <linearGradient id="midFlameShow" x1="50" y1="25" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00C6FF"/>
+            <stop offset="100%" stop-color="#0891B2"/>
+          </linearGradient>
+          <linearGradient id="innerFlameShow" x1="50" y1="50" x2="50" y2="85" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F59E0B"/>
+            <stop offset="100%" stop-color="#EF4444"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 5 C50 5 85 55 85 85 C85 90 75 95 65 95 C55 95 50 88 50 88 C50 88 45 95 35 95 C25 95 15 90 15 85 C15 55 50 5 50 5 Z" fill="url(#outerFlameShow)" opacity="0.85"/>
+        <path d="M50 25 C50 25 73 60 73 82 C73 86 66 90 58 90 C50 90 50 84 50 84 C50 84 50 90 42 90 C34 90 27 86 27 82 C27 60 50 25 50 25 Z" fill="url(#midFlameShow)"/>
+        <path d="M50 50 C50 50 60 68 60 80 C60 83 55 85 50 85 C45 85 40 83 40 80 C40 68 50 50 50 50 Z" fill="url(#innerFlameShow)"/>
+      </svg>
+      <div>
+        <b style="font-size:13.5px;">Primary mark</b>
+        <p style="font-size:13px;margin:4px 0 0;">Three letter 'A' peaks, forming a unified corporate flame crest in clean cyan/blue gradients with a warm orange/red core. Perfect transparency allows it to blend on any background.</p>
+      </div>
+    </div>
+    <div class="card">
+      <b style="font-size:13.5px;">Clear space & usage</b>
+      <p style="font-size:13px;margin:8px 0 0;">Keep clear space around the flame logo on all sides. Used in header navigations, app icons, and branding elements across the public site and admin portal.</p>
+    </div>
+  </div>
+
+  <h2>Wordmark lockup</h2>
+  <div class="card" style="display:flex;align-items:center;gap:16px;">
+    <svg class="mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 46px; height: 46px; vertical-align: middle;">
+      <defs>
+        <linearGradient id="outerFlameWord" x1="50" y1="5" x2="50" y2="95" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#00F2FE"/>
+          <stop offset="100%" stop-color="#0072FF"/>
+        </linearGradient>
+        <linearGradient id="midFlameWord" x1="50" y1="25" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#00C6FF"/>
+          <stop offset="100%" stop-color="#0891B2"/>
+        </linearGradient>
+        <linearGradient id="innerFlameWord" x1="50" y1="50" x2="50" y2="85" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#F59E0B"/>
+          <stop offset="100%" stop-color="#EF4444"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 5 C50 5 85 55 85 85 C85 90 75 95 65 95 C55 95 50 88 50 88 C50 88 45 95 35 95 C25 95 15 90 15 85 C15 55 50 5 50 5 Z" fill="url(#outerFlameWord)" opacity="0.85"/>
+      <path d="M50 25 C50 25 73 60 73 82 C73 86 66 90 58 90 C50 90 50 84 50 84 C50 84 50 90 42 90 C34 90 27 86 27 82 C27 60 50 25 50 25 Z" fill="url(#midFlameWord)"/>
+      <path d="M50 50 C50 50 60 68 60 80 C60 83 55 85 50 85 C45 85 40 83 40 80 C40 68 50 50 50 50 Z" fill="url(#innerFlameWord)"/>
+    </svg>
+    <div style="font-family:var(--display);font-weight:800;font-size:28px;color:var(--ink);letter-spacing:.01em;">TRIPLE A GAS</div>
+  </div>
+  <p class="refnote">Set in Archivo Expanded 800, all caps, tracked open slightly. This lockup uses the approved premium vector flame logo featuring a stylized triple-A flame silhouette.</p>
+</section>
+
+<!-- ============ PAGE 4 : COLOR ============ -->
+<section class="page" id="page-color">
+  <div class="page-kicker">Page 04 / 14</div>
+  <h1 class="page-title">Color System</h1>
+  <p class="page-sub">One palette, two moods. The public site leans light and warm-lit; the admin portal inverts to a dark, low-glare shell suited to long shifts and dim station offices.</p>
+
+  <h2>Core brand colors</h2>
+  <div class="grid grid-4">
+    <div class="swatch"><div class="swatch-color" style="background:#0B3B5C;"></div><div class="swatch-meta"><div class="swatch-name">Cylinder Blue</div><div class="swatch-hex">#0B3B5C</div><div class="swatch-use">Primary brand color. Header, primary nav, trust elements.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#D6491C;"></div><div class="swatch-meta"><div class="swatch-name">Flame</div><div class="swatch-hex">#D6491C</div><div class="swatch-use">Primary action color. CTAs, links on dark, highlights.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F0A202;"></div><div class="swatch-meta"><div class="swatch-name">Hazard Amber</div><div class="swatch-hex">#F0A202</div><div class="swatch-use">Safety callouts, warnings, gauge needle. Use sparingly.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#16191c;"></div><div class="swatch-meta"><div class="swatch-name">Ink</div><div class="swatch-hex">#16191C</div><div class="swatch-use">Body text, admin shell background base.</div></div></div>
+  </div>
+
+  <h2>Status colors (used in both public and admin)</h2>
+  <div class="grid grid-4">
+    <div class="swatch"><div class="swatch-color" style="background:#2E7D32;"></div><div class="swatch-meta"><div class="swatch-name">Safe Green</div><div class="swatch-hex">#2E7D32</div><div class="swatch-use">In stock, passed inspection, delivery complete.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#B3261E;"></div><div class="swatch-meta"><div class="swatch-name">Danger Red</div><div class="swatch-hex">#B3261E</div><div class="swatch-use">Overdue inspection, stockout, incident log entry.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F3F5F7;border:1px solid var(--steel-100);"></div><div class="swatch-meta"><div class="swatch-name">Cloud</div><div class="swatch-hex">#F3F5F7</div><div class="swatch-use">Public site page background.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8A97A1;"></div><div class="swatch-meta"><div class="swatch-name">Steel 400</div><div class="swatch-hex">#8A97A1</div><div class="swatch-use">Muted/secondary text, borders on dark UI.</div></div></div>
+  </div>
+
+  <h2>Admin shell neutrals</h2>
+  <div class="grid grid-3">
+    <div class="swatch"><div class="swatch-color" style="background:#14181C;"></div><div class="swatch-meta"><div class="swatch-name">Admin BG</div><div class="swatch-hex">#14181C</div><div class="swatch-use">Outer shell background.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1E2429;"></div><div class="swatch-meta"><div class="swatch-name">Admin Panel</div><div class="swatch-hex">#1E2429</div><div class="swatch-use">Sidebar, cards, table zebra base.</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2B333A;"></div><div class="swatch-meta"><div class="swatch-name">Admin Border</div><div class="swatch-hex">#2B333A</div><div class="swatch-use">Hairlines, dividers, table rules.</div></div></div>
+  </div>
+
+  <h2>Usage rules</h2>
+  <ul class="checklist">
+    <li>Flame is a CTA and accent color, never a large background field — it should stay energetic, not overwhelming.</li>
+    <li>Hazard Amber is reserved for genuine safety/attention content. If it starts appearing on marketing banners "because it pops," that's a misuse — swap in Flame instead.</li>
+    <li>Cylinder Blue carries the brand's trust signal — it should be the dominant color of the header and footer on every public page.</li>
+    <li>On the admin side, color communicates status first, brand second. A red badge always means "needs attention," everywhere in the portal, with no exceptions.</li>
+    <li>Text on Cylinder Blue or Ink must be white or Cloud — verified for WCAG AA contrast (4.7:1 and 15.1:1 respectively).</li>
+  </ul>
+</section>
+
+<!-- ============ PAGE 5 : TYPE ============ -->
+<section class="page" id="page-type">
+  <div class="page-kicker">Page 05 / 14</div>
+  <h1 class="page-title">Typography</h1>
+  <p class="page-sub">Three families, each with one job. All three are free, widely mirrored fonts that render reliably on the mid-range Android devices most customers in Ghana will use.</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <b style="font-family:var(--display);font-size:22px;">Aa</b>
+      <p style="margin:10px 0 0;font-size:13px;"><strong>Archivo Expanded</strong> — display. Headlines, page titles, stat numbers, the wordmark. Weights 700–900 only. Never for body copy or long paragraphs.</p>
+    </div>
+    <div class="card">
+      <b style="font-family:var(--body);font-size:22px;">Aa</b>
+      <p style="margin:10px 0 0;font-size:13px;"><strong>Inter</strong> — body & UI. Paragraphs, navigation, buttons, form fields, admin UI chrome. Weights 400 (body), 600 (labels/nav), 700–800 (emphasis).</p>
+    </div>
+    <div class="card">
+      <b style="font-family:var(--mono);font-size:22px;">Aa</b>
+      <p style="margin:10px 0 0;font-size:13px;"><strong>IBM Plex Mono</strong> — data. Cylinder serial numbers, timestamps, prices, log entries, phone numbers in tables. Anywhere numeric alignment matters.</p>
+    </div>
+  </div>
+
+  <h2>Type scale</h2>
+  <div class="type-row"><div class="type-sample" style="font-size:44px;">Hero Headline</div><div class="type-label">Archivo Expanded 800 · 44/48 · -1% tracking</div></div>
+  <div class="type-row"><div class="type-sample" style="font-size:30px;">Section Title</div><div class="type-label">Archivo Expanded 800 · 30/36</div></div>
+  <div class="type-row"><div class="type-sample" style="font-size:20px;">Card Title</div><div class="type-label">Archivo Expanded 700 · 20/26</div></div>
+  <div class="type-row"><div style="font-family:var(--body);font-weight:600;font-size:16px;">UI Label / Nav Item</div><div class="type-label">Inter 600 · 16/22</div></div>
+  <div class="type-row"><div style="font-family:var(--body);font-weight:400;font-size:16px;max-width:420px;">Body copy sets in Inter Regular at 16px with 1.6 line height so it stays comfortable on a phone screen in bright sunlight.</div><div class="type-label">Inter 400 · 16/26</div></div>
+  <div class="type-row"><div style="font-family:var(--mono);font-weight:500;font-size:14px;">GH₵ 145.00 · 2026-07-19 08:41</div><div class="type-label">IBM Plex Mono 500 · 14/20</div></div>
+
+  <h2>Rules</h2>
+  <ul class="checklist">
+    <li>Body text minimum 16px on the public site (never smaller — most traffic is mobile).</li>
+    <li>Admin tables may drop to 12–13px Inter/Plex Mono, since they're used on desktop or tablet at the counter, not on the move.</li>
+    <li>All-caps is reserved for the wordmark, nav labels, and badges — never for body paragraphs.</li>
+    <li>Line length for body copy stays under ~70 characters on desktop for readability.</li>
+  </ul>
+</section>
+
+<!-- ============ PAGE 6 : ICON/PHOTO ============ -->
+<section class="page" id="page-icon">
+  <div class="page-kicker">Page 06 / 14</div>
+  <h1 class="page-title">Iconography, Photography & the Gauge Motif</h1>
+  <p class="page-sub">How Triple A Gas should look in photos and small graphics, and how the gauge mark extends beyond the logo into a full data-visualization device.</p>
+
+  <h2>Photography direction</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0;">Do</h3>
+      <ul class="checklist">
+        <li>Real cylinders, real trucks, real staff in branded workwear at real outlets</li>
+        <li>Natural daylight, slightly warm white balance</li>
+        <li>Wide shots of the filling plant/forecourt that show scale and order</li>
+        <li>Close-ups of the safety valve, gauge, and regulator to reinforce the safety story</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;">Avoid</h3>
+      <ul class="checklist" style="list-style:none;">
+        <li class="dont" style="display:flex;gap:10px;">Generic stock photography of unrelated gas burners or Western kitchens</li>
+        <li class="dont" style="display:flex;gap:10px;">Staged "lifestyle" smiling-at-camera shots with no product visible</li>
+        <li class="dont" style="display:flex;gap:10px;">Heavy color-graded filters that shift the blue/orange brand colors</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Icon style</h2>
+  <p>Line icons, 1.75px stroke, rounded caps, 24px grid — matching the rounded geometry of the gauge mark. Fill icons only for status badges (safe/hazard/danger).</p>
+
+  <h2>The gauge as a data device</h2>
+  <p>Beyond the logo, the gauge becomes a radial progress indicator anywhere the site needs to show a level, percentage, or completion state — tank stock level, safety-inspection compliance, delivery-route progress. This is the signature element that ties the public site's stat blocks to the admin portal's dashboards.</p>
+  <div class="card-row" style="background:var(--paper);border:1px solid var(--steel-100);border-radius:var(--radius);">
+    <div style="text-align:center;">
+      <div class="gauge">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#E7EBEE" stroke-width="10"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#16A34A" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="45" transform="rotate(-90 50 50)"/>
+        </svg>
+        <div class="gauge-label"><div class="gauge-value">83%</div><div class="gauge-unit">tank level</div></div>
+      </div>
+      <span style="font-size:11px;color:var(--steel-600);">Stock gauge</span>
+    </div>
+    <div style="text-align:center;">
+      <div class="gauge">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#E7EBEE" stroke-width="10"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#F97316" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="145" transform="rotate(-90 50 50)"/>
+        </svg>
+        <div class="gauge-label"><div class="gauge-value">45%</div><div class="gauge-unit">inspections</div></div>
+      </div>
+      <span style="font-size:11px;color:var(--steel-600);">Compliance gauge</span>
+    </div>
+    <div style="text-align:center;">
+      <div class="gauge">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#E7EBEE" stroke-width="10"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#CA8A04" stroke-width="10" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="8" transform="rotate(-90 50 50)"/>
+        </svg>
+        <div class="gauge-label"><div class="gauge-value">97%</div><div class="gauge-unit">routes done</div></div>
+      </div>
+      <span style="font-size:11px;color:var(--steel-600);">Delivery gauge</span>
+    </div>
+  </div>
+  <p class="refnote" style="margin-top:10px;">Ring color always maps to the status palette on page 4 (green = healthy, amber = attention, flame/red = urgent) — never purely decorative.</p>
+</section>
+
+<!-- ============ PAGE 7 : COMPONENTS ============ -->
+<section class="page" id="page-components">
+  <div class="page-kicker">Page 07 / 14</div>
+  <h1 class="page-title">UI Components</h1>
+  <p class="page-sub">Shared building blocks used across both the public site and the admin portal.</p>
+
+  <h2>Buttons</h2>
+  <div class="btn-row">
+    <button class="btn btn-primary">Order Gas Now</button>
+    <button class="btn btn-secondary">Find a Station</button>
+    <button class="btn btn-ghost">Learn More</button>
+    <button class="btn btn-whatsapp">💬 Chat on WhatsApp</button>
+  </div>
+  <p>Primary (Flame) is reserved for the single most important action on a page — usually "Order," "Call," or "WhatsApp Us." A page should rarely have more than one primary button visible at once.</p>
+
+  <h2>Badges</h2>
+  <div class="btn-row">
+    <span class="badge badge-safe">In Stock</span>
+    <span class="badge badge-hazard">Inspection Due</span>
+    <span class="badge badge-danger">Overdue</span>
+    <span class="badge badge-blue">Licensed Outlet</span>
+  </div>
+
+  <h2>Cards</h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <b style="font-family:var(--display);font-size:15px;">Outlet Card</b>
+      <p style="font-size:13px;margin:8px 0 0;">Name, town, phone (tap-to-call), open hours, distance from user if geolocation available.</p>
+    </div>
+    <div class="card">
+      <b style="font-family:var(--display);font-size:15px;">Product Card</b>
+      <p style="font-size:13px;margin:8px 0 0;">Cylinder size (kg), refill price, exchange vs. new-cylinder note, "Order" CTA.</p>
+    </div>
+    <div class="card">
+      <b style="font-family:var(--display);font-size:15px;">Log Entry Card</b>
+      <p style="font-size:13px;margin:8px 0 0;">Admin only. Timestamp, staff name, entry type badge, note text, attached photo if any.</p>
+    </div>
+  </div>
+
+  <h2>Forms</h2>
+  <div class="card" style="max-width:420px;">
+    <label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Full name</label>
+    <input style="width:100%;padding:11px 12px;border:1.5px solid var(--steel-300);border-radius:8px;font-family:var(--body);font-size:14px;margin-bottom:14px;" placeholder="Ama Owusu">
+    <label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px;">Phone number</label>
+    <input style="width:100%;padding:11px 12px;border:1.5px solid var(--steel-300);border-radius:8px;font-family:var(--mono);font-size:14px;margin-bottom:14px;" placeholder="+233 24 000 0000">
+    <button class="btn btn-primary" style="width:100%;justify-content:center;">Request Delivery</button>
+  </div>
+  <p>Inputs: 1.5px Steel-300 border, 8px radius, Flame-colored focus ring, 44px minimum tap height. Every public form field should work with Ghanaian phone number formats and be usable one-thumbed.</p>
+
+  <h2>Navigation bar (public)</h2>
+  <div class="mock">
+    <div class="site-nav">
+      <div class="logo">TRIPLE A GAS</div>
+      <div class="links"><span>Home</span><span>Products</span><span>Find a Station</span><span>Safety</span><span>About</span><span>Contact</span></div>
+      <div style="background:var(--flame);padding:6px 12px;border-radius:6px;font-weight:700;">Call Us</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 8 : PUBLIC IA ============ -->
+<section class="page" id="page-publicsite">
+  <div class="page-kicker">Page 08 / 14</div>
+  <h1 class="page-title">Public Site — Information Architecture</h1>
+  <p class="page-sub">Sitemap synthesized from the navigation patterns found across GOIL, GASO, Trinity Oil, and XpressGas, adapted to Triple A Gas's scale.</p>
+
+  <div class="diagram">
+    <table class="spec">
+      <tr><th>Nav item</th><th>Contains</th><th>Competitor precedent</th></tr>
+      <tr><td><strong>Home</strong></td><td>Hero, stat bar, product snapshot, safety-first strip, station locator teaser, WhatsApp CTA</td><td>Universal across all sites studied</td></tr>
+      <tr><td><strong>Products</strong></td><td>Cylinder sizes & prices, refill vs. exchange, bulk/commercial supply, accessories</td><td>Trinity Oil's plain service list; GOIL's LPG product page</td></tr>
+      <tr><td><strong>Find a Station</strong></td><td>Searchable/filterable list of outlets by region, map, phone per outlet</td><td>GOIL "Find a Station," GASO "Station Locator," Trinity's per-town outlet list</td></tr>
+      <tr><td><strong>Safety</strong></td><td>Handling & storage tips, leak response steps, cylinder inspection info, emergency contact</td><td>GOIL's dedicated LPG Safety Tips page and HSSEQ section</td></tr>
+      <tr><td><strong>About</strong></td><td>Company story, mission/vision, licensing (NPA), leadership, CSR/community</td><td>Trinity Oil's About + Directors; GASO's Who We Are cluster</td></tr>
+      <tr><td><strong>Contact</strong></td><td>Head office address, phone, WhatsApp, email, contact form</td><td>Universal footer + dedicated contact page</td></tr>
+      <tr><td><strong>Portal</strong> <span class="badge badge-blue" style="margin-left:4px;">Staff only</span></td><td>Login → admin dashboard (page 10–11). Not listed in main nav; reached via a small footer link.</td><td>Not present on any competitor site — Triple A Gas differentiator</td></tr>
+    </table>
+  </div>
+
+  <h2>Homepage block order</h2>
+  <ol class="std">
+    <li>Header with logo, nav, phone + WhatsApp CTA</li>
+    <li>Hero — one clear promise ("Reliable cooking gas, delivered safely, across Ghana") + primary CTA</li>
+    <li>Stat bar — years in business, outlets, deliveries, tonnage (GASO-style)</li>
+    <li>Product snapshot — 3–4 cylinder sizes as cards</li>
+    <li>Safety-first strip — one strong statement + link to full Safety page</li>
+    <li>Station locator teaser — map or list preview + "Find a Station" link</li>
+    <li>About/trust strip — license badge, founding year, leadership photo</li>
+    <li>Footer — full contact block, socials, sitemap, developer credit</li>
+  </ol>
+</section>
+
+<!-- ============ PAGE 9 : TEMPLATES ============ -->
+<section class="page" id="page-templates">
+  <div class="page-kicker">Page 09 / 14</div>
+  <h1 class="page-title">Public Site — Page Templates</h1>
+  <p class="page-sub">Low-fidelity mockups showing how the tokens from pages 4–7 assemble into real pages.</p>
+
+  <h3>Homepage</h3>
+  <div class="mock">
+    <div class="mock-browserbar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-url">triplaagas.com</span></div>
+    <div class="site-nav">
+      <div class="logo">TRIPLE A GAS</div>
+      <div class="links"><span>Products</span><span>Stations</span><span>Safety</span><span>About</span></div>
+      <div style="background:var(--flame);padding:6px 12px;border-radius:6px;font-weight:700;">Order Now</div>
+    </div>
+    <div class="site-hero">
+      <h4>Reliable cooking gas, delivered safely, across Ghana.</h4>
+      <p>Order a refill, find your nearest Triple A Gas station, or get bulk supply for your business.</p>
+      <div style="margin-top:16px;display:flex;gap:10px;">
+        <span class="btn btn-primary" style="padding:9px 18px;font-size:12px;">Order Gas</span>
+        <span class="btn" style="padding:9px 18px;font-size:12px;background:rgba(255,255,255,.15);color:#fff;">Find a Station</span>
+      </div>
+    </div>
+    <div class="stat-bar">
+      <div class="stat"><b>12+</b><span>Years operating</span></div>
+      <div class="stat"><b>24</b><span>Outlets in Ghana</span></div>
+      <div class="stat"><b>1.2M+</b><span>Kg delivered / yr</span></div>
+      <div class="stat"><b>NPA</b><span>Licensed marketer</span></div>
+    </div>
+    <div class="card-row">
+      <div class="prod-card"><div class="cyl"></div><b>3 kg</b><span>Starter cylinder</span></div>
+      <div class="prod-card"><div class="cyl" style="height:58px;"></div><b>6 kg</b><span>Household</span></div>
+      <div class="prod-card"><div class="cyl" style="height:70px;"></div><b>14.5 kg</b><span>Family / small biz</span></div>
+      <div class="prod-card"><div class="cyl" style="height:82px;"></div><b>Bulk</b><span>Commercial supply</span></div>
+    </div>
+    <div class="site-footer">
+      <span>© 2026 Triple A Gas Ltd. · Accra, Ghana</span>
+      <span>f · in · ig — Site built by [developer]</span>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px;">Find a Station</h3>
+  <div class="mock">
+    <div class="site-nav"><div class="logo">TRIPLE A GAS</div><div class="links"><span>Stations</span></div><div></div></div>
+    <div style="padding:20px 24px;background:#fff;">
+      <input style="width:100%;padding:11px 14px;border:1.5px solid var(--steel-300);border-radius:8px;margin-bottom:14px;font-family:var(--body);" placeholder="Search by town or region…">
+      <div class="grid grid-3">
+        <div class="card"><b style="font-size:13px;">Triple A Gas — Achimota</b><p style="font-size:12px;margin:6px 0 0;">Achimota Retail Rd, Accra<br><span style="font-family:var(--mono);">020 000 0001</span></p><span class="badge badge-safe" style="margin-top:8px;">Open now</span></div>
+        <div class="card"><b style="font-size:13px;">Triple A Gas — Tema</b><p style="font-size:12px;margin:6px 0 0;">Community 4, Tema<br><span style="font-family:var(--mono);">020 000 0002</span></p><span class="badge badge-safe" style="margin-top:8px;">Open now</span></div>
+        <div class="card"><b style="font-size:13px;">Triple A Gas — Kumasi</b><p style="font-size:12px;margin:6px 0 0;">Kentinkrono Rd, Kumasi<br><span style="font-family:var(--mono);">020 000 0003</span></p><span class="badge badge-hazard" style="margin-top:8px;">Closes 6pm</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px;">Safety</h3>
+  <div class="mock">
+    <div class="site-nav"><div class="logo">TRIPLE A GAS</div><div class="links"><span>Safety</span></div><div></div></div>
+    <div style="padding:24px;background:#fff;">
+      <div style="background:var(--hazard-pale);border-left:3px solid var(--hazard);border-radius:6px;padding:14px 18px;margin-bottom:16px;">
+        <b style="font-size:13px;">Smell gas? Turn off the cylinder, open windows, don't switch anything electrical, and call 020 000 0000 immediately.</b>
+      </div>
+      <div class="grid grid-2">
+        <div class="card"><b style="font-size:13px;">Storage</b><p style="font-size:12px;margin:6px 0 0;">Keep cylinders upright, ventilated, away from heat sources.</p></div>
+        <div class="card"><b style="font-size:13px;">Inspection</b><p style="font-size:12px;margin:6px 0 0;">Check valves and hoses for wear every refill.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 10 : ADMIN CONCEPT ============ -->
+<section class="page" id="page-admin">
+  <div class="page-kicker">Page 10 / 14</div>
+  <h1 class="page-title">Admin Portal — Concept & Information Architecture</h1>
+  <p class="page-sub">The operational half of the site: where staff log deliveries, track cylinder inventory, record safety inspections, and leave shift notes. None of the competitor sites researched expose anything like this publicly — this is Triple A Gas's structural differentiator, so it should be genuinely useful, not a token "admin panel."</p>
+
+  <h2>Design intent</h2>
+  <p>The admin portal is a <em>tool</em>, not a marketing surface. It should feel calm and dense: dark UI to reduce glare in a station office, generous use of the mono type for scannable data, and status color used consistently and literally (page 4). It shares the gauge mark and status palette with the public site so the whole product still feels like one brand — but nothing about it should look "salesy."</p>
+
+  <h2>Core modules</h2>
+  <table class="spec">
+    <tr><th>Module</th><th>Purpose</th><th>Who uses it</th></tr>
+    <tr><td><strong>Delivery Log</strong></td><td>Record each delivery: driver, route, cylinders/kg delivered, customer, timestamp, signature/photo proof</td><td>Drivers, dispatch staff</td></tr>
+    <tr><td><strong>Cylinder Inventory</strong></td><td>Track cylinder stock by size and status (full / empty / in transit / awaiting inspection) per outlet</td><td>Station managers</td></tr>
+    <tr><td><strong>Safety Inspections</strong></td><td>Scheduled and ad-hoc inspection records per cylinder or tank, pass/fail, photos, next-due date</td><td>Safety officer, station managers</td></tr>
+    <tr><td><strong>Shift Notes</strong></td><td>Free-text handover notes between shifts — issues, low stock warnings, customer complaints, maintenance needs</td><td>All station staff</td></tr>
+    <tr><td><strong>Staff Directory</strong></td><td>Roles, outlet assignment, contact info, permission level</td><td>Admin/owner</td></tr>
+    <tr><td><strong>Reports</strong></td><td>Rolled-up view across outlets — stock levels, delivery volumes, overdue inspections</td><td>Owner/head office</td></tr>
+  </table>
+
+  <h2>Permission model</h2>
+  <div class="grid grid-3">
+    <div class="card"><b style="font-size:13px;">Driver</b><p style="font-size:12px;margin:8px 0 0;">Create delivery log entries and shift notes. Read-only on inventory.</p></div>
+    <div class="card"><b style="font-size:13px;">Station Manager</b><p style="font-size:12px;margin:8px 0 0;">Full access to their own outlet's modules. Cannot see other outlets' financials.</p></div>
+    <div class="card"><b style="font-size:13px;">Owner / Head Office</b><p style="font-size:12px;margin:8px 0 0;">Full access across all outlets, plus Reports and Staff Directory.</p></div>
+  </div>
+
+  <h2>Data flow between the two halves</h2>
+  <div class="diagram">
+    <div class="flow">
+      <div class="node alt">Delivery Log entry</div><div class="arrow">→</div>
+      <div class="node alt">Inventory auto-updates</div><div class="arrow">→</div>
+      <div class="node">Station Locator "in stock" badge</div>
+    </div>
+  </div>
+  <p style="margin-top:12px;">This is the real payoff of building both halves together: when a driver logs a delivery in the admin portal, the public "Find a Station" page can reflect live stock status instead of a static list — something none of the competitor sites offer.</p>
+
+  <div class="callout amber">Keep the admin portal at a subdomain or subpath behind authentication (e.g. <code>/portal</code>), never linked from primary public navigation. A small, low-contrast "Staff Login" link in the footer is enough — see page 8.</div>
+</section>
+
+<!-- ============ PAGE 11 : ADMIN UI ============ -->
+<section class="page" id="page-adminui">
+  <div class="page-kicker">Page 11 / 14</div>
+  <h1 class="page-title">Admin Portal — Screens & Components</h1>
+  <p class="page-sub">The dark admin shell, built from the same tokens as the public site.</p>
+
+  <h3>Dashboard</h3>
+  <div class="mock">
+    <div class="admin-shell">
+      <div class="admin-side">
+        <div class="item on">Dashboard</div>
+        <div class="item">Delivery Log</div>
+        <div class="item">Inventory</div>
+        <div class="item">Inspections</div>
+        <div class="item">Shift Notes</div>
+        <div class="item">Staff</div>
+        <div class="item">Reports</div>
+      </div>
+      <div class="admin-main">
+        <div class="admin-topbar">
+          <div class="admin-title">Achimota — Dashboard</div>
+          <span class="badge badge-blue">Kwame A. · Manager</span>
+        </div>
+        <div class="admin-cards">
+          <div class="admin-card"><b>142</b><span>Cylinders in stock</span></div>
+          <div class="admin-card"><b style="color:var(--hazard);">3</b><span>Inspections due</span></div>
+          <div class="admin-card"><b style="color:var(--danger);">1</b><span>Overdue</span></div>
+          <div class="admin-card"><b>27</b><span>Deliveries today</span></div>
+        </div>
+        <table class="admintbl">
+          <tr><th>Time</th><th>Type</th><th>Detail</th><th>Staff</th><th>Status</th></tr>
+          <tr><td>07:41</td><td>Delivery</td><td>14.5kg ×2 — A. Mensah, East Legon</td><td>Kojo</td><td><span class="badge badge-safe">Done</span></td></tr>
+          <tr><td>08:15</td><td>Inspection</td><td>Bulk tank #04</td><td>Efua</td><td><span class="badge badge-hazard">Due</span></td></tr>
+          <tr><td>08:52</td><td>Shift note</td><td>Low stock on 6kg — reorder before Fri</td><td>Kwame</td><td><span class="badge badge-blue">Noted</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:32px;">Shift Note entry</h3>
+  <div class="mock">
+    <div class="admin-shell" style="min-height:auto;">
+      <div class="admin-main" style="width:100%;">
+        <div class="admin-title" style="margin-bottom:14px;">New Shift Note</div>
+        <div style="background:var(--admin-panel-2);border:1px solid var(--admin-border);border-radius:8px;padding:16px;">
+          <div style="font-family:var(--mono);font-size:10.5px;color:var(--admin-text-dim);margin-bottom:10px;">2026-07-19 · 17:02 · Efua O.</div>
+          <textarea style="width:100%;height:70px;background:var(--admin-bg);border:1px solid var(--admin-border);border-radius:6px;color:var(--admin-text);padding:10px;font-family:var(--body);font-size:13px;" placeholder="What should the next shift know?"></textarea>
+          <div style="margin-top:10px;display:flex;gap:8px;">
+            <span class="btn btn-primary" style="padding:8px 16px;font-size:12px;">Save Note</span>
+            <span class="btn" style="padding:8px 16px;font-size:12px;background:var(--admin-panel);color:var(--admin-text);border:1px solid var(--admin-border);">Attach Photo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:36px;">Admin-specific rules</h2>
+  <ul class="checklist">
+    <li>Every log entry is timestamped and attributed automatically — never editable after save, only appendable (an "amended" follow-up entry), to preserve an honest audit trail.</li>
+    <li>Status badges use the exact same colors as the public site's status palette — the vocabulary must stay identical across both halves.</li>
+    <li>Tables default to newest-first. Staff scanning a handover need the latest entry without scrolling.</li>
+    <li>Design for a shared station tablet or desktop, not a personal phone — targets can be smaller (32–36px) than the public site's 44px minimum.</li>
+    <li>Works offline-first where possible: a shift note or delivery log drafted with no signal should queue and sync when connectivity returns, given inconsistent data coverage at some outlets.</li>
+  </ul>
+</section>
+
+<!-- ============ PAGE 12 : VOICE ============ -->
+<section class="page" id="page-voice">
+  <div class="page-kicker">Page 12 / 14</div>
+  <h1 class="page-title">Voice, Tone & Bilingual Content</h1>
+  <p class="page-sub">How Triple A Gas sounds — in customer-facing copy and in the admin portal.</p>
+
+  <h2>Public voice</h2>
+  <ul class="checklist">
+    <li>Plain, direct, confident — closer to Trinity Oil's practical service descriptions than to lifestyle-brand marketing copy.</li>
+    <li>Lead with what the customer can do: "Order a refill," "Find your nearest station" — active verbs, not passive claims.</li>
+    <li>Safety language is specific and instructional, never vague reassurance ("we care about safety") — give the actual step.</li>
+    <li>English is the primary language; short Twi/Ga phrases (e.g. a WhatsApp greeting, a safety-tip headline) can appear where they add warmth, but core instructions and legal/safety text stay in clear English so they're unambiguous.</li>
+  </ul>
+
+  <h3>Example: homepage hero</h3>
+  <div class="card">
+    <p style="margin:0;font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);">"Reliable cooking gas, delivered safely, across Ghana."</p>
+    <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);">Not: "Experience the future of energy with Triple A Gas's world-class solutions." — too abstract, doesn't say what the customer gets.</p>
+  </div>
+
+  <h2>Admin voice</h2>
+  <ul class="checklist">
+    <li>Instructional and neutral. A field label says what to enter, not how to feel about it.</li>
+    <li>Error and empty states explain what happened and what to do next: "No inspections logged yet — add the first one" rather than a bare "No data."</li>
+    <li>Never use exclamation points or celebratory copy in the admin UI — this is a work tool used every day, and enthusiasm reads as noise.</li>
+  </ul>
+
+  <h2>Naming conventions</h2>
+  <table class="spec">
+    <tr><th>Say this</th><th>Not this</th></tr>
+    <tr><td>Order Gas</td><td>Submit Request</td></tr>
+    <tr><td>Find a Station</td><td>Locate Retail Outlet Node</td></tr>
+    <tr><td>Shift Note</td><td>Internal Memo Object</td></tr>
+    <tr><td>Inspection Due</td><td>Compliance Flag Active</td></tr>
+  </table>
+</section>
+
+<!-- ============ PAGE 13 : ACCESS ============ -->
+<section class="page" id="page-access">
+  <div class="page-kicker">Page 13 / 14</div>
+  <h1 class="page-title">Accessibility, Responsive & Low-Bandwidth Rules</h1>
+  <p class="page-sub">Ghana's mobile web is overwhelmingly Android, often on 3G/4G with variable coverage outside major cities — every rule below is a direct response to that.</p>
+
+  <h2>Performance budget</h2>
+  <ul class="checklist">
+    <li>Public homepage target: under 1.2MB total, under 3s to interactive on a mid-range Android over 4G.</li>
+    <li>Serve responsive, compressed images (WebP with JPEG fallback); never a full-resolution hero photo to a phone.</li>
+    <li>Fonts self-hosted or aggressively cached — don't block first paint on a webfont round-trip.</li>
+    <li>Admin portal: queue writes locally and sync in the background so a dropped connection at an outlet never loses a log entry (page 11).</li>
+  </ul>
+
+  <h2>Responsive breakpoints</h2>
+  <table class="spec">
+    <tr><th>Breakpoint</th><th>Target</th><th>Notes</th></tr>
+    <tr><td>&lt; 480px</td><td>Small phones</td><td>Single column everywhere, nav collapses to a menu, tap targets ≥44px</td></tr>
+    <tr><td>480–900px</td><td>Large phones / small tablets</td><td>Public cards may go 2-up; admin stays single-column by default</td></tr>
+    <tr><td>900–1200px</td><td>Tablets / small laptops</td><td>Admin sidebar becomes visible persistently; public grids go 3-up</td></tr>
+    <tr><td>&gt; 1200px</td><td>Desktop</td><td>Full layouts as shown on pages 9 and 11</td></tr>
+  </table>
+
+  <h2>Accessibility</h2>
+  <ul class="checklist">
+    <li>All text/background pairs meet WCAG AA contrast — see the ratios noted on page 4.</li>
+    <li>Every interactive element has a visible keyboard focus ring in Flame.</li>
+    <li>Status is never color-only — badges always carry a text label alongside the color (page 7), so the site works for colorblind users and reads correctly in screen readers.</li>
+    <li>Forms have real <code>&lt;label&gt;</code> elements, not placeholder-only fields.</li>
+    <li>Respect <code>prefers-reduced-motion</code> — the gauge fill animation and any page transitions should become instant, not looping, when requested.</li>
+  </ul>
+</section>
+
+<!-- ============ PAGE 14 : DOS/DONTS ============ -->
+<section class="page" id="page-dos">
+  <div class="page-kicker">Page 14 / 14</div>
+  <h1 class="page-title">Do's, Don'ts & Build Checklist</h1>
+  <p class="page-sub">A final pass before development starts.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="margin-top:0;color:var(--safe);">Do</h3>
+      <ul class="checklist">
+        <li>Lead the public homepage with a stat bar and a clear, single CTA</li>
+        <li>Keep phone and WhatsApp contact visible on every public page</li>
+        <li>Treat the outlet/station list as primary content, fully searchable</li>
+        <li>Give Safety its own real page with actionable content</li>
+        <li>Keep the admin portal dark, dense, and status-color-driven</li>
+        <li>Make every admin log entry timestamped, attributed, and permanent</li>
+        <li>Reuse the gauge motif and status palette across both halves</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0;color:var(--danger);">Don't</h3>
+      <ul class="checklist" style="list-style:none;">
+        <li class="dont" style="display:flex;gap:10px;">Bury the phone number behind a "Contact Us" click — it should always be one tap away</li>
+        <li class="dont" style="display:flex;gap:10px;">Use Hazard Amber decoratively outside of safety/status contexts</li>
+        <li class="dont" style="display:flex;gap:10px;">Link the admin portal from primary public navigation</li>
+        <li class="dont" style="display:flex;gap:10px;">Let staff edit or delete past log entries — amend only</li>
+        <li class="dont" style="display:flex;gap:10px;">Ship a hero image over ~300KB to mobile</li>
+        <li class="dont" style="display:flex;gap:10px;">Invent generic "world-class energy solutions" marketing copy — stay specific and plain (page 12)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Build checklist</h2>
+  <table class="spec">
+    <tr><th>Area</th><th>Ready when…</th></tr>
+    <tr><td>Brand</td><td>Gauge mark finalized, wordmark set, favicon exported at all sizes</td></tr>
+    <tr><td>Public IA</td><td>Home, Products, Find a Station, Safety, About, Contact all mapped (page 8)</td></tr>
+    <tr><td>Content</td><td>Real outlet addresses/phones, real license number, real safety copy — no lorem ipsum in production</td></tr>
+    <tr><td>Admin core</td><td>Delivery Log, Inventory, Inspections, Shift Notes modules functional with permission tiers (page 10)</td></tr>
+    <tr><td>Performance</td><td>Homepage under budget on a throttled 4G test (page 13)</td></tr>
+    <tr><td>Accessibility</td><td>Contrast, focus states, and label pass complete (page 13)</td></tr>
+  </table>
+
+  <div class="callout blue" style="margin-top:30px;">This guide is a starting system, not a locked spec — revisit the color and type choices once real photography and a finished logo exist, and update this document as the source of truth.</div>
+</section>
+</div>
+
+<script>
+showPage('cover');
+</script>
+
+</body>
+</html>

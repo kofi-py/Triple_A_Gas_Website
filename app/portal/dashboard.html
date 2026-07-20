@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Dashboard — Triple A Gas Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../images/triple_a_gas_logo.png">
+</head>
+<body class="admin-body portal-dashboard">
+  <div class="portal-shell">
+    <aside class="portal-side" id="portal-side">
+      <div class="portal-side-brand">
+        <svg class="brand-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px; vertical-align: middle;">
+          <defs>
+            <linearGradient id="outerFlameDash" x1="50" y1="5" x2="50" y2="95" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00F2FE"/>
+              <stop offset="100%" stop-color="#0072FF"/>
+            </linearGradient>
+            <linearGradient id="midFlameDash" x1="50" y1="25" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00C6FF"/>
+              <stop offset="100%" stop-color="#0891B2"/>
+            </linearGradient>
+            <linearGradient id="innerFlameDash" x1="50" y1="50" x2="50" y2="85" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F59E0B"/>
+              <stop offset="100%" stop-color="#EF4444"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 5 C50 5 85 55 85 85 C85 90 75 95 65 95 C55 95 50 88 50 88 C50 88 45 95 35 95 C25 95 15 90 15 85 C15 55 50 5 50 5 Z" fill="url(#outerFlameDash)" opacity="0.85"/>
+          <path d="M50 25 C50 25 73 60 73 82 C73 86 66 90 58 90 C50 90 50 84 50 84 C50 84 50 90 42 90 C34 90 27 86 27 82 C27 60 50 25 50 25 Z" fill="url(#midFlameDash)"/>
+          <path d="M50 50 C50 50 60 68 60 80 C60 83 55 85 50 85 C45 85 40 83 40 80 C40 68 50 50 50 50 Z" fill="url(#innerFlameDash)"/>
+        </svg>
+        <div class="brand-text">TRIPLE A GAS<span>Portal</span></div>
+      </div>
+      <ul class="portal-nav">
+        <li><button type="button" class="active" data-module="dashboard">Dashboard</button></li>
+        <li><button type="button" data-module="deliveries">Delivery Log</button></li>
+        <li><button type="button" data-module="inventory">Inventory</button></li>
+        <li><button type="button" data-module="inspections">Inspections</button></li>
+        <li><button type="button" data-module="notes">Shift Notes</button></li>
+      </ul>
+      <div class="portal-user">
+        <strong id="user-name">—</strong>
+        <span id="user-role">—</span>
+        <a href="#" id="logout-btn">Sign out</a>
+      </div>
+    </aside>
+
+    <main class="portal-main">
+      <button type="button" class="portal-menu-toggle" id="portal-menu-toggle">☰ Modules</button>
+
+      <!-- Dashboard -->
+      <div class="admin-module active" id="module-dashboard">
+        <div class="portal-topbar">
+          <div>
+            <h1 id="dash-title">Dashboard</h1>
+            <p>Today’s activity at this outlet</p>
+          </div>
+          <span class="badge badge-blue" id="session-badge">Staff</span>
+        </div>
+
+        <div class="admin-cards">
+          <div class="admin-card"><b>142</b><span>Cylinders in stock</span></div>
+          <div class="admin-card"><b class="warn">3</b><span>Inspections due</span></div>
+          <div class="admin-card"><b class="danger">1</b><span>Overdue</span></div>
+          <div class="admin-card"><b>27</b><span>Deliveries today</span></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Recent activity</h2>
+          </div>
+          <table class="admintbl">
+            <thead>
+              <tr><th>Time</th><th>Type</th><th>Detail</th><th>Staff</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>07:41</td>
+                <td>Delivery</td>
+                <td>14.5kg ×2 — A. Mensah, East Legon</td>
+                <td>Kojo</td>
+                <td><span class="badge badge-safe">Done</span></td>
+              </tr>
+              <tr>
+                <td>08:15</td>
+                <td>Inspection</td>
+                <td>Bulk tank #04</td>
+                <td>Efua</td>
+                <td><span class="badge badge-hazard">Due</span></td>
+              </tr>
+              <tr>
+                <td>08:52</td>
+                <td>Shift note</td>
+                <td>Low stock on 6kg — reorder before Fri</td>
+                <td>Kwame</td>
+                <td><span class="badge badge-blue">Noted</span></td>
+              </tr>
+              <tr>
+                <td>09:20</td>
+                <td>Delivery</td>
+                <td>6kg ×4 — Chop Bar, Madina</td>
+                <td>Kojo</td>
+                <td><span class="badge badge-safe">Done</span></td>
+              </tr>
+              <tr>
+                <td>10:05</td>
+                <td>Inventory</td>
+                <td>Received 40× 14.5kg full from plant</td>
+                <td>Efua</td>
+                <td><span class="badge badge-safe">Logged</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Deliveries -->
+      <div class="admin-module" id="module-deliveries">
+        <div class="portal-topbar">
+          <div>
+            <h1>Delivery Log</h1>
+            <p>Newest first · entries are permanent after save</p>
+          </div>
+        </div>
+        <div class="panel">
+          <table class="admintbl">
+            <thead>
+              <tr><th>Time</th><th>Customer</th><th>Load</th><th>Driver</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>10:48</td><td>S. Adjei — Spintex</td><td>14.5kg ×1</td><td>Kojo</td><td><span class="badge badge-hazard">En route</span></td></tr>
+              <tr><td>09:20</td><td>Chop Bar — Madina</td><td>6kg ×4</td><td>Kojo</td><td><span class="badge badge-safe">Done</span></td></tr>
+              <tr><td>07:41</td><td>A. Mensah — East Legon</td><td>14.5kg ×2</td><td>Kojo</td><td><span class="badge badge-safe">Done</span></td></tr>
+              <tr><td>07:05</td><td>Office Park — Airport</td><td>6kg ×2</td><td>Ama</td><td><span class="badge badge-safe">Done</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Inventory -->
+      <div class="admin-module" id="module-inventory">
+        <div class="portal-topbar">
+          <div>
+            <h1>Cylinder Inventory</h1>
+            <p>Stock by size at this outlet</p>
+          </div>
+        </div>
+        <div class="inventory-grid">
+          <div class="inv-item"><b>28</b><span>3 kg full</span></div>
+          <div class="inv-item"><b>12</b><span>3 kg empty</span></div>
+          <div class="inv-item"><b>41</b><span>6 kg full</span></div>
+          <div class="inv-item"><b>19</b><span>6 kg empty</span></div>
+          <div class="inv-item"><b>54</b><span>14.5 kg full</span></div>
+          <div class="inv-item"><b>22</b><span>14.5 kg empty</span></div>
+          <div class="inv-item"><b>8</b><span>In transit</span></div>
+          <div class="inv-item"><b>3</b><span>Awaiting inspection</span></div>
+        </div>
+      </div>
+
+      <!-- Inspections -->
+      <div class="admin-module" id="module-inspections">
+        <div class="portal-topbar">
+          <div>
+            <h1>Safety Inspections</h1>
+            <p>Pass / fail records and next-due dates</p>
+          </div>
+        </div>
+        <div class="panel">
+          <table class="admintbl">
+            <thead>
+              <tr><th>Asset</th><th>Last check</th><th>Next due</th><th>Officer</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bulk tank #04</td><td>2026-06-12</td><td>2026-07-19</td><td>Efua</td><td><span class="badge badge-hazard">Due</span></td></tr>
+              <tr><td>Forecourt hose bank</td><td>2026-07-01</td><td>2026-08-01</td><td>Kwame</td><td><span class="badge badge-safe">Pass</span></td></tr>
+              <tr><td>Delivery van #2 regulator kit</td><td>2026-05-20</td><td>2026-07-10</td><td>Efua</td><td><span class="badge badge-danger">Overdue</span></td></tr>
+              <tr><td>Store room fire extinguisher</td><td>2026-07-15</td><td>2027-01-15</td><td>Kwame</td><td><span class="badge badge-safe">Pass</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Shift Notes -->
+      <div class="admin-module" id="module-notes">
+        <div class="portal-topbar">
+          <div>
+            <h1>Shift Notes</h1>
+            <p>Handover notes between shifts — append only</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h2>New shift note</h2></div>
+          <form id="note-form" class="note-form">
+            <div class="note-meta" id="note-meta">—</div>
+            <label for="note-body">What should the next shift know?</label>
+            <textarea id="note-body" required placeholder="Issues, low stock, customer complaints, maintenance…"></textarea>
+            <button class="btn btn-primary" type="submit">Save Note</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h2>Recent notes</h2></div>
+          <ul class="note-list" id="note-list"></ul>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../js/portal.js"></script>
+</body>
+</html>

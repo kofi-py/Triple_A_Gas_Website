@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find a Triple A Gas station near you. Search outlets by town or region across Ghana.">
+  <title>Find a Station — Triple A Gas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="icon" type="image/png" href="images/triple_a_gas_logo.png">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="page-hero">
+    <div class="container" data-aos="fade-up">
+      <h1>Find a Station</h1>
+      <p>Search by town or region. Every outlet lists a direct phone number — tap to call.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="search-bar" data-aos="fade-up">
+        <label for="station-search" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Search stations</label>
+        <input id="station-search" type="search" placeholder="Search by town or region…" autocomplete="off">
+        <div class="filter-chips" role="group" aria-label="Filter by region">
+          <button type="button" class="filter-chip active" data-region="all">All regions</button>
+          <button type="button" class="filter-chip" data-region="Greater Accra">Greater Accra</button>
+          <button type="button" class="filter-chip" data-region="Ashanti">Ashanti</button>
+          <button type="button" class="filter-chip" data-region="Western">Western</button>
+          <button type="button" class="filter-chip" data-region="Central">Central</button>
+          <button type="button" class="filter-chip" data-region="Northern">Northern</button>
+          <button type="button" class="filter-chip" data-region="Bono">Bono</button>
+        </div>
+      </div>
+      <div class="grid-3" id="station-grid"></div>
+    </div>
+  </section>
+
+  <div class="safety-strip" data-aos="fade-up">
+    <div class="container">
+      <div>
+        <h2>Need gas today?</h2>
+        <p>Call head office on 020 000 0000 and we will point you to the nearest open outlet with stock.</p>
+      </div>
+      <a class="btn btn-primary" href="tel:+233200000000">Call now</a>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

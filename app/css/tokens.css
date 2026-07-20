@@ -1,0 +1,82 @@
+/* Triple A Gas — design tokens from style guide */
+:root {
+  --ink: #16191c;
+  --cylinder-blue: #0B3B5C;
+  --cylinder-blue-light: #14507A;
+  --cylinder-blue-pale: #E4ECF1;
+  --flame: #D6491C;
+  --flame-light: #F0703F;
+  --flame-pale: #FBE7DE;
+  --hazard: #F0A202;
+  --hazard-pale: #FDF0D6;
+  --safe: #2E7D32;
+  --safe-pale: #E4F1E5;
+  --danger: #B3261E;
+  --danger-pale: #F7E2E0;
+  --cloud: #F3F5F7;
+  --paper: #FFFFFF;
+  --steel-100: #E7EBEE;
+  --steel-300: #C4CCD2;
+  --steel-400: #8A97A1;
+  --steel-600: #4B5860;
+  --admin-bg: #14181C;
+  --admin-panel: #1E2429;
+  --admin-panel-2: #242B31;
+  --admin-border: #2B333A;
+  --admin-text: #DCE3E8;
+  --admin-text-dim: #8A97A1;
+  --display: 'Archivo Expanded', Archivo, sans-serif;
+  --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --header-h: 68px;
+  --whatsapp: #25D366;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cloud);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--cylinder-blue);
+}
+
+:focus-visible {
+  outline: 2px solid var(--flame);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

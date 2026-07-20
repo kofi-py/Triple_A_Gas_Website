@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Staff Login — Triple A Gas Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../images/triple_a_gas_logo.png">
+</head>
+<body class="admin-body">
+  <div class="login-shell">
+    <div class="login-card">
+      <div class="login-brand">
+        <svg class="brand-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: 40px; vertical-align: middle;">
+          <defs>
+            <linearGradient id="outerFlameLogin" x1="50" y1="5" x2="50" y2="95" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00F2FE"/>
+              <stop offset="100%" stop-color="#0072FF"/>
+            </linearGradient>
+            <linearGradient id="midFlameLogin" x1="50" y1="25" x2="50" y2="90" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00C6FF"/>
+              <stop offset="100%" stop-color="#0891B2"/>
+            </linearGradient>
+            <linearGradient id="innerFlameLogin" x1="50" y1="50" x2="50" y2="85" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F59E0B"/>
+              <stop offset="100%" stop-color="#EF4444"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 5 C50 5 85 55 85 85 C85 90 75 95 65 95 C55 95 50 88 50 88 C50 88 45 95 35 95 C25 95 15 90 15 85 C15 55 50 5 50 5 Z" fill="url(#outerFlameLogin)" opacity="0.85"/>
+          <path d="M50 25 C50 25 73 60 73 82 C73 86 66 90 58 90 C50 90 50 84 50 84 C50 84 50 90 42 90 C34 90 27 86 27 82 C27 60 50 25 50 25 Z" fill="url(#midFlameLogin)"/>
+          <path d="M50 50 C50 50 60 68 60 80 C60 83 55 85 50 85 C45 85 40 83 40 80 C40 68 50 50 50 50 Z" fill="url(#innerFlameLogin)"/>
+        </svg>
+        <div class="brand-text">TRIPLE A GAS<span>Staff portal</span></div>
+      </div>
+      <h1>Sign in</h1>
+      <p>Operations tools for deliveries, inventory, inspections, and shift notes.</p>
+
+      <div id="login-error" class="login-error" role="alert">Invalid email or password. Use the demo credentials below.</div>
+
+      <form id="login-form">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autocomplete="username" placeholder="manager@triplaagas.com">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••">
+        <button class="btn btn-primary" type="submit" style="width:100%;margin-top:4px;">Sign in</button>
+      </form>
+
+      <p class="login-hint">
+        Demo access:<br>
+        Email <code>manager@triplaagas.com</code><br>
+        Password <code>gas2026</code>
+      </p>
+      <a class="login-back" href="../index.html">← Back to public site</a>
+    </div>
+  </div>
+  <script src="../js/portal.js"></script>
+</body>
+</html>
