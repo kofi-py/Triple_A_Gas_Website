@@ -239,8 +239,8 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(11, 59, 92, 0.94) 0%, rgba(20, 80, 122, 0.88) 50%, rgba(214, 73, 28, 0.55) 100%),
-    radial-gradient(ellipse at 80% 20%, rgba(240, 162, 2, 0.25), transparent 50%),
+    linear-gradient(135deg, rgba(62, 9, 20, 0.97) 0%, rgba(93, 16, 32, 0.93) 50%, rgba(143, 30, 52, 0.70) 100%),
+    radial-gradient(ellipse at 80% 20%, rgba(212, 154, 34, 0.22), transparent 50%),
     var(--cylinder-blue);
   color: #fff;
   padding: 72px 0 80px;
@@ -841,6 +841,15 @@
 
 .station-card .phone:hover {
   color: var(--flame);
+}
+
+.station-map {
+  display: block;
+  width: fit-content;
+  margin: 0 0 12px;
+  color: var(--flame);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .station-meta {

@@ -4,16 +4,18 @@ const GAUGE_SVG = `
 <img class="brand-mark" src="images/triple_a_gas_logo.png" alt="Triple A Gas" style="width:44px;height:44px;object-fit:contain;display:block;">`;
 
 const STATIONS = [
-  { id: 1, name: 'Triple A Gas — Achimota', town: 'Accra', region: 'Greater Accra', address: 'Achimota Retail Rd, Accra', phone: '020 000 0001', hours: 'Open now', status: 'safe', stock: 'In stock' },
-  { id: 2, name: 'Triple A Gas — Tema', town: 'Tema', region: 'Greater Accra', address: 'Community 4, Tema', phone: '020 000 0002', hours: 'Open now', status: 'safe', stock: 'In stock' },
-  { id: 3, name: 'Triple A Gas — Madina', town: 'Madina', region: 'Greater Accra', address: 'Madina Market Rd, Accra', phone: '020 000 0004', hours: 'Open now', status: 'safe', stock: 'In stock' },
-  { id: 4, name: 'Triple A Gas — Kumasi', town: 'Kumasi', region: 'Ashanti', address: 'Kentinkrono Rd, Kumasi', phone: '020 000 0003', hours: 'Closes 6pm', status: 'hazard', stock: 'Low stock' },
-  { id: 5, name: 'Triple A Gas — Suame', town: 'Kumasi', region: 'Ashanti', address: 'Suame Magazine, Kumasi', phone: '020 000 0005', hours: 'Open now', status: 'safe', stock: 'In stock' },
-  { id: 6, name: 'Triple A Gas — Takoradi', town: 'Takoradi', region: 'Western', address: 'Harbour Rd, Takoradi', phone: '020 000 0006', hours: 'Open now', status: 'safe', stock: 'In stock' },
-  { id: 7, name: 'Triple A Gas — Cape Coast', town: 'Cape Coast', region: 'Central', address: 'Pedu Junction, Cape Coast', phone: '020 000 0007', hours: 'Closes 5pm', status: 'hazard', stock: 'In stock' },
-  { id: 8, name: 'Triple A Gas — Tamale', town: 'Tamale', region: 'Northern', address: 'Kaladan Rd, Tamale', phone: '020 000 0008', hours: 'Open now', status: 'safe', stock: 'In stock' },
-  { id: 9, name: 'Triple A Gas — Sunyani', town: 'Sunyani', region: 'Bono', address: 'Magazine Rd, Sunyani', phone: '020 000 0009', hours: 'Open now', status: 'safe', stock: 'Low stock' },
-  { id: 10, name: 'Triple A Gas — North Legon', town: 'North Legon', region: 'Greater Accra', address: 'North Legon, Accra', phone: '024 401 1050', hours: 'Open now', status: 'safe', stock: 'In stock' },
+  {
+    id: 1,
+    name: 'Triple A LP Gas — Ga East',
+    town: 'Ga East Municipal Assembly',
+    region: 'Greater Accra',
+    address: 'Greater Accra Region, Ghana',
+    phone: '024 401 1050',
+    hours: 'Confirm before travelling',
+    status: 'hazard',
+    stock: 'Availability to confirm',
+    mapUrl: 'https://www.openstreetmap.org/?mlat=5.6781&mlon=-0.19169#map=17/5.6781/-0.19169'
+  },
 ];
 
 // Read phone and WhatsApp from site-config.js (fallback to current values)
@@ -70,7 +72,7 @@ function renderHeader() {
   el.innerHTML = `
     <div class="topbar">
       <div class="container">
-        <span>NPA-licensed LPG marketer · Accra, Ghana</span>
+        <span>Triple A LP Gas Limited · Ghana</span>
         <div class="topbar-right">
           <a href="tel:${PHONE_TEL}">Call ${PHONE}</a>
           <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>
@@ -201,6 +203,7 @@ function initStationSearch() {
         <h3>${s.name}</h3>
         <p>${s.address}</p>
         <a class="phone" href="tel:+233${s.phone.replace(/\s/g, '').replace(/^0/, '')}">${s.phone}</a>
+        ${s.mapUrl ? `<a class="station-map" href="${s.mapUrl}" target="_blank" rel="noopener">Open map</a>` : ''}
         <div class="station-meta">
           <span class="badge badge-${s.status}">${s.hours}</span>
           <span class="badge badge-${s.stock === 'In stock' ? 'safe' : 'hazard'}">${s.stock}</span>
@@ -245,7 +248,8 @@ function initStationTeaser() {
     <article class="card station-card" data-aos="fade-up" data-aos-delay="${i * 80}">
       <h3>${s.name}</h3>
       <p>${s.address}</p>
-      <a class="phone" href="tel:+233${s.phone.replace(/\s/g, '').replace(/^0/, '')}">${s.phone}</a>
+        <a class="phone" href="tel:+233${s.phone.replace(/\s/g, '').replace(/^0/, '')}">${s.phone}</a>
+        ${s.mapUrl ? `<a class="station-map" href="${s.mapUrl}" target="_blank" rel="noopener">Open map</a>` : ''}
       <div class="station-meta">
         <span class="badge badge-${s.status}">${s.hours}</span>
       </div>
