@@ -1,0 +1,7 @@
+# image-urls.txt — add one image URL per line (no extra commas).
+# Edit this file to include the remote image URLs you want downloaded.
+# Example lines (replace with real URLs):
+# https://example.com/path/to/image1.jpg
+# https://example.com/path/to/image2.png
+
+# Paste your image URLs below this line, one per line:

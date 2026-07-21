@@ -13,10 +13,42 @@ const STATIONS = [
   { id: 7, name: 'Triple A Gas — Cape Coast', town: 'Cape Coast', region: 'Central', address: 'Pedu Junction, Cape Coast', phone: '020 000 0007', hours: 'Closes 5pm', status: 'hazard', stock: 'In stock' },
   { id: 8, name: 'Triple A Gas — Tamale', town: 'Tamale', region: 'Northern', address: 'Kaladan Rd, Tamale', phone: '020 000 0008', hours: 'Open now', status: 'safe', stock: 'In stock' },
   { id: 9, name: 'Triple A Gas — Sunyani', town: 'Sunyani', region: 'Bono', address: 'Magazine Rd, Sunyani', phone: '020 000 0009', hours: 'Open now', status: 'safe', stock: 'Low stock' },
+  { id: 10, name: 'Triple A Gas — North Legon', town: 'North Legon', region: 'Greater Accra', address: 'North Legon, Accra', phone: '024 401 1050', hours: 'Open now', status: 'safe', stock: 'In stock' },
 ];
 
-const PHONE = '020 000 0000';
-const WHATSAPP = '233200000000';
+// Read phone and WhatsApp from site-config.js (fallback to current values)
+const PHONE = (window.SITE_CONFIG && window.SITE_CONFIG.PHONE) ? window.SITE_CONFIG.PHONE : '024 507 5496';
+const PHONE_TEL = (window.SITE_CONFIG && window.SITE_CONFIG.PHONE_TEL) ? window.SITE_CONFIG.PHONE_TEL : '+233245075496';
+const WHATSAPP = (window.SITE_CONFIG && window.SITE_CONFIG.WHATSAPP) ? window.SITE_CONFIG.WHATSAPP : '233245075496';
+
+// Apply site config to existing static anchors (class-based):
+function applySiteConfigToStatic() {
+  // anchors that should show the phone number
+  document.querySelectorAll('a.autophone').forEach((a) => {
+    a.setAttribute('href', `tel:${PHONE_TEL}`);
+    // If anchor contains the phone text, update it for consistency
+    if (a.textContent && a.textContent.trim().match(/\d/)) {
+      // preserve surrounding text (e.g., "Call 024 507 5496")
+      const text = a.textContent.trim();
+      const replaced = text.replace(/\+?233\s?\d{2,3}[\s\d-]*/g, PHONE).replace(/\d{2,3}[\s\d-]{6,}/g, PHONE);
+      a.textContent = replaced || PHONE;
+    }
+  });
+  // anchors that should link to WhatsApp
+  document.querySelectorAll('a.autowa').forEach((a) => {
+    a.setAttribute('href', `https://wa.me/${WHATSAPP}`);
+  });
+}
+
+function createFloatingCall() {
+  if (document.querySelector('.fab-call')) return;
+  const a = document.createElement('a');
+  a.className = 'fab-call autophone';
+  a.setAttribute('aria-label', 'Call Triple A Gas');
+  a.innerHTML = '📞';
+  document.body.appendChild(a);
+}
+
 
 function getPage() {
   const path = location.pathname.split('/').pop() || 'index.html';
@@ -40,7 +72,7 @@ function renderHeader() {
       <div class="container">
         <span>NPA-licensed LPG marketer · Accra, Ghana</span>
         <div class="topbar-right">
-          <a href="tel:+233200000000">Call ${PHONE}</a>
+          <a href="tel:${PHONE_TEL}">Call ${PHONE}</a>
           <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
@@ -62,7 +94,7 @@ function renderHeader() {
         </ul>
         <div class="header-actions">
           <a class="btn btn-whatsapp btn-sm" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="btn btn-primary btn-sm" href="tel:+233200000000">Call Us</a>
+          <a class="btn btn-primary btn-sm" href="tel:${PHONE_TEL}">Call Us</a>
         </div>
       </div>
     </header>
@@ -106,7 +138,7 @@ function renderFooter() {
           </div>
           <div>
             <h4>Contact</h4>
-            <a class="footer-phone" href="tel:+233200000000">${PHONE}</a>
+            <a class="footer-phone" href="tel:${PHONE_TEL}">${PHONE}</a>
             <p style="margin:0 0 6px;">Head Office, Accra</p>
             <a href="mailto:hello@triplaagas.com">hello@triplaagas.com</a>
           </div>
@@ -317,6 +349,9 @@ function initLightbox() {
 document.addEventListener('DOMContentLoaded', () => {
   renderHeader();
   renderFooter();
+  // Apply config-driven updates to any static anchors and add floating CTA
+  applySiteConfigToStatic();
+  createFloatingCall();
   initAos();
   animateGauges();
   initStationSearch();
