@@ -1,7 +1,7 @@
 /* Triple A Gas — shared public JS */
 
 const GAUGE_SVG = `
-<img class="brand-mark" src="images/triple_a_gas_logo.png" alt="Triple A Gas" style="width:44px;height:44px;object-fit:contain;display:block;">`;
+<img class="brand-mark" src="images/offical_logo.png" alt="Triple A Gas" style="width:70px;height:70px;object-fit:contain;display:block;">`;
 
 const STATIONS = [
   {
