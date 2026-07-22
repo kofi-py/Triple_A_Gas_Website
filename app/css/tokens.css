@@ -1,13 +1,13 @@
 /* Triple A Gas — design tokens from style guide */
 :root {
-  /* Triple A LP Gas brand: refined wine with clean white surfaces. */
-  --ink: #251015;
-  --cylinder-blue: #5D1020;
-  --cylinder-blue-light: #78192C;
-  --cylinder-blue-pale: #F9EDF0;
-  --flame: #8F1E34;
-  --flame-light: #B33B50;
-  --flame-pale: #FCEFF2;
+  /* Triple A LP Gas brand: wine red (#722F37) with clean white surfaces. */
+  --ink: #722F37;
+  --cylinder-blue: #722F37;
+  --cylinder-blue-light: #8B3F48;
+  --cylinder-blue-pale: #F5E9EA;
+  --flame: #722F37;
+  --flame-light: #8B3F48;
+  --flame-pale: #F5E9EA;
   --hazard: #D49A22;
   --hazard-pale: #FFF4D9;
   --safe: #2E7D32;
@@ -20,17 +20,17 @@
   --steel-300: #DDC9CD;
   --steel-400: #9A7E84;
   --steel-600: #5F484D;
-  --admin-bg: #240B11;
-  --admin-panel: #35101A;
-  --admin-panel-2: #481724;
-  --admin-border: #632334;
-  --admin-text: #FFF7F8;
-  --admin-text-dim: #D7B6BC;
+  --admin-bg: #722F37;
+  --admin-panel: #8B3F48;
+  --admin-panel-2: #A04F58;
+  --admin-border: #B05F68;
+  --admin-text: #FFFFFF;
+  --admin-text-dim: #E4D5D8;
   --display: 'Archivo Expanded', Archivo, sans-serif;
   --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: 'IBM Plex Mono', monospace;
   --radius: 10px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow: 0 1px 3px rgba(114, 47, 55, 0.15);
   --header-h: 68px;
   --whatsapp: #25D366;
 }
