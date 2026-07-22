@@ -64,6 +64,12 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 6.9167, lng: -1.0333 },
+      images: [
+        "images/bonwire/IMG-20260722-WA0006.jpg",
+        "images/bonwire/IMG-20260722-WA0007.jpg",
+        "images/bonwire/IMG-20260722-WA0008.jpg",
+        "images/bonwire/IMG-20260722-WA0009.jpg",
+      ],
     },
     {
       id: 4,
@@ -74,6 +80,14 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 5.6667, lng: -2.5833 },
+      images: [
+        "images/bogoso/IMG-20260722-WA0000.jpg",
+        "images/bogoso/IMG-20260722-WA0001.jpg",
+        "images/bogoso/IMG-20260722-WA0002.jpg",
+        "images/bogoso/IMG-20260722-WA0003.jpg",
+        "images/bogoso/IMG-20260722-WA0004.jpg",
+        "images/bogoso/IMG-20260722-WA0005.jpg",
+      ],
     },
     {
       id: 5,
