@@ -12,7 +12,7 @@ const DEMO_USER = {
 };
 
 const GAUGE_SVG = `
-<img class="brand-mark" src="../images/offical_logo.png" alt="Triple A Gas" style="width:70px;height:70px;object-fit:contain;display:block;">`;
+<img class="brand-mark" src="../images/offical_logo-removebg.png" alt="Triple A Gas" style="width:70px;height:70px;object-fit:contain;display:block;">`;
 
 function getSession() {
   try {

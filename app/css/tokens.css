@@ -1,38 +1,38 @@
 /* Triple A Gas — design tokens from style guide */
 :root {
-  /* Triple A LP Gas brand: wine red (#722F37) with clean white surfaces. */
-  --ink: #722F37;
-  --cylinder-blue: #722F37;
-  --cylinder-blue-light: #8B3F48;
-  --cylinder-blue-pale: #F5E9EA;
-  --flame: #722F37;
-  --flame-light: #8B3F48;
-  --flame-pale: #F5E9EA;
-  --hazard: #D49A22;
-  --hazard-pale: #FFF4D9;
-  --safe: #2E7D32;
-  --safe-pale: #E4F1E5;
-  --danger: #B42318;
-  --danger-pale: #FDEBE8;
-  --cloud: #FFFFFF;
-  --paper: #FFFFFF;
-  --steel-100: #F0E4E6;
-  --steel-300: #DDC9CD;
-  --steel-400: #9A7E84;
-  --steel-600: #5F484D;
-  --admin-bg: #722F37;
-  --admin-panel: #8B3F48;
-  --admin-panel-2: #A04F58;
-  --admin-border: #B05F68;
-  --admin-text: #FFFFFF;
-  --admin-text-dim: #E4D5D8;
-  --display: 'Archivo Expanded', Archivo, sans-serif;
-  --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: 'IBM Plex Mono', monospace;
+  /* Triple A LP Gas brand: dark wine red (#5D1020) with clean white surfaces. */
+  --ink: #251015;
+  --cylinder-blue: #5d1020;
+  --cylinder-blue-light: #78192c;
+  --cylinder-blue-pale: #f9edf0;
+  --flame: #8f1e34;
+  --flame-light: #b33b50;
+  --flame-pale: #fceff2;
+  --hazard: #d49a22;
+  --hazard-pale: #fff4d9;
+  --safe: #2e7d32;
+  --safe-pale: #e4f1e5;
+  --danger: #b42318;
+  --danger-pale: #fdebe8;
+  --cloud: #ffffff;
+  --paper: #ffffff;
+  --steel-100: #f0e4e6;
+  --steel-300: #ddc9cd;
+  --steel-400: #9a7e84;
+  --steel-600: #5f484d;
+  --admin-bg: #240b11;
+  --admin-panel: #35101a;
+  --admin-panel-2: #481724;
+  --admin-border: #632334;
+  --admin-text: #fff7f8;
+  --admin-text-dim: #d7b6bc;
+  --display: "Archivo Expanded", Archivo, sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "IBM Plex Mono", monospace;
   --radius: 10px;
-  --shadow: 0 1px 3px rgba(114, 47, 55, 0.15);
+  --shadow: 0 1px 3px rgba(93, 16, 32, 0.15);
   --header-h: 68px;
-  --whatsapp: #25D366;
+  --whatsapp: #25d366;
 }
 
 *,
