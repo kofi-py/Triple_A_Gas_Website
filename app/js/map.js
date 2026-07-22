@@ -19,27 +19,53 @@ document.addEventListener("DOMContentLoaded", function () {
       iconAnchor: [0, 0],
     });
 
+    var popupContent = '<div class="map-info-window">';
+    popupContent +=
+      "<h4>" +
+      location.city +
+      " " +
+      (location.type === "Headquarters" ? "🏢" : "📍") +
+      "</h4>";
+    if (location.images && location.images.length > 0) {
+      popupContent +=
+        '<img src="../' +
+        location.images[0] +
+        '" alt="' +
+        location.city +
+        ' station" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:8px;">';
+    }
+    popupContent += "<p><strong>" + location.address + "</strong></p>";
+    popupContent +=
+      '<p>📞 <a href="tel:' +
+      location.phone.replace(/\s/g, "") +
+      '">' +
+      location.phone +
+      "</a></p>";
+    popupContent += "<p>Services: " + location.services.join(", ") + "</p>";
+    if (location.googleMapsUrl) {
+      popupContent +=
+        '<p><a href="' +
+        location.googleMapsUrl +
+        '" target="_blank" rel="noopener">Open in Google Maps</a></p>';
+    }
+    if (location.images && location.images.length > 1) {
+      popupContent +=
+        '<p style="font-size:11px;color:#9A7E84;">📸 ' +
+        location.images.length +
+        " photos</p>";
+    }
+    popupContent += "</div>";
+
     const marker = L.marker(
       [location.coordinates.lat, location.coordinates.lng],
       {
         icon,
         title: location.city,
       },
-    ).bindPopup(
-      `
-      <div class="map-info-window">
-        <h4>${location.city} ${location.type === "Headquarters" ? "🏢" : "📍"}</h4>
-        <p><strong>${location.address}</strong></p>
-        <p>📞 <a href="tel:${location.phone.replace(/\s/g, "")}">${location.phone}</a></p>
-        <p>Services: ${location.services.join(", ")}</p>
-        ${location.googleMapsUrl ? `<p><a href="${location.googleMapsUrl}" target="_blank" rel="noopener">Open in Google Maps</a></p>` : ""}
-      </div>
-    `,
-      {
-        maxWidth: 280,
-        className: "station-popup",
-      },
-    );
+    ).bindPopup(popupContent, {
+      maxWidth: 280,
+      className: "station-popup",
+    });
 
     markers.addLayer(marker);
     return marker;

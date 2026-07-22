@@ -9,10 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/public.css">
-<link rel="icon" type="image/png" href="images/offical_logo-removebg.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="icon" type="image/png" href="images/offical_logo-removebg.png">
 </head>
 <body>
   <div id="site-header"></div>
@@ -32,7 +32,6 @@
         <p>Triple A Gas operates 7 locations across Ghana. Use the map to find the branch nearest to you.</p>
       </div>
       <div id="station-map" data-aos="fade-up"></div>
-    </div>
   </section>
 
   <section class="section">
@@ -50,9 +49,17 @@
           <button type="button" class="filter-chip" data-region="Ashanti">Ashanti</button>
           <button type="button" class="filter-chip" data-region="Western">Western</button>
         </div>
-      </div>
       <div class="grid-3" id="station-grid"></div>
-    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-kicker">Station gallery</div>
+        <h2>See our stations</h2>
+        <p>Real photos from our Bogoso and Bonwire branches.</p>
+      </div>
+      <div id="station-galleries"></div>
   </section>
 
   <div class="safety-strip" data-aos="fade-up">
@@ -63,7 +70,6 @@
       </div>
       <a class="btn btn-primary" href="tel:+233244011050">Call now</a>
     </div>
-  </div>
 
   <div id="site-footer"></div>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -74,4 +80,3 @@
   <script src="js/map.js"></script>
 </body>
 </html>
-

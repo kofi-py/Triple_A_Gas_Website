@@ -109,7 +109,6 @@ function renderHeader() {
           <a href="tel:${PHONE_TEL}">Call ${PHONE}</a>
           <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
         </div>
-      </div>
     </div>
     <header class="site-header">
       <div class="container">
@@ -130,7 +129,6 @@ function renderHeader() {
           <a class="btn btn-whatsapp btn-sm" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
           <a class="btn btn-primary btn-sm" href="tel:${PHONE_TEL}">Call Us</a>
         </div>
-      </div>
     </header>
   `;
 
@@ -158,7 +156,6 @@ function renderFooter() {
             <div class="footer-brand">
               ${GAUGE_SVG}
               <div class="brand-text">TRIPLE A GAS<span>Reliable cooking gas</span></div>
-            </div>
             <p style="margin:0;max-width:32ch;line-height:1.55;">Dependable, safety-first LPG for households and businesses across Ghana.</p>
           </div>
           <div>
@@ -184,7 +181,6 @@ function renderFooter() {
               <li><a href="${base}stations.html">Nearest outlet</a></li>
             </ul>
           </div>
-        </div>
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} Triple A Gas Ltd. · Accra, Ghana</span>
           <span>
@@ -192,7 +188,6 @@ function renderFooter() {
             · Site built for Triple A Gas
           </span>
         </div>
-      </div>
     </footer>
     <a class="fab-whatsapp" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       ${WHATSAPP_ICON.replace('width="18" height="18"', 'width="26" height="26"')}<span>WhatsApp</span>
@@ -297,6 +292,55 @@ function initStationTeaser() {
     )
     .join("");
   refreshAos();
+}
+
+// Station gallery (for stations page)
+function initStationGalleries() {
+  var container = document.getElementById("station-galleries");
+  if (!container || !window.COMPANY_INFO) return;
+  var locations = window.COMPANY_INFO.locations.filter(function (l) {
+    return l.images && l.images.length > 0;
+  });
+  if (!locations.length) {
+    container.innerHTML =
+      '<p style="color:var(--steel-600);">Gallery photos coming soon.</p>';
+    return;
+  }
+  var html = "";
+  for (var l = 0; l < locations.length; l++) {
+    var loc = locations[l];
+    var cols = Math.min(loc.images.length, 3);
+    html +=
+      '<div class="station-gallery-block" data-aos="fade-up" style="margin-bottom:36px;">';
+    html +=
+      '<h3 style="font-family:var(--display);font-size:18px;margin:0 0 4px;">' +
+      loc.city +
+      ", " +
+      loc.region +
+      "</h3>";
+    html +=
+      '<p style="font-size:14px;color:var(--steel-600);margin:0 0 16px;">' +
+      loc.address +
+      "</p>";
+    html +=
+      '<div class="gallery-grid" style="grid-template-columns: repeat(' +
+      cols +
+      ', 1fr);">';
+    for (var i = 0; i < loc.images.length; i++) {
+      html +=
+        '<div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="' +
+        loc.city +
+        " station photo " +
+        (i + 1) +
+        '" data-full="' +
+        loc.images[i] +
+        '" style="background-image:url(\'' +
+        loc.images[i] +
+        "'); min-height:160px;\"></div>";
+    }
+    html += "</div>";
+  }
+  container.innerHTML = html;
 }
 
 function initAos() {
@@ -416,6 +460,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animateGauges();
   initStationSearch();
   initStationTeaser();
+  initStationGalleries();
   initForms();
   initLightbox();
 });
