@@ -3,20 +3,30 @@
 const GAUGE_SVG = `
 <img class="brand-mark" src="images/offical_logo.png" alt="Triple A Gas" style="width:70px;height:70px;object-fit:contain;display:block;">`;
 
-const STATIONS = [
-  {
-    id: 1,
-    name: 'Triple A LP Gas — Ga East',
-    town: 'Ga East Municipal Assembly',
-    region: 'Greater Accra',
-    address: 'Greater Accra Region, Ghana',
-    phone: '024 401 1050',
+function formatLocalPhone(phone) {
+  return phone.replace(/^\+233\s?/, '0').replace(/\s+/g, ' ').trim();
+}
+
+function buildStationsFromCompanyInfo() {
+  const locations = window.COMPANY_INFO?.locations || [];
+  return locations.map((loc) => ({
+    id: loc.id,
+    name: loc.type === 'Headquarters'
+      ? `Triple A LP Gas — ${loc.city} (HQ)`
+      : `Triple A LP Gas — ${loc.city}`,
+    town: loc.city,
+    region: loc.region,
+    address: loc.address,
+    phone: formatLocalPhone(loc.phone),
     hours: 'Confirm before travelling',
-    status: 'hazard',
+    status: loc.type === 'Headquarters' ? 'safe' : 'hazard',
     stock: 'Availability to confirm',
-    mapUrl: 'https://www.openstreetmap.org/?mlat=5.6781&mlon=-0.19169#map=17/5.6781/-0.19169'
-  },
-];
+    mapUrl: loc.googleMapsUrl || `https://www.openstreetmap.org/?mlat=${loc.coordinates.lat}&mlon=${loc.coordinates.lng}#map=15/${loc.coordinates.lat}/${loc.coordinates.lng}`,
+    coordinates: loc.coordinates
+  }));
+}
+
+const STATIONS = buildStationsFromCompanyInfo();
 
 // Read phone and WhatsApp from site-config.js (fallback to current values)
 const PHONE = (window.SITE_CONFIG && window.SITE_CONFIG.PHONE) ? window.SITE_CONFIG.PHONE : '024 507 5496';
