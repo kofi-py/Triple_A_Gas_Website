@@ -3,35 +3,36 @@ window.COMPANY_INFO = {
   name: "Triple A LP Gas Limited",
   established: 2005,
   colors: {
-    primary: "#722F37", // wine red
-    secondary: "#FFFFFF" // white
+    primary: "#5D1020", // wine red
+    secondary: "#FFFFFF", // white
   },
-  
+
   // Official Registration Details
   registration: {
     number: "CA-18,223",
     taxId: "C5647752015",
-    status: "IN GOOD STANDING"
+    status: "IN GOOD STANDING",
   },
-  
+
   // Official Address (Registered)
   officialAddress: "Flowers Haatso, Agbogba Road, P.O. Box WJ 486, Weija-Accra",
   hq: "Accra, Ghana",
-  description: "Leading LPG supplier serving homes, businesses, and taxis across Ghana since 2005.",
-  
+  description:
+    "Leading LPG supplier serving homes, businesses, and taxis across Ghana since 2005.",
+
   // Contact Information
   contacts: {
     primaryPhone: "+233 24 507 5496",
     alternatePhone: "+233 24 401 1050",
-    email: "tripleagascompany@yahoo.com"
+    email: "tripleagascompany@yahoo.com",
   },
-  
+
   // Official Contact Person
   contactPerson: {
     name: "Francis Adu Mensah",
-    title: "Representative"
+    title: "Representative",
   },
-  
+
   // Locations (7 branches)
   locations: [
     {
@@ -42,7 +43,7 @@ window.COMPANY_INFO = {
       address: "Flowers Haatso, Agbogba Road, Weija-Accra",
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Taxi Service", "Retail"],
-      coordinates: { lat: 5.6037, lng: -0.1870 }
+      coordinates: { lat: 5.6037, lng: -0.187 },
     },
     {
       id: 2,
@@ -52,7 +53,7 @@ window.COMPANY_INFO = {
       address: "Antoa, Ghana",
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 6.0167, lng: -1.0333 }
+      coordinates: { lat: 6.0167, lng: -1.0333 },
     },
     {
       id: 3,
@@ -62,7 +63,7 @@ window.COMPANY_INFO = {
       address: "Bonwire, Ghana",
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 6.9167, lng: -1.0333 }
+      coordinates: { lat: 6.9167, lng: -1.0333 },
     },
     {
       id: 4,
@@ -72,7 +73,7 @@ window.COMPANY_INFO = {
       address: "Bogoso, Ghana",
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 5.6667, lng: -2.5833 }
+      coordinates: { lat: 5.6667, lng: -2.5833 },
     },
     {
       id: 5,
@@ -82,7 +83,7 @@ window.COMPANY_INFO = {
       address: "Prestea, Ghana",
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 5.45, lng: -2.0833 }
+      coordinates: { lat: 5.45, lng: -2.0833 },
     },
     {
       id: 6,
@@ -92,7 +93,7 @@ window.COMPANY_INFO = {
       address: "North Legon, Accra, Ghana",
       phone: "+233 24 401 1050",
       services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 5.6500, lng: -0.1400 }
+      coordinates: { lat: 5.65, lng: -0.14 },
     },
     {
       id: 7,
@@ -103,36 +104,37 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 6.7975625, lng: -1.4695156 },
-      googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=QGXJ%2B25H+Ejisu+Ghana"
-    }
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=QGXJ%2B25H+Ejisu+Ghana",
+    },
   ],
-  
+
   // Leadership Team
   team: [
     {
       name: "Akua Adu Mensah",
       title: "Owner",
-      role: "Co-founder"
+      role: "Co-founder",
     },
     {
       name: "Frank Adu Mensah",
       title: "Owner",
-      role: "Co-founder"
+      role: "Co-founder",
     },
     {
       name: "Nana Kwame Owusu Boateng",
       title: "Chief Operating Officer (COO)",
-      role: "Operations"
+      role: "Operations",
     },
     {
       name: "Ama Boakye Waa Boating",
       title: "Secretary",
-      role: "Administration"
+      role: "Administration",
     },
     {
       name: "Francis Adu Mensah",
       title: "Representative",
-      role: "Business Development"
-    }
-  ]
+      role: "Business Development",
+    },
+  ],
 };
