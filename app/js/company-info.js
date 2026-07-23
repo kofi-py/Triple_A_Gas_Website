@@ -44,6 +44,14 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Taxi Service", "Retail"],
       coordinates: { lat: 5.6037, lng: -0.187 },
+      images: [
+        "images/accra/image1.png",
+        "images/accra/image2.png",
+        "images/accra/image3.png",
+        "images/accra/image4.png",
+        "images/accra/image5.png",
+        "images/accra/image6.png",
+      ],
     },
     {
       id: 2,
