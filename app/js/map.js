@@ -27,12 +27,18 @@ document.addEventListener("DOMContentLoaded", function () {
       (location.type === "Headquarters" ? "🏢" : "📍") +
       "</h4>";
     if (location.images && location.images.length > 0) {
+      var imgSrc = location.images[0].startsWith("../")
+        ? location.images[0].substring(3)
+        : location.images[0];
       popupContent +=
-        '<img src="../' +
-        location.images[0] +
-        '" alt="' +
+        '<img src="' +
+        imgSrc +
+        '" alt="Photo of ' +
         location.city +
-        ' station" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:8px;">';
+        ' station" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:8px;" loading="lazy" onerror="this.style.display=\'none\'">';
+    } else {
+      popupContent +=
+        '<div style="width:100%;height:80px;background:#F0E4E6;border-radius:6px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:28px;">📷</div>';
     }
     popupContent += "<p><strong>" + location.address + "</strong></p>";
     popupContent +=
