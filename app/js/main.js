@@ -109,7 +109,6 @@ function renderHeader() {
           <a href="tel:${PHONE_TEL}">Call ${PHONE}</a>
           <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
         </div>
-    </div>
     <header class="site-header">
       <div class="container">
         <a class="brand" href="${base}index.html">
@@ -122,6 +121,7 @@ function renderHeader() {
           <li><a href="${base}products.html" ${isActive("products", current) ? 'aria-current="page"' : ""}>Products</a></li>
           <li><a href="${base}stations.html" ${isActive("stations", current) ? 'aria-current="page"' : ""}>Find a Station</a></li>
           <li><a href="${base}safety.html" ${isActive("safety", current) ? 'aria-current="page"' : ""}>Safety</a></li>
+          <li><a href="${base}faq.html" ${isActive("faq", current) ? 'aria-current="page"' : ""}>FAQ</a></li>
           <li><a href="${base}about.html" ${isActive("about", current) ? 'aria-current="page"' : ""}>About</a></li>
           <li><a href="${base}contact.html" ${isActive("contact", current) ? 'aria-current="page"' : ""}>Contact</a></li>
         </ul>
@@ -164,6 +164,7 @@ function renderFooter() {
               <li><a href="${base}products.html">Products</a></li>
               <li><a href="${base}stations.html">Find a Station</a></li>
               <li><a href="${base}safety.html">Safety</a></li>
+              <li><a href="${base}faq.html">FAQ</a></li>
               <li><a href="${base}about.html">About</a></li>
             </ul>
           </div>

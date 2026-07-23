@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frequently asked questions about LPG gas delivery, cylinder sizes, refill and exchange, safety, and service areas from Triple A Gas in Ghana.">
+  <title>FAQ — Triple A Gas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/public.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#5D1020">
+    <meta name="theme-color" content="#5D1020">
+  <style>
+    .faq-search {
+      margin-bottom: 32px;
+    }
+    .faq-search input {
+      margin-bottom: 0;
+      font-size: 16px;
+    }
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border: 1px solid var(--steel-100);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.15s;
+    }
+    .faq-item:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .faq-question {
+      width: 100%;
+      background: var(--paper);
+      border: none;
+      padding: 18px 20px;
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      transition: background 0.12s;
+    }
+    .faq-question:hover {
+      background: var(--cylinder-blue-pale);
+    }
+    .faq-question .faq-icon {
+      flex-shrink: 0;
+      font-size: 18px;
+      color: var(--flame);
+      transition: transform 0.2s;
+    }
+    .faq-item.open .faq-question .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease, padding 0.25s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+    }
+    .faq-answer-inner {
+      padding: 0 20px 18px;
+      font-size: 15px;
+      color: var(--steel-600);
+      line-height: 1.65;
+    }
+    .faq-answer-inner a {
+      color: var(--flame);
+      font-weight: 600;
+    }
+    .faq-answer-inner ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    .faq-answer-inner ul li {
+      margin-bottom: 4px;
+    }
+    .faq-highlight {
+      background: #fff3cd;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+    .faq-empty {
+      display: none;
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--steel-600);
+    }
+    .faq-empty.show {
+      display: block;
+    }
+    .faq-category-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--steel-400);
+      margin: 28px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--steel-100);
+    }
+    .faq-category-label:first-of-type {
+      margin-top: 0;
+    }
+    .faq-cta {
+      text-align: center;
+      margin: 40px 0 0;
+      padding: 28px;
+      background: var(--cylinder-blue-pale);
+      border-radius: var(--radius);
+    }
+    .faq-cta h3 {
+      font-family: var(--display);
+      font-size: 18px;
+      margin: 0 0 8px;
+      color: var(--cylinder-blue);
+    }
+    .faq-cta p {
+      margin: 0 0 18px;
+      color: var(--steel-600);
+    }
+    @media (max-width: 600px) {
+      .faq-question {
+        font-size: 14px;
+        padding: 14px 16px;
+      }
+      .faq-answer-inner {
+        font-size: 14px;
+        padding: 0 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="page-hero">
+    <div class="container" data-aos="fade-up">
+      <h1>Frequently Asked Questions</h1>
+      <p>Everything you need to know about ordering LPG, delivery, safety, and service from Triple A Gas.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container" style="max-width:800px;">
+      <div class="faq-search" data-aos="fade-up">
+        <input type="search" id="faq-search" placeholder="Search questions…" autocomplete="off">
+      </div>
+
+      <div class="faq-list" id="faq-list" data-aos="fade-up">
+
+        <!-- Category: Orders & Delivery -->
+        <div class="faq-category-label">Orders &amp; Delivery</div>
+
+        <div class="faq-item" data-category="orders">
+          <button class="faq-question" type="button">
+            How do I order gas from Triple A Gas?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              You can order by <a href="tel:+233245075496">phone</a>, <a href="https://wa.me/233245075496" target="_blank" rel="noopener">WhatsApp</a>, or using the delivery request form on our <a href="contact.html">Contact</a> or <a href="products.html">Products</a> pages. Tell us your cylinder size and delivery area, and we will confirm availability and pricing.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="orders">
+          <button class="faq-question" type="button">
+            How long does delivery take?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Delivery times depend on your location and the station's current workload. Most deliveries within the station's coverage area are completed the same day or within 24 hours. Call your <a href="stations.html">nearest branch</a> to confirm.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="orders">
+          <button class="faq-question" type="button">
+            What areas do you deliver to?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We serve areas near our 7 retail outlets across Greater Accra (Agbogba, Klagon), Central Region (Apam), Ashanti Region (Antoa, Bonwire), and Western Region (Bogoso, Prestea). Call the branch closest to you to check if we deliver to your specific location.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="orders">
+          <button class="faq-question" type="button">
+            Do you charge for delivery?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Delivery charges vary by distance and order size. Please ask the station when you place your order. Delivery is free or discounted for bulk/commercial orders in some areas.
+            </div>
+        </div>
+
+        <!-- Category: Products & Pricing -->
+        <div class="faq-category-label">Products &amp; Pricing</div>
+
+        <div class="faq-item" data-category="products">
+          <button class="faq-question" type="button">
+            What cylinder sizes do you offer?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We offer four sizes to suit different needs:
+              <ul>
+                <li><strong>3 kg</strong> — Starter cylinder, ideal for students and small kitchens</li>
+                <li><strong>6 kg</strong> — Everyday household cooking</li>
+                <li><strong>14.5 kg</strong> — Family homes and chop bars</li>
+                <li><strong>Bulk / tank</strong> — Commercial supply for hotels, factories, and institutions</li>
+              </ul>
+              Visit our <a href="products.html">Products page</a> for current guide prices.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="products">
+          <button class="faq-question" type="button">
+            Can I exchange an empty cylinder for a full one?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. You can swap your empty cylinder for a full one of the same size at any Triple A Gas outlet, provided the empty cylinder passes a quick safety inspection (valve and hose condition). Exchange is usually faster than waiting for a refill.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="products">
+          <button class="faq-question" type="button">
+            What payment methods do you accept?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We accept cash and mobile money (MoMo) at all our stations. Please confirm with your branch when ordering, as payment options may vary by location.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="products">
+          <button class="faq-question" type="button">
+            Do I need my own cylinder?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              If you are a new customer, you may need to purchase a new cylinder or pay a deposit for one. If you already own a Triple A Gas or compatible cylinder, we can refill or exchange it. Ask your nearest station for details.
+            </div>
+        </div>
+
+        <!-- Category: Safety -->
+        <div class="faq-category-label">Safety</div>
+
+        <div class="faq-item" data-category="safety">
+          <button class="faq-question" type="button">
+            What should I do if I smell gas?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Follow these steps immediately:
+              <ol>
+                <li>Turn off the cylinder valve</li>
+                <li>Open windows and doors to ventilate the area</li>
+                <li>Do <strong>not</strong> switch any electrical devices on or off</li>
+                <li>Do <strong>not</strong> light matches or use lighters</li>
+                <li>Leave the area and call <a href="tel:+233245075496"><strong>024 507 5496</strong></a> immediately</li>
+              </ol>
+              For more safety tips, visit our <a href="safety.html">Safety page</a>.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="safety">
+          <button class="faq-question" type="button">
+            How should I store my LPG cylinder at home?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Keep the cylinder upright at all times, in a well-ventilated area away from heat sources, direct sunlight, and flammable materials. Never store cylinders indoors inside closed cupboards. Ensure the valve is fully closed when not in use.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="safety">
+          <button class="faq-question" type="button">
+            How do I check if my cylinder and hose are safe?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Before every refill, check:
+              <ul>
+                <li>The hose for cracks, kinks, or signs of wear</li>
+                <li>The regulator is seated correctly and seals tightly</li>
+                <li>The valve opens and closes smoothly</li>
+                <li>Apply soapy water to connections — bubbles mean a leak</li>
+              </ul>
+              If you notice any damage, bring the cylinder to your nearest Triple A Gas outlet for inspection.
+            </div>
+        </div>
+
+        <!-- Category: Stations & Service -->
+        <div class="faq-category-label">Stations &amp; Service</div>
+
+        <div class="faq-item" data-category="stations">
+          <button class="faq-question" type="button">
+            What are your opening hours?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Opening hours may vary by station. Please call your <a href="stations.html">nearest branch</a> to confirm their current hours before travelling.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="stations">
+          <button class="faq-question" type="button">
+            Where is your head office located?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Our head office is at <strong>Flowers Haatso, Agbogba Road</strong>, P.O. Box WJ 486, Weija-Accra, Greater Accra Region. You can also visit any of our other 6 retail outlets — see all locations on our <a href="stations.html">Stations page</a>.
+            </div>
+        </div>
+
+        <div class="faq-item" data-category="stations">
+          <button class="faq-question" type="button">
+            Do you offer bulk supply for businesses?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. We supply bulk LPG to hotels, restaurants, factories, schools, and other commercial customers. Contact us via <a href="https://wa.me/233245075496" target="_blank" rel="noopener">WhatsApp</a> or call <a href="tel:+233245075496">024 507 5496</a> to discuss your requirements and get a quote.
+            </div>
+        </div>
+
+      <div class="faq-empty" id="faq-empty">
+        <p>No questions match your search. Try a different term.</p>
+      </div>
+
+      <div class="faq-cta" data-aos="fade-up">
+        <h3>Still have questions?</h3>
+        <p>We are happy to help. Call or send us a message.</p>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn btn-primary" href="tel:+233245075496">Call 024 507 5496</a>
+          <a class="btn btn-whatsapp" href="https://wa.me/233245075496" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-ghost" href="contact.html">Send a message</a>
+        </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/site-config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        item.classList.toggle('open');
+      });
+    });
+
+    // FAQ search filter
+    var searchInput = document.getElementById('faq-search');
+    var faqItems = document.querySelectorAll('.faq-item');
+    var emptyState = document.getElementById('faq-empty');
+
+    searchInput.addEventListener('input', function() {
+      var q = this.value.trim().toLowerCase();
+      var visibleCount = 0;
+
+      faqItems.forEach(function(item) {
+        var question = item.querySelector('.faq-question').textContent.toLowerCase();
+        var answer = item.querySelector('.faq-answer-inner').textContent.toLowerCase();
+        var match = !q || question.indexOf(q) !== -1 || answer.indexOf(q) !== -1;
+
+        if (q && match) {
+          // Auto-open matching items during search
+          item.classList.add('open');
+        } else if (!q) {
+          item.classList.remove('open');
+        }
+
+        item.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
+      });
+
+      emptyState.classList.toggle('show', visibleCount === 0 && q.length > 0);
+    });
+  </script>
+</body>
+</html>
