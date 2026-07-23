@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find Triple A LP Gas stations across Ghana — Accra, North Legon, Ejisu, Antoa, Bonwire, Bogoso, and Prestea.">
+  <meta name="description" content="Find Triple A Gas stations across Ghana — Agbogba, Klagon, Apam, Antoa, Bonwire, Bogoso, and Prestea.">
   <title>Find a Station — Triple A Gas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,13 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/public.css">
-  <link rel="icon" type="image/png" href="images/offical_logo-removebg.png">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#5D1020">
+    <meta name="theme-color" content="#5D1020">
 </head>
 <body>
   <div id="site-header"></div>
@@ -20,7 +26,7 @@
   <section class="page-hero">
     <div class="container" data-aos="fade-up">
       <h1>Find a Station</h1>
-      <p>Triple A Gas operates 7 locations across Greater Accra, Ashanti, and Western regions. Use the map or list below to find your nearest branch — confirm availability before travelling.</p>
+      <p>Triple A Gas operates 7 retail outlets across Greater Accra, Central, Ashanti, and Western regions. Use the map or list below to find your nearest branch — confirm availability before travelling.</p>
     </div>
   </section>
 
@@ -29,7 +35,7 @@
       <div class="section-header" data-aos="fade-up">
         <div class="section-kicker">Interactive map</div>
         <h2>Our Locations</h2>
-        <p>Triple A Gas operates 7 locations across Ghana. Use the map to find the branch nearest to you.</p>
+        <p>Triple A Gas operates 7 retail outlets across Ghana. Use the map to find the branch nearest to you.</p>
       </div>
       <div id="station-map" data-aos="fade-up"></div>
   </section>
@@ -46,6 +52,7 @@
         <div class="filter-chips" role="group" aria-label="Filter by region">
           <button type="button" class="filter-chip active" data-region="all">All locations</button>
           <button type="button" class="filter-chip" data-region="Greater Accra">Greater Accra</button>
+          <button type="button" class="filter-chip" data-region="Central">Central</button>
           <button type="button" class="filter-chip" data-region="Ashanti">Ashanti</button>
           <button type="button" class="filter-chip" data-region="Western">Western</button>
         </div>
@@ -57,7 +64,7 @@
       <div class="section-header" data-aos="fade-up">
         <div class="section-kicker">Station gallery</div>
         <h2>See our stations</h2>
-        <p>Real photos from our Bogoso and Bonwire branches.</p>
+        <p>Real photos from our stations across Ghana.</p>
       </div>
       <div id="station-galleries"></div>
   </section>

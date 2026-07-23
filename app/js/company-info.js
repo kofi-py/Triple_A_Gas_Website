@@ -1,6 +1,6 @@
 // Centralized Triple A Gas Company Information
 window.COMPANY_INFO = {
-  name: "Triple A LP Gas Limited",
+  name: "Triple A Gas Company Limited",
   established: 2005,
   colors: {
     primary: "#5D1020", // wine red
@@ -18,7 +18,7 @@ window.COMPANY_INFO = {
   officialAddress: "Flowers Haatso, Agbogba Road, P.O. Box WJ 486, Weija-Accra",
   hq: "Accra, Ghana",
   description:
-    "Leading LPG supplier serving homes, businesses, and taxis across Ghana since 2005.",
+    "Oil Marketing Company specialising in Liquified Petroleum Gas (LPG) for homes, businesses, and taxis across Ghana since 2005.",
 
   // Contact Information
   contacts: {
@@ -33,11 +33,12 @@ window.COMPANY_INFO = {
     title: "Representative",
   },
 
-  // Locations (7 branches)
+  // Locations (7 retail outlets)
   locations: [
     {
       id: 1,
-      city: "Accra",
+      city: "Agbogba",
+      district: "Agbogba",
       region: "Greater Accra",
       type: "Headquarters",
       address: "Flowers Haatso, Agbogba Road, P.O. Box WJ 486, Weija-Accra",
@@ -55,7 +56,30 @@ window.COMPANY_INFO = {
     },
     {
       id: 2,
+      city: "Klagon",
+      district: "Klagon",
+      region: "Greater Accra",
+      type: "Branch",
+      address: "Klagon, Greater Accra Region",
+      phone: "+233 24 507 5496",
+      services: ["Cylinder Filling", "Retail"],
+      coordinates: { lat: 5.65, lng: -0.05 },
+    },
+    {
+      id: 3,
+      city: "Apam",
+      district: "Apam",
+      region: "Central",
+      type: "Branch",
+      address: "Apam, Central Region",
+      phone: "+233 24 507 5496",
+      services: ["Cylinder Filling", "Retail"],
+      coordinates: { lat: 5.2833, lng: -0.7333 },
+    },
+    {
+      id: 4,
       city: "Antoa",
+      district: "Kwabre East",
       region: "Ashanti",
       type: "Branch",
       address: "Antoa, Kwabre East District, Ashanti Region",
@@ -64,8 +88,9 @@ window.COMPANY_INFO = {
       coordinates: { lat: 6.0167, lng: -1.0333 },
     },
     {
-      id: 3,
+      id: 5,
       city: "Bonwire",
+      district: "Ejisu",
       region: "Ashanti",
       type: "Branch",
       address: "Bonwire, Ejisu Municipality, Ashanti Region",
@@ -80,8 +105,9 @@ window.COMPANY_INFO = {
       ],
     },
     {
-      id: 4,
+      id: 6,
       city: "Bogoso",
+      district: "Prestea-Huni Valley",
       region: "Western",
       type: "Branch",
       address:
@@ -99,8 +125,9 @@ window.COMPANY_INFO = {
       ],
     },
     {
-      id: 5,
+      id: 7,
       city: "Prestea",
+      district: "Prestea-Huni Valley",
       region: "Western",
       type: "Branch",
       address:
@@ -108,26 +135,6 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 5.45, lng: -2.0833 },
-    },
-    {
-      id: 6,
-      city: "North Legon",
-      region: "Greater Accra",
-      type: "Branch",
-      address: "North Legon, Accra, Ghana",
-      phone: "+233 24 401 1050",
-      services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 5.65, lng: -0.14 },
-    },
-    {
-      id: 7,
-      city: "Ejisu",
-      region: "Ashanti",
-      type: "Branch",
-      address: "Ejisu, Ashanti Region, Ghana",
-      phone: "+233 24 507 5496",
-      services: ["Cylinder Filling", "Retail"],
-      coordinates: { lat: 6.7975625, lng: -1.4695156 },
     },
   ],
 
