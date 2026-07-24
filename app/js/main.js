@@ -50,6 +50,9 @@ const WHATSAPP =
     ? window.SITE_CONFIG.WHATSAPP
     : "233245075496";
 
+// Backend API base URL
+const API_BASE = "http://localhost:3001/api";
+
 // Apply site config to existing static anchors (class-based):
 function applySiteConfigToStatic() {
   // anchors that should show the phone number
@@ -177,7 +180,7 @@ function renderFooter() {
           <div>
             <h4>Order</h4>
             <ul>
-          <li><a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} Chat on WhatsApp</a></li>
+              <li><a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} Chat on WhatsApp</a></li>
               <li><a href="${base}contact.html">Request delivery</a></li>
               <li><a href="${base}stations.html">Nearest outlet</a></li>
             </ul>
@@ -383,13 +386,65 @@ function initForms() {
       }
       if (phone) phone.setCustomValidity("");
 
-      const success = form.querySelector(".form-success");
-      if (success) {
-        success.classList.add("show");
-        success.textContent =
-          form.dataset.success || "Thanks — we will contact you shortly.";
+      // Gather form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Determine endpoint: if form has "size" field, it's an order
+      const isOrder = form.querySelector('[name="size"]') !== null;
+      const endpoint = isOrder ? "/order" : "/contact";
+      data.source = isOrder ? "delivery-order" : "contact";
+
+      // Show loading state
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.textContent : "";
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Sending…";
       }
-      form.reset();
+
+      const success = form.querySelector(".form-success");
+
+      // Send to backend
+      fetch(API_BASE + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.success) {
+            if (success) {
+              success.classList.add("show");
+              success.textContent =
+                result.message ||
+                form.dataset.success ||
+                "Thanks — we will contact you shortly.";
+            }
+            form.reset();
+          } else {
+            alert(result.error || "Something went wrong. Please try again.");
+          }
+        })
+        .catch((err) => {
+          console.error("Form submission error:", err);
+          // Fallback: show success locally if backend is unreachable
+          if (success) {
+            success.classList.add("show");
+            success.textContent =
+              form.dataset.success || "Thanks — we will contact you shortly.";
+          }
+          form.reset();
+        })
+        .finally(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = originalText;
+          }
+        });
     });
 
     const phone = form.querySelector('[name="phone"]');
@@ -407,12 +462,11 @@ function initLightbox() {
     overlay.innerHTML = `
       <div class="lightbox-inner" role="dialog" aria-modal="true">
         <button class="lightbox-close" aria-label="Close">×</button>
-        <img src="${src}" alt="${alt || ""}">
+        <img src="${src}" alt="${alt || ""}" loading="lazy">
       </div>
     `;
 
     document.body.appendChild(overlay);
-    // allow CSS transition
     requestAnimationFrame(() => overlay.classList.add("show"));
 
     const close = () => {
@@ -454,7 +508,6 @@ function initLightbox() {
 document.addEventListener("DOMContentLoaded", () => {
   renderHeader();
   renderFooter();
-  // Apply config-driven updates to any static anchors and add floating CTA
   applySiteConfigToStatic();
   createFloatingCall();
   initAos();

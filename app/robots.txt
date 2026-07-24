@@ -1,0 +1,6 @@
+# Triple A Gas — robots.txt
+User-agent: *
+Allow: /
+Disallow: /portal/
+
+Sitemap: https://triplaagas.com/sitemap.xml
