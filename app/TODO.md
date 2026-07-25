@@ -6,11 +6,12 @@
 - [x] **Typewriter effect** on hero headline (cycles through 3 phrases, typewriter-style)
 - [x] **Re-trigger gauge animation** on scroll (IntersectionObserver)
 
-## ⬜ Phase 2 — Visual Design Upgrades (public.css)
+## ✅ Phase 2 — Visual Design Upgrades (public.css)
 
-- [ ] Glassmorphism panels (hero panel, cards with backdrop-blur + border glow)
+- [x] Glassmorphism utility classes (`.glass`, `.glass-dark`, `.glass-card`, `.glow-border`)
+- [x] Glassmorphism applied to hero panel (`glass-dark` class on index.html)
+- [x] Enhanced shadows & depth (layered box-shadows on cards + hover)
 - [ ] Animated gradient backgrounds (subtle moving gradients)
-- [ ] Enhanced shadows & depth (layered box-shadows)
 - [ ] Subtle noise texture overlay
 - [ ] Improved button micro-interactions (scale, glow, ripple)
 
