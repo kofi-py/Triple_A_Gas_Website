@@ -199,6 +199,50 @@ function renderFooter() {
   `;
 }
 
+function initTypewriter() {
+  const el = document.getElementById("typewriter-text");
+  if (!el) return;
+  const phrases = [
+    "Reliable LPG for Ghanaian homes and businesses.",
+    "Safety-first cooking gas, delivered to your door.",
+    "Trusted LPG supply since 2005.",
+  ];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let speed = 60;
+
+  function type() {
+    const current = phrases[phraseIndex];
+    if (!isDeleting) {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === current.length) {
+        isDeleting = true;
+        speed = 2000; // pause before deleting
+        setTimeout(type, speed);
+        return;
+      }
+      speed = 50 + Math.random() * 40;
+    } else {
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+      if (charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 400; // pause before typing next
+        setTimeout(type, speed);
+        return;
+      }
+      speed = 20 + Math.random() * 30;
+    }
+    setTimeout(type, speed);
+  }
+
+  // Small delay before starting
+  setTimeout(type, 600);
+}
+
 function animateGauges() {
   document.querySelectorAll("[data-gauge]").forEach((el) => {
     const pct = Number(el.dataset.gauge) || 0;
@@ -213,6 +257,35 @@ function animateGauges() {
       circle.style.strokeDashoffset = String(offset);
     });
   });
+}
+
+function initScrollTriggeredGauges() {
+  const heroPanel = document.querySelector(".hero-panel");
+  if (!heroPanel || !window.IntersectionObserver) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Add the animation class to trigger CSS transitions
+          entry.target.classList.add("gauges-animate");
+          // Force a small delay then add .visible to each circle
+          entry.target.querySelectorAll(".gauge-arc").forEach((circle, i) => {
+            setTimeout(
+              () => {
+                circle.classList.add("visible");
+              },
+              i * 200 + 100,
+            );
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 },
+  );
+
+  observer.observe(heroPanel);
 }
 
 function initStationSearch() {
@@ -511,7 +584,9 @@ document.addEventListener("DOMContentLoaded", () => {
   applySiteConfigToStatic();
   createFloatingCall();
   initAos();
+  initTypewriter();
   animateGauges();
+  initScrollTriggeredGauges();
   initStationSearch();
   initStationTeaser();
   initStationGalleries();

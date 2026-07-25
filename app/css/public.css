@@ -728,6 +728,34 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* ---------- Typewriter effect ---------- */
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--hazard);
+  font-weight: 300;
+  animation: blink-cursor 0.8s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Gauge animation class — triggered via IntersectionObserver */
+.gauges-animate .gauge-arc {
+  stroke-dasharray: 263.89; /* circumference of r=42 circle */
+  stroke-dashoffset: 263.89;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.gauges-animate .gauge-arc.visible {
+  stroke-dashoffset: 0;
+}
+
 /* ---------- Stat bar ---------- */
 .stat-bar {
   background: var(--ink);
