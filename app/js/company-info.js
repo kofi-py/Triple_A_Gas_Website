@@ -45,6 +45,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Taxi Service", "Retail"],
       coordinates: { lat: 5.6037, lng: -0.187 },
+      directions:
+        "From the Accra Mall junction on the Tetteh Quarshie Interchange, drive north along the N4 towards Aburi. Take the right turn at the Peduase junction onto the Agbogba road. Continue straight for about 3 km, passing the Valley View University campus on your left. The station is on the left, just after the Flowers Haatso signage — look for the Triple A Gas canopy.",
       images: [
         "images/accra/image1.png",
         "images/accra/image2.png",
@@ -64,6 +66,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 5.65, lng: -0.05 },
+      directions:
+        "From the Tema Motorway (George Bush Highway), exit at the Ashaiman junction and head east towards Klagon. Follow the main Klagon road for about 2.5 km. The station is situated on the right-hand side just after the Klagon market area, directly opposite the Shell filling station.",
     },
     {
       id: 3,
@@ -75,6 +79,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 5.2833, lng: -0.7333 },
+      directions:
+        "Travelling from Accra on the N1 (Cape Coast road), pass through Kasoa and continue for about 40 km to the Apam junction. Turn right into Apam town and follow the main street past the Apam Anglican Church. The station is about 800 m ahead on the left, near the Apam lorry station.",
     },
     {
       id: 4,
@@ -86,6 +92,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 6.0167, lng: -1.0333 },
+      directions:
+        "From the Kumasi central market area, take the Mampong road (Route R112) heading north. After about 18 km, you will reach the Antoa junction at Kwabre. Turn left at the Antoa signpost and continue for 1.5 km. The gas station is on your right, just after the Antoa Nkwanta community centre.",
     },
     {
       id: 5,
@@ -97,6 +105,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 6.9167, lng: -1.0333 },
+      directions:
+        "From Kumasi, drive east on the N6 towards Ejisu. At the Ejisu roundabout, take the first exit onto the Bonwire road. Continue for approximately 12 km through the Ejisu municipality. The station is located at the Bonwire town entrance on the left, adjacent to the Bonwire Kente weaving centre. Look for the Triple A Gas blue sign.",
       images: [
         "images/bonwire/IMG-20260722-WA0006.jpg",
         "images/bonwire/IMG-20260722-WA0007.jpg",
@@ -115,6 +125,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 5.6667, lng: -2.5833 },
+      directions:
+        "From Takoradi, take the N1 west towards Côte d'Ivoire and pass through Tarkwa. After about 50 km, look for the Bogoso turnoff on your right. Enter Bogoso town and drive towards the Kokoase neighbourhood. The station is about 2 km from the main Bogoso roundabout on the Kokoase road, on the left beside the Bogoso Community Health Centre.",
       images: [
         "images/bogoso/IMG-20260722-WA0000.jpg",
         "images/bogoso/IMG-20260722-WA0001.jpg",
@@ -135,6 +147,8 @@ window.COMPANY_INFO = {
       phone: "+233 24 507 5496",
       services: ["Cylinder Filling", "Retail"],
       coordinates: { lat: 5.45, lng: -2.0833 },
+      directions:
+        "From the Prestea main intersection on the Tarkwa-Asankrangwa road, turn towards the Asoampa neighbourhood. Follow the Asoampa road for about 1.8 km past the Prestea Government Hospital. The Triple A Gas station is on the right just after the Asoampa Evangelical Church, identifiable by the cylinder display at the front.",
     },
   ],
 

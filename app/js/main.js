@@ -23,6 +23,7 @@ function buildStationsFromCompanyInfo() {
     town: loc.city,
     region: loc.region,
     address: loc.address,
+    directions: loc.directions || "",
     phone: formatLocalPhone(loc.phone),
     hours: "Confirm before travelling",
     status: loc.type === "Headquarters" ? "safe" : "hazard",
@@ -112,6 +113,8 @@ function renderHeader() {
           <a href="tel:${PHONE_TEL}">Call ${PHONE}</a>
           <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
         </div>
+      </div>
+    </div>
     <header class="site-header">
       <div class="container">
         <a class="brand" href="${base}index.html">
@@ -132,6 +135,7 @@ function renderHeader() {
           <a class="btn btn-whatsapp btn-sm" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
           <a class="btn btn-primary btn-sm" href="tel:${PHONE_TEL}">Call Us</a>
         </div>
+      </div>
     </header>
   `;
 
@@ -159,6 +163,7 @@ function renderFooter() {
             <div class="footer-brand">
               ${GAUGE_SVG}
               <div class="brand-text">TRIPLE A GAS<span>Reliable cooking gas</span></div>
+            </div>
             <p style="margin:0;max-width:32ch;line-height:1.55;">Dependable, safety-first LPG for households and businesses across Ghana.</p>
           </div>
           <div>
@@ -185,6 +190,7 @@ function renderFooter() {
               <li><a href="${base}stations.html">Nearest outlet</a></li>
             </ul>
           </div>
+        </div>
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} Triple A Gas Ltd. · Accra, Ghana</span>
           <span>
@@ -192,6 +198,7 @@ function renderFooter() {
             · Site built for Triple A Gas
           </span>
         </div>
+      </div>
     </footer>
     <a class="fab-whatsapp" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       ${WHATSAPP_ICON.replace('width="18" height="18"', 'width="26" height="26"')}<span>WhatsApp</span>
@@ -267,9 +274,7 @@ function initScrollTriggeredGauges() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add the animation class to trigger CSS transitions
           entry.target.classList.add("gauges-animate");
-          // Force a small delay then add .visible to each circle
           entry.target.querySelectorAll(".gauge-arc").forEach((circle, i) => {
             setTimeout(
               () => {
@@ -286,6 +291,69 @@ function initScrollTriggeredGauges() {
   );
 
   observer.observe(heroPanel);
+}
+
+/* ---------- Button ripple effect ---------- */
+function initButtonRipples() {
+  document.querySelectorAll(".btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      const ripple = document.createElement("span");
+      ripple.className = "ripple-effect";
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      ripple.style.left = x + "px";
+      ripple.style.top = y + "px";
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+/* ---------- Animated number counters ---------- */
+function initCounters() {
+  var statBar = document.getElementById("stat-bar");
+  if (!statBar || !window.IntersectionObserver) return;
+  var counters = statBar.querySelectorAll("[data-count]");
+  if (!counters.length) return;
+  var counterObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseFloat(el.dataset.count);
+          if (isNaN(target)) return;
+          var duration = 1600;
+          var startTime = null;
+          function animate(now) {
+            if (!startTime) startTime = now;
+            var elapsed = now - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var currentVal = eased * target;
+            if (Number.isInteger(target)) {
+              el.textContent = Math.round(currentVal);
+            } else {
+              el.textContent = currentVal.toFixed(1);
+            }
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              el.textContent = Number.isInteger(target)
+                ? target
+                : target.toFixed(1);
+            }
+          }
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
+  counters.forEach(function (c) {
+    counterObserver.observe(c);
+  });
 }
 
 function initStationSearch() {
@@ -314,6 +382,17 @@ function initStationSearch() {
           <span class="badge badge-${s.status}">${s.hours}</span>
           <span class="badge badge-${s.stock === "In stock" ? "safe" : "hazard"}">${s.stock}</span>
         </div>
+        ${
+          s.directions
+            ? `
+        <div class="station-directions" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
+          <details>
+            <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">📍 Get directions</summary>
+            <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);line-height:1.55;">${s.directions}</p>
+          </details>
+        </div>`
+            : ""
+        }
       </article>
     `,
       )
@@ -364,6 +443,17 @@ function initStationTeaser() {
       <div class="station-meta">
         <span class="badge badge-${s.status}">${s.hours}</span>
       </div>
+      ${
+        s.directions
+          ? `
+      <div class="station-directions" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
+        <details>
+          <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">📍 Get directions</summary>
+          <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);line-height:1.55;">${s.directions}</p>
+        </details>
+      </div>`
+          : ""
+      }
     </article>
   `,
     )
@@ -587,6 +677,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initTypewriter();
   animateGauges();
   initScrollTriggeredGauges();
+  initButtonRipples();
+  initCounters();
   initStationSearch();
   initStationTeaser();
   initStationGalleries();

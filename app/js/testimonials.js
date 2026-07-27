@@ -34,30 +34,179 @@ window.TESTIMONIALS = [
   },
 ];
 
-function renderTestimonials() {
-  const container = document.getElementById("testimonials-container");
-  if (!container || !window.TESTIMONIALS) return;
-
-  const stars = (n) =>
-    Array(n).fill("★").join("") +
-    Array(5 - n)
-      .fill("☆")
-      .join("");
-
-  container.innerHTML = window.TESTIMONIALS.map(
-    (t, i) => `
-    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="${i * 80}">
-      <div class="testimonial-stars">${stars(t.rating)}</div>
-      <blockquote>"${escapeHtml(t.text)}"</blockquote>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar">${t.name.charAt(0)}</div>
-        <div>
-          <strong>${escapeHtml(t.name)}</strong>
-          <span>${escapeHtml(t.location)}</span>
-        </div>
-      <div class="testimonial-highlight">${escapeHtml(t.highlight)}</div>
-  `,
-  ).join("");
+function escapeHtml(str) {
+  if (!str) return "";
+  var div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
 }
 
-document.addEventListener("DOMContentLoaded", renderTestimonials);
+var testimonialAutoRotate;
+
+function renderTestimonials() {
+  var container = document.getElementById("testimonials-container");
+  if (!container || !window.TESTIMONIALS) return;
+
+  var testimonials = window.TESTIMONIALS;
+
+  function stars(n) {
+    return (
+      Array(n).fill("★").join("") +
+      Array(5 - n)
+        .fill("☆")
+        .join("")
+    );
+  }
+
+  // Build slides
+  var slidesHtml = "";
+  for (var i = 0; i < testimonials.length; i++) {
+    var t = testimonials[i];
+    slidesHtml +=
+      '<div class="testimonial-slide" data-index="' +
+      i +
+      '">' +
+      '<div class="testimonial-stars">' +
+      stars(t.rating) +
+      "</div>" +
+      '<blockquote>"' +
+      escapeHtml(t.text) +
+      '"</blockquote>' +
+      '<div class="testimonial-author">' +
+      '<div class="testimonial-avatar">' +
+      t.name.charAt(0) +
+      "</div>" +
+      "<div>" +
+      "<strong>" +
+      escapeHtml(t.name) +
+      "</strong>" +
+      "<span>" +
+      escapeHtml(t.location) +
+      "</span>" +
+      "</div>" +
+      "</div>" +
+      '<div class="testimonial-highlight">' +
+      escapeHtml(t.highlight) +
+      "</div>" +
+      "</div>";
+  }
+
+  // Dots
+  var dotsHtml = '<div class="testimonial-dots">';
+  for (var j = 0; j < testimonials.length; j++) {
+    dotsHtml +=
+      '<button class="testimonial-dot' +
+      (j === 0 ? " active" : "") +
+      '" data-slide="' +
+      j +
+      '" aria-label="Go to testimonial ' +
+      (j + 1) +
+      '"></button>';
+  }
+  dotsHtml += "</div>";
+
+  container.innerHTML =
+    '<div class="testimonial-carousel">' +
+    '<button class="testimonial-arrow testimonial-arrow-prev" aria-label="Previous testimonial">‹</button>' +
+    '<div class="testimonial-track">' +
+    slidesHtml +
+    "</div>" +
+    '<button class="testimonial-arrow testimonial-arrow-next" aria-label="Next testimonial">›</button>' +
+    dotsHtml +
+    "</div>";
+
+  var current = 0;
+  var track = container.querySelector(".testimonial-track");
+  var slides = container.querySelectorAll(".testimonial-slide");
+  var dots = container.querySelectorAll(".testimonial-dot");
+  var prevBtn = container.querySelector(".testimonial-arrow-prev");
+  var nextBtn = container.querySelector(".testimonial-arrow-next");
+
+  function goTo(index) {
+    if (index < 0) index = slides.length - 1;
+    if (index >= slides.length) index = 0;
+    current = index;
+    track.style.transform = "translateX(-" + current * 100 + "%)";
+    for (var d = 0; d < dots.length; d++) {
+      dots[d].classList.toggle("active", d === current);
+    }
+  }
+
+  function nextSlide() {
+    goTo(current + 1);
+  }
+  function prevSlide() {
+    goTo(current - 1);
+  }
+
+  nextBtn.addEventListener("click", function () {
+    nextSlide();
+    resetAutoRotate();
+  });
+  prevBtn.addEventListener("click", function () {
+    prevSlide();
+    resetAutoRotate();
+  });
+
+  for (var k = 0; k < dots.length; k++) {
+    dots[k].addEventListener("click", function () {
+      goTo(parseInt(this.dataset.slide));
+      resetAutoRotate();
+    });
+  }
+
+  // Keyboard
+  container.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") {
+      nextSlide();
+      resetAutoRotate();
+    }
+    if (e.key === "ArrowLeft") {
+      prevSlide();
+      resetAutoRotate();
+    }
+  });
+
+  // Touch swipe
+  var startX = 0;
+  var isDragging = false;
+  track.addEventListener(
+    "touchstart",
+    function (e) {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    },
+    { passive: true },
+  );
+  track.addEventListener(
+    "touchend",
+    function (e) {
+      if (!isDragging) return;
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        resetAutoRotate();
+      }
+      isDragging = false;
+    },
+    { passive: true },
+  );
+
+  function resetAutoRotate() {
+    clearInterval(testimonialAutoRotate);
+    testimonialAutoRotate = setInterval(nextSlide, 5000);
+  }
+  resetAutoRotate();
+
+  goTo(0);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderTestimonials);
+} else {
+  renderTestimonials();
+}

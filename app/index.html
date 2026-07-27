@@ -87,55 +87,61 @@
   <body>
     <div id="site-header"></div>
 
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container hero-grid">
         <div data-aos="fade-right">
           <div class="hero-kicker">Triple A LP Gas Limited · Ghana</div>
           <h1><span id="typewriter-text"></span><span class="typewriter-cursor" aria-hidden="true">|</span></h1>
           <p class="hero-lead">Find a publicly listed Triple A LP Gas location, get in touch, or explore practical LPG safety guidance.</p>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="contact.html">Order Gas</a>
-            <a class="btn btn-ghost-light" href="stations.html">Find a Station</a>
-          </div>
-        <div class="hero-visual" data-aos="fade-left" data-aos-delay="120">
-          <div class="hero-panel glass-dark">
-            <h2>Live operations</h2>
-            <div class="gauge-row">
-              <div>
-                <div class="gauge" data-gauge="83">
-                  <svg viewBox="0 0 100 100" aria-hidden="true">
-                    <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="10"></circle>
-                    <circle class="gauge-arc" cx="50" cy="50" r="42" fill="none" stroke="#B33B50" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
-                  </svg>
-                  <div class="gauge-label">
-                    <div class="gauge-value">83%</div>
-                    <div class="gauge-unit">stock</div>
-                </div>
-                <div class="gauge-caption">Tank level</div>
-              <div>
-                <div class="gauge" data-gauge="97">
-                  <svg viewBox="0 0 100 100" aria-hidden="true">
-                    <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="10"></circle>
-                    <circle class="gauge-arc" cx="50" cy="50" r="42" fill="none" stroke="#D49A22" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
-                  </svg>
-                  <div class="gauge-label">
-                    <div class="gauge-value">97%</div>
-                    <div class="gauge-unit">routes</div>
-                </div>
-                <div class="gauge-caption">Deliveries</div>
-            </div>
         </div>
+
+        <div data-aos="fade-left" class="hero-panel glass-dark">
+          <div class="hero-gauges">
+            <div class="gauge-item">
+              <div class="gauge" data-gauge="83">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="10"></circle>
+                  <circle class="gauge-arc" cx="50" cy="50" r="42" fill="none" stroke="#B33B50" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
+                </svg>
+                <div class="gauge-label">
+                  <div class="gauge-value">83%</div>
+                  <div class="gauge-unit">stock</div>
+                </div>
+              </div>
+              <div class="gauge-caption">Tank level</div>
+            </div>
+
+            <div class="gauge-item">
+              <div class="gauge" data-gauge="97">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="10"></circle>
+                  <circle class="gauge-arc" cx="50" cy="50" r="42" fill="none" stroke="#D49A22" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
+                </svg>
+                <div class="gauge-label">
+                  <div class="gauge-value">97%</div>
+                  <div class="gauge-unit">routes</div>
+                </div>
+              </div>
+              <div class="gauge-caption">Deliveries</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="hero-bg" aria-hidden="true" style="background-image: url('images/IMG-20260720-WA0000.jpg'); pointer-events: none;"></div>
     </section>
 
-    <div class="stat-bar">
+    <!-- Stat Bar -->
+    <div class="stat-bar" id="stat-bar">
       <div class="container">
-        <div class="stat" data-aos="fade-up" data-aos-delay="0"><b>2017</b><span>Historical sales record</span></div>
-        <div class="stat" data-aos="fade-up" data-aos-delay="80"><b>1,599.1</b><span>MT LPG sales reported</span></div>
-        <div class="stat" data-aos="fade-up" data-aos-delay="160"><b>0.6%</b><span>2017 market share reported</span></div>
+        <div class="stat" data-aos="fade-up" data-aos-delay="0"><b data-count="2017">0</b><span>Historical sales record</span></div>
+        <div class="stat" data-aos="fade-up" data-aos-delay="80"><b data-count="1599.1">0</b><span>MT LPG sales reported</span></div>
+        <div class="stat" data-aos="fade-up" data-aos-delay="160"><b data-count="0.6">0</b><span>% market share reported</span></div>
         <div class="stat" data-aos="fade-up" data-aos-delay="240"><b>COMAC</b><span>Member directory listing</span></div>
+      </div>
     </div>
 
+    <!-- Products Section -->
     <section class="section section-alt">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -177,6 +183,7 @@
       </div>
     </section>
 
+    <!-- Safety Strip -->
     <div class="safety-strip" data-aos="fade-up">
       <div class="container">
         <div>
@@ -185,7 +192,9 @@
         </div>
         <a class="btn btn-secondary" href="safety.html">Read safety tips</a>
       </div>
+    </div>
 
+    <!-- Testimonials Section -->
     <section class="section section-alt">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -194,8 +203,10 @@
           <p>Real feedback from homes and businesses that rely on Triple A Gas.</p>
         </div>
         <div class="testimonials-grid" id="testimonials-container"></div>
+      </div>
     </section>
 
+    <!-- Stations Teaser Section -->
     <section class="section">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -208,6 +219,7 @@
       </div>
     </section>
 
+    <!-- Trust Strip -->
     <div class="trust-strip">
       <div class="container">
         <div data-aos="fade-right">
@@ -220,8 +232,11 @@
           <div class="trust-badge">Ga East<span>Publicly listed location</span></div>
           <div class="trust-badge">2017 record<span>1,599.1 MT LPG sales</span></div>
           <div class="trust-badge">Safety first<span>Confirm before use</span></div>
+        </div>
       </div>
+    </div>
 
+    <!-- Gallery Section -->
     <section class="section">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -231,16 +246,16 @@
         </div>
         <div class="gallery" data-aos="fade-up">
           <div class="gallery-grid">
-            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Delivery truck at a station" data-full="images/IMG-20260720-WA0000.jpg" style="background-image: url('images/IMG-20260720-WA0000.jpg');" loading="lazy"><div class="gallery-caption">Delivery</div>
-            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Station forecourt" data-full="images/IMG-20260720-WA0001.jpg" style="background-image: url('images/IMG-20260720-WA0001.jpg');" loading="lazy"><div class="gallery-caption">Forecourt</div>
-            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Team and cylinders" data-full="images/IMG-20260720-WA0002.jpg" style="background-image: url('images/IMG-20260720-WA0002.jpg');" loading="lazy"><div class="gallery-caption">Team</div>
-            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Cylinder display" data-full="images/IMG-20260720-WA0003.jpg" style="background-image: url('images/IMG-20260720-WA0003.jpg');" loading="lazy"><div class="gallery-caption">Cylinders</div>
+            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Delivery truck at a station" data-full="images/IMG-20260720-WA0000.jpg" style="background-image: url('images/IMG-20260720-WA0000.jpg');"><div class="gallery-caption">Delivery</div></div>
+            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Station forecourt" data-full="images/IMG-20260720-WA0001.jpg" style="background-image: url('images/IMG-20260720-WA0001.jpg');"><div class="gallery-caption">Forecourt</div></div>
+            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Team and cylinders" data-full="images/IMG-20260720-WA0002.jpg" style="background-image: url('images/IMG-20260720-WA0002.jpg');"><div class="gallery-caption">Team</div></div>
+            <div class="gallery-item lightbox-target" role="img" tabindex="0" aria-label="Cylinders display" data-full="images/IMG-20260720-WA0003.jpg" style="background-image: url('images/IMG-20260720-WA0003.jpg');"><div class="gallery-caption">Cylinders</div></div>
           </div>
+        </div>
       </div>
     </section>
 
     <div id="site-footer"></div>
-
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="js/site-config.js"></script>
     <script src="js/company-info.js"></script>

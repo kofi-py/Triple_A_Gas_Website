@@ -11,9 +11,20 @@
 - [x] Glassmorphism utility classes (`.glass`, `.glass-dark`, `.glass-card`, `.glow-border`)
 - [x] Glassmorphism applied to hero panel (`glass-dark` class on index.html)
 - [x] Enhanced shadows & depth (layered box-shadows on cards + hover)
-- [ ] Animated gradient backgrounds (subtle moving gradients)
-- [ ] Subtle noise texture overlay
-- [ ] Improved button micro-interactions (scale, glow, ripple)
+- [x] Animated gradient backgrounds (hero `gradient-shift` animation)
+- [x] Subtle noise texture overlay (`.noise-overlay` CSS with SVG fractal noise)
+- [x] Improved button micro-interactions (scale, glow, ripple effects)
+- [x] Button ripple CSS animation (`.ripple-effect`)
+- [x] Button glow variants (`.btn-glow-primary`, `.btn-glow-whatsapp`)
+- [x] Card hover lift effect (`.card:hover` translateY + shadow)
+- [x] Border glow utility (`.glow-border`)
+
+## ✅ Phase 2.5 — Station Directions Feature
+
+- [x] **Added driving directions** to all 7 stations in `company-info.js`
+- [x] **Display directions** in station search cards (expandable `<details>` toggle)
+- [x] **Display directions** in homepage station teaser cards
+- [x] Directions include landmarks like "Accra Mall junction", "Kumasi central market", "Takoradi N1"
 
 ## ⬜ Phase 3 — Interactive Features (main.js)
 
