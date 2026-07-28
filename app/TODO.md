@@ -1,53 +1,41 @@
-# Triple A Gas Frontend — Enhancement Tracker
+# Triple A Gas — Phase 2 Implementation Progress
 
-## ✅ Phase 1 — Homepage Hero Improvements
+## ✅ Phase 2 — UX & Interactive Features — COMPLETED
 
-- [x] Create TODO.md
-- [x] **Typewriter effect** on hero headline (cycles through 3 phrases, typewriter-style)
-- [x] **Re-trigger gauge animation** on scroll (IntersectionObserver)
+### 1. 🌙 Dark Mode Toggle
 
-## ✅ Phase 2 — Visual Design Upgrades (public.css)
+- [x] Add dark mode CSS custom properties to `tokens.css`
+- [x] Add dark mode overrides to `public.css`
+- [x] Add toggle button + JS logic in `main.js`
+- [x] Persist preference with localStorage
 
-- [x] Glassmorphism utility classes (`.glass`, `.glass-dark`, `.glass-card`, `.glow-border`)
-- [x] Glassmorphism applied to hero panel (`glass-dark` class on index.html)
-- [x] Enhanced shadows & depth (layered box-shadows on cards + hover)
-- [x] Animated gradient backgrounds (hero `gradient-shift` animation)
-- [x] Subtle noise texture overlay (`.noise-overlay` CSS with SVG fractal noise)
-- [x] Improved button micro-interactions (scale, glow, ripple effects)
-- [x] Button ripple CSS animation (`.ripple-effect`)
-- [x] Button glow variants (`.btn-glow-primary`, `.btn-glow-whatsapp`)
-- [x] Card hover lift effect (`.card:hover` translateY + shadow)
-- [x] Border glow utility (`.glow-border`)
+### 2. 📱 Mobile Slide-in Nav Drawer
 
-## ✅ Phase 2.5 — Station Directions Feature
+- [x] CSS for `.nav-drawer`, `.nav-overlay` in `public.css`
+- [x] Update `renderHeader()` in `main.js` for slide-in behavior
 
-- [x] **Added driving directions** to all 7 stations in `company-info.js`
-- [x] **Display directions** in station search cards (expandable `<details>` toggle)
-- [x] **Display directions** in homepage station teaser cards
-- [x] Directions include landmarks like "Accra Mall junction", "Kumasi central market", "Takoradi N1"
+### 3. 🔔 Toast Notifications
 
-## ⬜ Phase 3 — Interactive Features (main.js)
+- [x] CSS for `.toast-container`, `.toast` in `public.css`
+- [x] JS `showToast()` function in `main.js`
+- [x] Integrate with form submissions (replaces inline success)
 
-- [ ] Animated number counters (stats count up on scroll)
-- [ ] Testimonials carousel (auto-rotating with dots + arrows)
-- [ ] Scroll-aware sticky nav (shrink on scroll down)
-- [ ] Back-to-top button
-- [ ] Dark mode toggle (with localStorage)
-- [ ] Particle background in hero
-- [ ] Image lazy-load with blur-up
+### 4. ✨ Particle Background
 
-## ⬜ Phase 4 — UX & Navigation
+- [x] CSS for `#particle-canvas` in `public.css`
+- [x] JS `initParticles()` in `main.js`
 
-- [ ] Mobile slide-in nav drawer
-- [ ] Toast notifications for forms
-- [ ] Smooth anchor scroll with sticky header offset
+### 5. 📜 Smooth Anchor Scroll
 
-## ⬜ Phase 5 — Per-Page Polish
+- [x] JS `initSmoothScroll()` in `main.js`
 
-- [ ] About: Company timeline, team card hover effects
-- [ ] Products: SVG cylinder illustrations, compare sizes modal
-- [ ] Stations: Get Directions links, distance display
-- [ ] Safety: Illustrated icons, expandable tips
-- [ ] Contact: Quick-contact pills, animated form validation
-- [ ] FAQ: Helpful feedback on answers
-- [ ] 404: Animated bouncing cylinder
+### 6. 🖼️ Image Lazy-Load with Blur-Up
+
+- [x] CSS `.lazy-img`, `.lazy-img.loaded` in `public.css`
+- [x] JS `initLazyImages()` in `main.js`
+
+### Bonus Features Added:
+
+- [x] **Back-to-Top Button**: Smooth scroll-to-top FAB that appears after scrolling 400px
+- [x] **Scroll-Aware Sticky Nav**: Header shrinks from 68px to 56px on scroll down
+- [x] **Theme toggle button**: Added next to header actions with emoji indicator (🌙/☀️)

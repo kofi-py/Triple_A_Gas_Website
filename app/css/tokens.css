@@ -1,4 +1,83 @@
 /* Triple A Gas — design tokens from style guide */
+
+/* ========== DARK MODE ========== */
+[data-theme="dark"] {
+  --ink: #f0e4e6;
+  --cylinder-blue: #8f1e34;
+  --cylinder-blue-light: #b33b50;
+  --cylinder-blue-pale: #2a0c14;
+  --flame: #d49a22;
+  --flame-light: #e0b04a;
+  --flame-pale: #2a1a08;
+  --hazard: #d49a22;
+  --hazard-pale: #2a1f08;
+  --safe: #4caf50;
+  --safe-pale: #0d1f0e;
+  --danger: #ef5350;
+  --danger-pale: #2a0c0c;
+  --cloud: #1a060b;
+  --paper: #240b11;
+  --steel-100: #3a151e;
+  --steel-300: #6a3a45;
+  --steel-400: #9a7e84;
+  --steel-600: #c4a9af;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --header-h: 68px;
+}
+
+[data-theme="dark"] body {
+  background: var(--cloud);
+  color: var(--ink);
+}
+
+[data-theme="dark"] a {
+  color: var(--flame-light);
+}
+
+[data-theme="dark"] .section-alt {
+  background: var(--paper);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .prod-card,
+[data-theme="dark"] .form-card {
+  background: var(--paper);
+  border-color: var(--steel-100);
+}
+
+[data-theme="dark"] .glass-card {
+  background: rgba(36, 11, 17, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .glass {
+  background: rgba(36, 11, 17, 0.55);
+}
+
+[data-theme="dark"] .section-header h2 {
+  color: var(--ink);
+}
+
+[data-theme="dark"] .testimonial-slide blockquote {
+  color: var(--ink);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #1a060b;
+  border-color: var(--steel-300);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .safety-strip {
+  background: linear-gradient(90deg, var(--hazard-pale), var(--paper) 60%);
+}
+
+[data-theme="dark"] .safety-strip h2 {
+  color: var(--ink);
+}
+/* ========== END DARK MODE ========== */
 :root {
   /* Triple A LP Gas brand: dark wine red (#5D1020) with clean white surfaces. */
   --ink: #251015;

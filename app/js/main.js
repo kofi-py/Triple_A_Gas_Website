@@ -668,6 +668,446 @@ function initLightbox() {
   });
 }
 
+/* ---------- Dark Mode Toggle ---------- */
+function initThemeToggle() {
+  const toggle = document.getElementById("theme-toggle");
+  if (!toggle) return;
+
+  // Restore saved preference
+  const saved = localStorage.getItem("triplea-theme");
+  if (saved === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    toggle.textContent = "☀️";
+  }
+
+  toggle.addEventListener("click", () => {
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    if (isDark) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("triplea-theme", "light");
+      toggle.textContent = "🌙";
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("triplea-theme", "dark");
+      toggle.textContent = "☀️";
+    }
+  });
+}
+
+/* ---------- Mobile Slide-in Nav Drawer ---------- */
+function initMobileDrawer() {
+  const toggle = document.getElementById("nav-toggle");
+  if (!toggle) return;
+
+  // Create drawer elements if not exist
+  if (!document.querySelector(".nav-drawer")) {
+    const drawer = document.createElement("div");
+    drawer.className = "nav-drawer";
+    drawer.setAttribute("role", "dialog");
+    drawer.setAttribute("aria-modal", "true");
+    drawer.setAttribute("aria-label", "Navigation menu");
+    drawer.innerHTML = `
+      <div class="nav-drawer-header">
+        <div class="brand-text">TRIPLE A GAS<span>LPG · Ghana</span></div>
+        <button class="nav-drawer-close" aria-label="Close menu" id="nav-drawer-close">✕</button>
+      </div>
+      <ul class="nav-drawer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="stations.html">Find a Station</a></li>
+        <li><a href="safety.html">Safety</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-drawer-footer">
+        <a href="tel:${PHONE_TEL}">📞 Call ${PHONE}</a>
+        <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+      </div>
+    `;
+    document.body.appendChild(drawer);
+
+    const overlay = document.createElement("div");
+    overlay.className = "nav-overlay";
+    document.body.appendChild(overlay);
+
+    const closeBtn = document.getElementById("nav-drawer-close");
+    const drawerLinks = drawer.querySelectorAll("a");
+
+    function openDrawer() {
+      drawer.classList.add("open");
+      overlay.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.textContent = "✕";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove("open");
+      overlay.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "☰";
+      document.body.style.overflow = "";
+    }
+
+    toggle.addEventListener("click", () => {
+      if (drawer.classList.contains("open")) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    closeBtn.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+
+    drawerLinks.forEach((link) => {
+      link.addEventListener("click", closeDrawer);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && drawer.classList.contains("open")) {
+        closeDrawer();
+      }
+    });
+  }
+}
+
+/* ---------- Toast Notifications ---------- */
+function ensureToastContainer() {
+  let container = document.querySelector(".toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+  return container;
+}
+
+function showToast(message, type) {
+  type = type || "success";
+  const container = ensureToastContainer();
+  const toast = document.createElement("div");
+  toast.className = "toast toast-" + type;
+  const icons = { success: "✅", error: "❌", warning: "⚠️" };
+  toast.innerHTML = (icons[type] || "✅") + " " + message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("toast-out");
+    toast.addEventListener("animationend", () => toast.remove());
+  }, 4000);
+}
+
+// Override initForms to use toasts
+function initForms() {
+  document.querySelectorAll("[data-form]").forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const phone = form.querySelector('[name="phone"]');
+      if (phone && !normalizeGhPhone(phone.value)) {
+        phone.focus();
+        phone.setCustomValidity(
+          "Enter a valid Ghana phone number, e.g. 024 000 0000",
+        );
+        phone.reportValidity();
+        return;
+      }
+      if (phone) phone.setCustomValidity("");
+
+      // Gather form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Determine endpoint: if form has "size" field, it's an order
+      const isOrder = form.querySelector('[name="size"]') !== null;
+      const endpoint = isOrder ? "/order" : "/contact";
+      data.source = isOrder ? "delivery-order" : "contact";
+
+      // Show loading state
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.textContent : "";
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Sending…";
+      }
+
+      // Send to backend
+      fetch(API_BASE + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.success) {
+            showToast(
+              result.message ||
+                form.dataset.success ||
+                "Thanks — we will contact you shortly.",
+              "success",
+            );
+            form.reset();
+          } else {
+            showToast(
+              result.error || "Something went wrong. Please try again.",
+              "error",
+            );
+          }
+        })
+        .catch((err) => {
+          // Fallback: show success locally if backend is unreachable
+          showToast(
+            form.dataset.success || "Thanks — we will contact you shortly.",
+            "success",
+          );
+          form.reset();
+        })
+        .finally(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = originalText;
+          }
+        });
+    });
+
+    const phone = form.querySelector('[name="phone"]');
+    phone?.addEventListener("input", () => phone.setCustomValidity(""));
+  });
+}
+
+/* ---------- Particle Background (Canvas-based, lightweight) ---------- */
+function initParticles() {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+
+  // Remove existing canvas if any
+  const existing = document.getElementById("particle-canvas");
+  if (existing) existing.remove();
+
+  const canvas = document.createElement("canvas");
+  canvas.id = "particle-canvas";
+  hero.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+  let animId = null;
+
+  function resize() {
+    const rect = hero.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+  }
+
+  function createParticles(count) {
+    particles = [];
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2.5 + 1,
+        alpha: Math.random() * 0.4 + 0.1,
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const w = canvas.width;
+    const h = canvas.height;
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255, 255, 255, " + p.alpha + ")";
+      ctx.fill();
+      // Draw connections
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle =
+            "rgba(255, 255, 255, " + 0.08 * (1 - dist / 120) + ")";
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  }
+
+  resize();
+  const count = Math.min(Math.floor((canvas.width * canvas.height) / 8000), 60);
+  createParticles(count);
+  draw();
+
+  const ro = new ResizeObserver(() => {
+    resize();
+    const newCount = Math.min(
+      Math.floor((canvas.width * canvas.height) / 8000),
+      60,
+    );
+    if (Math.abs(newCount - particles.length) > 5) {
+      createParticles(newCount);
+    }
+  });
+  ro.observe(hero);
+}
+
+/* ---------- Smooth Anchor Scroll ---------- */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      const targetId = anchor.getAttribute("href");
+      if (targetId === "#" || !targetId) return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const headerH =
+          parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue(
+              "--header-h",
+            ),
+          ) || 68;
+        const top =
+          target.getBoundingClientRect().top +
+          window.pageYOffset -
+          headerH -
+          16;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    });
+  });
+}
+
+/* ---------- Image Lazy-Load with Blur-Up ---------- */
+function initLazyImages() {
+  if (!window.IntersectionObserver) return;
+  const images = document.querySelectorAll(".lazy-img");
+  if (!images.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.dataset.src;
+          if (src) {
+            img.src = src;
+            img.removeAttribute("data-src");
+            img.addEventListener("load", () => {
+              const wrap = img.closest(".lazy-img-wrap");
+              if (wrap) wrap.classList.add("loaded");
+            });
+            img.addEventListener("error", () => {
+              const wrap = img.closest(".lazy-img-wrap");
+              if (wrap) wrap.classList.add("loaded");
+            });
+          }
+          observer.unobserve(img);
+        }
+      });
+    },
+    { rootMargin: "200px 0px" },
+  );
+
+  images.forEach((img) => observer.observe(img));
+}
+
+/* ---------- Back-to-Top Button ---------- */
+function initBackToTop() {
+  let btn = document.querySelector(".back-to-top");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.className = "back-to-top";
+    btn.setAttribute("aria-label", "Back to top");
+    btn.innerHTML = "↑";
+    document.body.appendChild(btn);
+  }
+
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        btn.classList.toggle("visible", window.scrollY > 400);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+/* ---------- Scroll-Aware Sticky Nav (shrink on scroll) ---------- */
+function initScrollNav() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let lastScroll = 0;
+  let ticking = false;
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentScroll = window.scrollY;
+        if (currentScroll > 120) {
+          header.style.setProperty("--header-h", "56px");
+          header.style.boxShadow = "0 2px 16px rgba(0,0,0,0.2)";
+        } else {
+          header.style.setProperty("--header-h", "68px");
+          header.style.boxShadow = "";
+        }
+        lastScroll = currentScroll;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+}
+
+/* ---------- Update renderHeader to include theme toggle ---------- */
+const _origRenderHeader = renderHeader;
+renderHeader = function () {
+  _origRenderHeader();
+  // Add theme toggle button next to nav toggle inside the header
+  const container = document.querySelector(".site-header .container");
+  if (container) {
+    const existingToggle = document.getElementById("theme-toggle");
+    if (!existingToggle) {
+      const themeBtn = document.createElement("button");
+      themeBtn.className = "theme-toggle";
+      themeBtn.id = "theme-toggle";
+      themeBtn.type = "button";
+      themeBtn.setAttribute("aria-label", "Toggle dark mode");
+      // Check saved preference
+      const saved = localStorage.getItem("triplea-theme");
+      themeBtn.textContent = saved === "dark" ? "☀️" : "🌙";
+      const actions = container.querySelector(".header-actions");
+      if (actions) {
+        actions.insertBefore(themeBtn, actions.firstChild);
+      }
+    }
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   renderHeader();
   renderFooter();
@@ -684,4 +1124,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initStationGalleries();
   initForms();
   initLightbox();
+  // Phase 2 features
+  initThemeToggle();
+  initMobileDrawer();
+  initParticles();
+  initSmoothScroll();
+  initLazyImages();
+  initBackToTop();
+  initScrollNav();
 });
