@@ -1,41 +1,81 @@
-# Triple A Gas — Phase 2 Implementation Progress
+# Triple A Gas — Enhancement Tracker
 
-## ✅ Phase 2 — UX & Interactive Features — COMPLETED
+## ✅ Phase 1 — Homepage Hero Improvements
 
-### 1. 🌙 Dark Mode Toggle
+- [x] Create TODO.md
+- [x] Typewriter effect on hero headline
+- [x] Re-trigger gauge animation on scroll
 
-- [x] Add dark mode CSS custom properties to `tokens.css`
-- [x] Add dark mode overrides to `public.css`
-- [x] Add toggle button + JS logic in `main.js`
-- [x] Persist preference with localStorage
+## ✅ Phase 2 — Visual Design Upgrades
 
-### 2. 📱 Mobile Slide-in Nav Drawer
+- [x] Glassmorphism utility classes
+- [x] Glassmorphism hero panel
+- [x] Enhanced shadows & depth
+- [x] Animated gradient hero backgrounds
+- [x] Noise texture overlay
+- [x] Button micro-interactions (scale, glow, ripple)
+- [x] Card hover lift effect
+- [x] Border glow utility
 
-- [x] CSS for `.nav-drawer`, `.nav-overlay` in `public.css`
-- [x] Update `renderHeader()` in `main.js` for slide-in behavior
+## ✅ Phase 2.5 — Station Directions
 
-### 3. 🔔 Toast Notifications
+- [x] Driving directions for all 7 stations
+- [x] Expandable directions in station cards
 
-- [x] CSS for `.toast-container`, `.toast` in `public.css`
-- [x] JS `showToast()` function in `main.js`
-- [x] Integrate with form submissions (replaces inline success)
+## ✅ Phase 2 — UX & Interactive Features
 
-### 4. ✨ Particle Background
+- [x] **Dark Mode Toggle** — localStorage-persisted, CSS custom properties swap
+- [x] **Mobile Slide-in Nav Drawer** — overlay + drawer pattern, no dropdown
+- [x] **Toast Notifications** — success/error/warning animated toasts
+- [x] **Particle Background** — canvas particles on hero section
+- [x] **Smooth Anchor Scroll** — header offset-aware
+- [x] **Image Lazy-Load with Blur-Up** — IntersectionObserver + blur placeholder
+- [x] **Back-to-Top Button** — appears after 400px scroll
+- [x] **Scroll-Aware Sticky Nav** — shrinks on scroll
+- [x] **Email Fix** — `hello@triplaagas.com` → `tripleagascompany@yahoo.com`
 
-- [x] CSS for `#particle-canvas` in `public.css`
-- [x] JS `initParticles()` in `main.js`
+## ✅ Phase 3 — Per-Page Polish (Complete)
 
-### 5. 📜 Smooth Anchor Scroll
+### About Page ✅
 
-- [x] JS `initSmoothScroll()` in `main.js`
+- [x] Company timeline with dot markers
+- [x] 3D team card flip on hover
+- [x] NPA License badge visual
 
-### 6. 🖼️ Image Lazy-Load with Blur-Up
+### Products Page ✅
 
-- [x] CSS `.lazy-img`, `.lazy-img.loaded` in `public.css`
-- [x] JS `initLazyImages()` in `main.js`
+- [x] SVG cylinder illustrations
+- [x] Compare sizes modal with overlay
 
-### Bonus Features Added:
+### Safety Page ✅
 
-- [x] **Back-to-Top Button**: Smooth scroll-to-top FAB that appears after scrolling 400px
-- [x] **Scroll-Aware Sticky Nav**: Header shrinks from 68px to 56px on scroll down
-- [x] **Theme toggle button**: Added next to header actions with emoji indicator (🌙/☀️)
+- [x] Illustrated safety icons
+- [x] Expandable detailed guides
+- [x] Sticky emergency bar
+
+### FAQ Page ✅
+
+- [x] "Was this helpful?" thumbs up/down feedback
+- [x] Expand All / Collapse All button
+
+### Contact Page ✅
+
+- [x] Quick-contact animated pill buttons
+- [x] Animated form validation with `.form-field` wrappers
+
+### 404 Page ✅
+
+- [x] Bouncing cylinder animation (`bounce-cylinder` keyframes applied)
+
+### Stations Page ✅
+
+- [x] Enhanced `.station-directions-link` in JS templates
+
+## 🚀 Next — Phase 4: Technical / Performance
+
+- [ ] CSS/JS bundling
+- [ ] Font loading optimization (font-display: swap)
+- [ ] Image WebP conversion
+- [ ] Service Worker for offline support
+- [ ] PWA manifest enhancements
+- [ ] Environment config separation

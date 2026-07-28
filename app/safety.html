@@ -1,90 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="LPG safety tips from Triple A Gas — storage, leak response, cylinder inspection, and emergency contacts.">
-  <title>Safety — Triple A Gas</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/public.css">
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <link rel="manifest" href="images/site.webmanifest">
-  <meta name="msapplication-TileColor" content="#5D1020">
-  <meta name="theme-color" content="#5D1020">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://triplaagas.com/safety.html">
-  <meta property="og:title" content="Safety — Triple A Gas">
-  <meta property="og:description" content="LPG safety tips — storage, leak response, cylinder inspection, and emergency contacts from Triple A Gas in Ghana.">
-  <meta property="og:image" content="https://triplaagas.com/images/offical_logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Safety — Triple A Gas">
-  <meta name="twitter:description" content="LPG safety tips — storage, leak response, cylinder inspection, and emergency contacts.">
-</head>
-<body>
-  <div id="site-header"></div>
-  <section class="page-hero">
-    <div class="container" data-aos="fade-up">
-      <h1>LPG safety</h1>
-      <p>Clear steps for storage, inspection, and what to do if you smell gas. Safety is a craft we are proud of — not a legal disclaimer.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="LPG safety tips from Triple A Gas — storage, leak response, cylinder inspection, and emergency contacts."
+    />
+    <title>Safety — Triple A Gas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/public.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#5D1020" />
+    <meta name="theme-color" content="#5D1020" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://triplaagas.com/safety.html" />
+    <meta property="og:title" content="Safety — Triple A Gas" />
+    <meta
+      property="og:description"
+      content="LPG safety tips — storage, leak response, cylinder inspection, and emergency contacts from Triple A Gas in Ghana."
+    />
+    <meta
+      property="og:image"
+      content="https://triplaagas.com/images/offical_logo.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Safety — Triple A Gas" />
+    <meta
+      name="twitter:description"
+      content="LPG safety tips — storage, leak response, cylinder inspection, and emergency contacts."
+    />
+    <style>
+      .safety-icon {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 24px;
+      }
+      .safety-icon.red {
+        background: var(--danger-pale);
+      }
+      .safety-icon.amber {
+        background: var(--hazard-pale);
+      }
+      .safety-icon.green {
+        background: var(--safe-pale);
+      }
+      .safety-icon.blue {
+        background: var(--cylinder-blue-pale);
+      }
+      .safety-card-flex {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .safety-emergency-bar {
+        position: sticky;
+        bottom: 0;
+        z-index: 50;
+        background: var(--danger);
+        color: #fff;
+        padding: 12px 0;
+        text-align: center;
+        font-weight: 700;
+      }
+      .safety-emergency-bar a {
+        color: #fff;
+        text-decoration: underline;
+      }
+      .safety-tip-details {
+        margin-top: 12px;
+      }
+      .safety-tip-details summary {
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 13px;
+        color: var(--cylinder-blue);
+      }
+      .safety-tip-details[open] summary {
+        margin-bottom: 8px;
+      }
+      .safety-tip-details p {
+        font-size: 14px;
+        color: var(--steel-600);
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <section class="page-hero">
+      <div class="container" data-aos="fade-up">
+        <h1>LPG safety</h1>
+        <p>
+          Clear steps for storage, inspection, and what to do if you smell gas.
+          Safety is a craft we are proud of — not a legal disclaimer.
+        </p>
+      </div>
+    </section>
+    <section class="section section-alt">
+      <div class="container">
+        <div class="callout amber" data-aos="fade-up">
+          <strong>⚠️ Smell gas?</strong>
+          Turn off the cylinder valve, open windows, do not switch anything
+          electrical on or off, leave the area, and call
+          <a
+            class="autophone"
+            href="tel:+233245075496"
+            style="color: inherit; font-family: var(--mono); font-weight: 700"
+            >024 507 5496</a
+          >
+          immediately.
+        </div>
+        <div class="grid-2">
+          <div
+            class="card tip-card safety-card-flex"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
+            <div class="safety-icon amber">📦</div>
+            <div>
+              <h3>Storage</h3>
+              <p>
+                Keep cylinders upright, in a ventilated space, away from heat
+                sources and direct sun. Never store cylinders indoors in a
+                closed cupboard.
+              </p>
+              <details class="safety-tip-details">
+                <summary>More details</summary>
+                <p>
+                  Ensure the storage area is free of flammable materials like
+                  petrol, paint thinners, or paper. Cylinders should be at least
+                  1 metre away from cookers, ovens, and other heat sources. In
+                  commercial settings, cylinders must be stored in a dedicated,
+                  well-ventilated cage or room with appropriate fire
+                  extinguishers nearby.
+                </p>
+              </details>
+            </div>
+          </div>
+          <div
+            class="card tip-card safety-card-flex"
+            data-aos="fade-up"
+            data-aos-delay="80"
+          >
+            <div class="safety-icon blue">🔍</div>
+            <div>
+              <h3>Inspection</h3>
+              <p>
+                Check valves, regulators, and hoses for cracks or wear every
+                refill. If anything looks damaged, do not use it — bring it to a
+                Triple A Gas outlet.
+              </p>
+              <details class="safety-tip-details">
+                <summary>More details</summary>
+                <p>
+                  Pay special attention to the rubber hose connecting the
+                  regulator to the cooker — this is the most common point of
+                  failure. Look for cracks, brittleness, or signs of burning.
+                  The valve on the cylinder should open and close smoothly. If
+                  the regulator hisses or feels loose, replace it immediately.
+                </p>
+              </details>
+            </div>
+          </div>
+          <div
+            class="card tip-card safety-card-flex"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
+            <div class="safety-icon green">🔧</div>
+            <div>
+              <h3>Connection</h3>
+              <p>
+                Tighten fittings by hand, then check for leaks with soapy water.
+                Bubbles mean a leak — close the valve and re-seat the
+                connection.
+              </p>
+              <details class="safety-tip-details">
+                <summary>More details</summary>
+                <p>
+                  Mix a small amount of dish soap with water in a spray bottle.
+                  After connecting the regulator, spray the solution on all
+                  connection points and the hose. If you see bubbles forming,
+                  there is a leak. Tighten the connection and test again. If
+                  bubbles persist, do not use the cylinder — contact Triple A
+                  Gas for assistance.
+                </p>
+              </details>
+            </div>
+          </div>
+          <div
+            class="card tip-card safety-card-flex"
+            data-aos="fade-up"
+            data-aos-delay="80"
+          >
+            <div class="safety-icon red">🚚</div>
+            <div>
+              <h3>Transport</h3>
+              <p>
+                Secure cylinders upright in the vehicle. Do not leave a filled
+                cylinder in a closed hot car for long periods.
+              </p>
+              <details class="safety-tip-details">
+                <summary>More details</summary>
+                <p>
+                  Always transport cylinders in an upright position with the
+                  valve closed and protective cap on. Use a non-slip mat or
+                  straps to prevent rolling. Never transport cylinders in the
+                  passenger compartment of a car — use a pickup bed or open
+                  trailer. If transporting in a van, open windows for
+                  ventilation.
+                </p>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container" style="max-width: 720px">
+        <div class="section-header" data-aos="fade-up">
+          <div class="section-kicker">Checklist</div>
+          <h2>Before you light the stove</h2>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="80">
+          <ul class="tip-list">
+            <li>Cylinder is upright and stable on a firm surface</li>
+            <li>Hose is free of cracks, kinks, and burns</li>
+            <li>Regulator is seated correctly and valve opens smoothly</li>
+            <li>No smell of gas after opening the valve</li>
+            <li>Area around the cooker is clear of flammable materials</li>
+          </ul>
+        </div>
+        <div class="btn-row" style="margin-top: 28px" data-aos="fade-up">
+          <a class="btn btn-primary autophone" href="tel:+233245075496"
+            >Emergency: 024 507 5496</a
+          >
+          <a class="btn btn-ghost" href="stations.html">Find a station</a>
+        </div>
+      </div>
+    </section>
+    <div class="safety-emergency-bar" data-aos="fade-up">
+      <div class="container">
+        Gas emergency?
+        <a class="autophone" href="tel:+233245075496">Call 024 507 5496</a>
+        immediately — available 24/7
+      </div>
     </div>
-  </section>
-  <section class="section section-alt">
-    <div class="container">
-      <div class="callout amber" data-aos="fade-up">
-        <strong>Smell gas?</strong>
-        Turn off the cylinder valve, open windows, do not switch anything electrical on or off, leave the area, and call <a class="autophone" href="tel:+233245075496" style="color:inherit;font-family:var(--mono);font-weight:700;">024 507 5496</a> immediately.
-      </div>
-      <div class="grid-2">
-        <div class="card tip-card" data-aos="fade-up" data-aos-delay="0">
-          <h3>Storage</h3>
-          <p>Keep cylinders upright, in a ventilated space, away from heat sources and direct sun. Never store cylinders indoors in a closed cupboard.</p>
-        </div>
-        <div class="card tip-card" data-aos="fade-up" data-aos-delay="80">
-          <h3>Inspection</h3>
-          <p>Check valves, regulators, and hoses for cracks or wear every refill. If anything looks damaged, do not use it — bring it to a Triple A Gas outlet.</p>
-        </div>
-        <div class="card tip-card" data-aos="fade-up" data-aos-delay="0">
-          <h3>Connection</h3>
-          <p>Tighten fittings by hand, then check for leaks with soapy water. Bubbles mean a leak — close the valve and re-seat the connection.</p>
-        </div>
-        <div class="card tip-card" data-aos="fade-up" data-aos-delay="80">
-          <h3>Transport</h3>
-          <p>Secure cylinders upright in the vehicle. Do not leave a filled cylinder in a closed hot car for long periods.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container" style="max-width:720px;">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-kicker">Checklist</div>
-        <h2>Before you light the stove</h2>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="80">
-        <ul class="tip-list">
-          <li>Cylinder is upright and stable on a firm surface</li>
-          <li>Hose is free of cracks, kinks, and burns</li>
-          <li>Regulator is seated correctly and valve opens smoothly</li>
-          <li>No smell of gas after opening the valve</li>
-          <li>Area around the cooker is clear of flammable materials</li>
-        </ul>
-      </div>
-      <div class="btn-row" style="margin-top:28px;" data-aos="fade-up">
-        <a class="btn btn-primary autophone" href="tel:+233245075496">Emergency: 024 507 5496</a>
-        <a class="btn btn-ghost" href="stations.html">Find a station</a>
-      </div>
-    </div>
-  </section>
-  <div id="site-footer"></div>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="js/site-config.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    <div id="site-footer"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/site-config.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

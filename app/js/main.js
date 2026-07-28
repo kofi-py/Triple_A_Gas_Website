@@ -162,7 +162,7 @@ function renderFooter() {
           <div>
             <div class="footer-brand">
               ${GAUGE_SVG}
-              <div class="brand-text">TRIPLE A GAS<span>Reliable cooking gas</span></div>
+            <div class="brand-text">TRIPLE A GAS<span>Reliable cooking gas</span></div>
             </div>
             <p style="margin:0;max-width:32ch;line-height:1.55;">Dependable, safety-first LPG for households and businesses across Ghana.</p>
           </div>
@@ -180,7 +180,7 @@ function renderFooter() {
             <h4>Contact</h4>
             <a class="footer-phone" href="tel:${PHONE_TEL}">${PHONE}</a>
             <p style="margin:0 0 6px;">Head Office, Accra</p>
-            <a href="mailto:hello@triplaagas.com">hello@triplaagas.com</a>
+            <a href="mailto:tripleagascompany@yahoo.com">tripleagascompany@yahoo.com</a>
           </div>
           <div>
             <h4>Order</h4>
@@ -385,9 +385,10 @@ function initStationSearch() {
         ${
           s.directions
             ? `
-        <div class="station-directions" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
-          <details>
-            <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">📍 Get directions</summary>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
+          <a class="station-directions-link" href="${s.mapUrl}" target="_blank" rel="noopener">📍 Get directions</a>
+          <details style="margin-top:8px;">
+            <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">Driving directions</summary>
             <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);line-height:1.55;">${s.directions}</p>
           </details>
         </div>`
@@ -446,9 +447,10 @@ function initStationTeaser() {
       ${
         s.directions
           ? `
-      <div class="station-directions" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
-        <details>
-          <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">📍 Get directions</summary>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
+        <a class="station-directions-link" href="${s.mapUrl}" target="_blank" rel="noopener">📍 Get directions</a>
+        <details style="margin-top:8px;">
+          <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">Driving directions</summary>
           <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);line-height:1.55;">${s.directions}</p>
         </details>
       </div>`
