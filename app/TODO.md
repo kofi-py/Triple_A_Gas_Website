@@ -71,11 +71,21 @@
 
 - [x] Enhanced `.station-directions-link` in JS templates
 
-## 🚀 Next — Phase 4: Technical / Performance
+## ✅ Phase 4 — Technical & Performance Infrastructure
 
-- [ ] CSS/JS bundling
-- [ ] Font loading optimization (font-display: swap)
-- [ ] Image WebP conversion
-- [ ] Service Worker for offline support
-- [ ] PWA manifest enhancements
-- [ ] Environment config separation
+- [x] **Service Worker** (`app/sw.js`) — Cache-first for static assets, network-first for API, offline fallback
+- [x] **PWA Manifest Enhancement** — Added `description`, `categories`, `scope`, `orientation`, `screenshots`, `purpose: maskable`
+- [x] **Font Loading Optimization** — Google Fonts loaded with `media="print"` + `onload="this.media='all'"` + `<noscript>` fallback on all pages, `font-display: swap` in CSS
+- [x] **Environment Config** — `site-config.js` now has `ENV` (dev/prod), `API_BASE` getter that auto-switches, `SITE_URL`, `EMAIL`, company name constants
+- [x] **Complete Sitemap** — All 7 pages with `changefreq`/`priority`, trailing slash for root
+- [x] **Dynamic API Base** — `main.js` reads `API_BASE` from `SITE_CONFIG` instead of hardcoded localhost
+- [x] **Service Worker Registration** — Added to all pages' `<head>` with `navigator.serviceWorker.register('sw.js')`
+
+## 🚀 Next — Phase 5: Advanced Features (Future)
+
+- [ ] Online ordering system with MoMo payment integration
+- [ ] Live stock availability per station
+- [ ] Customer portal with order history & delivery tracking
+- [ ] Multi-language support (English + Twi + Ga)
+- [ ] Blog/news section for company updates & safety tips
+- [ ] Image WebP conversion & CDN deployment

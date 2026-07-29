@@ -1,19 +1,36 @@
 {
-  "name": "Triple A Gas",
+  "name": "Triple A Gas Company Limited",
   "short_name": "Triple A Gas",
+  "description": "Reliable LPG cooking gas supply across Ghana. Order refills, find stations, and learn safety tips.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#5D1020",
+  "background_color": "#ffffff",
+  "categories": ["business", "utilities", "shopping"],
+  "lang": "en-GH",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#5D1020",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "screenshots": [
+    {
+      "src": "../IMG-20260720-WA0000.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "label": "Triple A Gas delivery at station"
+    }
+  ]
 }
+

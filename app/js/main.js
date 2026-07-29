@@ -51,8 +51,11 @@ const WHATSAPP =
     ? window.SITE_CONFIG.WHATSAPP
     : "233245075496";
 
-// Backend API base URL
-const API_BASE = "http://localhost:3001/api";
+// Backend API base URL — reads from SITE_CONFIG (falls back to localhost)
+const API_BASE =
+  window.SITE_CONFIG && window.SITE_CONFIG.API_BASE
+    ? window.SITE_CONFIG.API_BASE
+    : "http://localhost:3001/api";
 
 // Apply site config to existing static anchors (class-based):
 function applySiteConfigToStatic() {
