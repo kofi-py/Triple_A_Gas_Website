@@ -1,96 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find Triple A Gas stations across Ghana — Agbogba, Klagon, Apam, Antoa, Bonwire, Bogoso, and Prestea.">
-  <title>Find a Station — Triple A Gas</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/public.css">
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-  <link rel="manifest" href="images/site.webmanifest">
-  <meta name="msapplication-TileColor" content="#5D1020">
-  <meta name="theme-color" content="#5D1020">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://triplaagas.com/stations.html">
-  <meta property="og:title" content="Find a Station — Triple A Gas">
-  <meta property="og:description" content="Triple A Gas operates 7 retail outlets across Greater Accra, Central, Ashanti, and Western regions. Find your nearest LPG station.">
-  <meta property="og:image" content="https://triplaagas.com/images/offical_logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Find a Station — Triple A Gas">
-  <meta name="twitter:description" content="Find your nearest Triple A Gas LPG station across Ghana.">
-</head>
-<body>
-  <div id="site-header"></div>
-  <section class="page-hero">
-    <div class="container" data-aos="fade-up">
-      <h1>Find a Station</h1>
-      <p>Triple A Gas operates 7 retail outlets across Greater Accra, Central, Ashanti, and Western regions. Use the map or list below to find your nearest branch — confirm availability before travelling.</p>
-    </div>
-  </section>
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-kicker">Interactive map</div>
-        <h2>Our Locations</h2>
-        <p>Triple A Gas operates 7 retail outlets across Ghana. Use the map to find the branch nearest to you.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Find Triple A Gas stations across Ghana — Agbogba, Klagon, Apam, Antoa, Bonwire, Bogoso, and Prestea."
+    />
+    <title>Find a Station — Triple A Gas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/public.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#5D1020" />
+    <meta name="theme-color" content="#5D1020" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://triplaagas.com/stations.html" />
+    <meta property="og:title" content="Find a Station — Triple A Gas" />
+    <meta
+      property="og:description"
+      content="Triple A Gas operates 7 retail outlets across Greater Accra, Central, Ashanti, and Western regions. Find your nearest LPG station."
+    />
+    <meta
+      property="og:image"
+      content="https://triplaagas.com/images/offical_logo.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Find a Station — Triple A Gas" />
+    <meta
+      name="twitter:description"
+      content="Find your nearest Triple A Gas LPG station across Ghana."
+    />
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <section class="page-hero">
+      <div class="container" data-aos="fade-up">
+        <h1>Find a Station</h1>
+        <p>
+          Triple A Gas operates 7 retail outlets across Greater Accra, Central,
+          Ashanti, and Western regions. Use the map or list below to find your
+          nearest branch — confirm availability before travelling.
+        </p>
       </div>
-      <div id="station-map" data-aos="fade-up"></div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-kicker">All stations</div>
-        <h2>Find &amp; Contact</h2>
-      </div>
-      <div class="search-bar" data-aos="fade-up">
-        <label for="station-search" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Search stations</label>
-        <input id="station-search" type="search" placeholder="Search by town or region..." autocomplete="off">
-        <div class="filter-chips" role="group" aria-label="Filter by region">
-          <button type="button" class="filter-chip active" data-region="all">All locations</button>
-          <button type="button" class="filter-chip" data-region="Greater Accra">Greater Accra</button>
-          <button type="button" class="filter-chip" data-region="Central">Central</button>
-          <button type="button" class="filter-chip" data-region="Ashanti">Ashanti</button>
-          <button type="button" class="filter-chip" data-region="Western">Western</button>
+    </section>
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <div class="section-kicker">Interactive map</div>
+          <h2>Our Locations</h2>
+          <p>
+            Triple A Gas operates 7 retail outlets across Ghana. Use the map to
+            find the branch nearest to you.
+          </p>
         </div>
+        <div id="station-map" data-aos="fade-up"></div>
       </div>
-      <div class="grid-3" id="station-grid"></div>
-    </div>
-  </section>
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-header" data-aos="fade-up">
-        <div class="section-kicker">Station gallery</div>
-        <h2>See our stations</h2>
-        <p>Real photos from our stations across Ghana.</p>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <div class="section-kicker">All stations</div>
+          <h2>Find &amp; Contact</h2>
+        </div>
+        <div class="search-bar" data-aos="fade-up">
+          <label
+            for="station-search"
+            class="visually-hidden"
+            style="
+              position: absolute;
+              width: 1px;
+              height: 1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+            "
+            >Search stations</label
+          >
+          <input
+            id="station-search"
+            type="search"
+            placeholder="Search by town or region..."
+            autocomplete="off"
+          />
+          <div class="filter-chips" role="group" aria-label="Filter by region">
+            <button type="button" class="filter-chip active" data-region="all">
+              All locations
+            </button>
+            <button
+              type="button"
+              class="filter-chip"
+              data-region="Greater Accra"
+            >
+              Greater Accra
+            </button>
+            <button type="button" class="filter-chip" data-region="Central">
+              Central
+            </button>
+            <button type="button" class="filter-chip" data-region="Ashanti">
+              Ashanti
+            </button>
+            <button type="button" class="filter-chip" data-region="Western">
+              Western
+            </button>
+          </div>
+        </div>
+        <div class="grid-3" id="station-grid"></div>
       </div>
-      <div id="station-galleries"></div>
-    </div>
-  </section>
-  <div class="safety-strip" data-aos="fade-up">
-    <div class="container">
-      <div>
-        <h2>Need gas today?</h2>
-        <p>Call your nearest branch to confirm current availability and opening hours.</p>
+    </section>
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <div class="section-kicker">Station gallery</div>
+          <h2>See our stations</h2>
+          <p>Real photos from our stations across Ghana.</p>
+        </div>
+        <div id="station-galleries"></div>
       </div>
-      <a class="btn btn-primary" href="tel:+233244011050">Call now</a>
+    </section>
+    <div class="safety-strip" data-aos="fade-up">
+      <div class="container">
+        <div>
+          <h2>Need gas today?</h2>
+          <p>
+            Call your nearest branch to confirm current availability and opening
+            hours.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="tel:+233244011050">Call now</a>
+      </div>
     </div>
-  </div>
-  <div id="site-footer"></div>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/site-config.js"></script>
-  <script src="js/company-info.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/map.js"></script>
-</body>
+    <div id="site-footer"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/site-config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/company-info.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/map.js"></script>
+  </body>
 </html>

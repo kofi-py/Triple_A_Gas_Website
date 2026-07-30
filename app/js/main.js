@@ -1,5 +1,26 @@
 /* Triple A Gas — shared public JS */
 
+/* ---------- i18n helper (safe, falls back to key in English) ---------- */
+function __(key) {
+  try {
+    if (window.I18N && typeof window.I18N.t === "function") {
+      return window.I18N.t(key);
+    }
+  } catch (e) {}
+  // Fallback: return English key from I18N or key itself
+  try {
+    if (
+      window.I18N &&
+      window.I18N.translations &&
+      window.I18N.translations.en &&
+      window.I18N.translations.en[key]
+    ) {
+      return window.I18N.translations.en[key];
+    }
+  } catch (e) {}
+  return key;
+}
+
 const GAUGE_SVG = `
 <img class="brand-mark" src="images/offical_logo-removebg.png" alt="Triple A Gas" style="width:70px;height:70px;object-fit:contain;display:block;">`;
 
@@ -113,8 +134,8 @@ function renderHeader() {
       <div class="container">
         <span>Triple A LP Gas Limited · Ghana</span>
         <div class="topbar-right">
-          <a href="tel:${PHONE_TEL}">Call ${PHONE}</a>
-          <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
+          <a href="tel:${PHONE_TEL}">${__("call_us")} ${PHONE}</a>
+          <a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${__("chat_whatsapp")}</a>
         </div>
       </div>
     </div>
@@ -124,19 +145,19 @@ function renderHeader() {
           ${GAUGE_SVG}
           <div class="brand-text">TRIPLE A GAS<span>LPG · Ghana</span></div>
         </a>
-        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" id="nav-toggle">☰</button>
+        <button class="nav-toggle" type="button" aria-label="${__("close")}" aria-expanded="false" id="nav-toggle">☰</button>
         <ul class="nav-links" id="nav-links">
-          <li><a href="${base}index.html" ${isActive("home", current) ? 'aria-current="page"' : ""}>Home</a></li>
-          <li><a href="${base}products.html" ${isActive("products", current) ? 'aria-current="page"' : ""}>Products</a></li>
-          <li><a href="${base}stations.html" ${isActive("stations", current) ? 'aria-current="page"' : ""}>Find a Station</a></li>
-          <li><a href="${base}safety.html" ${isActive("safety", current) ? 'aria-current="page"' : ""}>Safety</a></li>
-          <li><a href="${base}faq.html" ${isActive("faq", current) ? 'aria-current="page"' : ""}>FAQ</a></li>
-          <li><a href="${base}about.html" ${isActive("about", current) ? 'aria-current="page"' : ""}>About</a></li>
-          <li><a href="${base}contact.html" ${isActive("contact", current) ? 'aria-current="page"' : ""}>Contact</a></li>
+          <li><a href="${base}index.html" ${isActive("home", current) ? 'aria-current="page"' : ""}>${__("nav_home")}</a></li>
+          <li><a href="${base}products.html" ${isActive("products", current) ? 'aria-current="page"' : ""}>${__("nav_products")}</a></li>
+          <li><a href="${base}stations.html" ${isActive("stations", current) ? 'aria-current="page"' : ""}>${__("nav_stations")}</a></li>
+          <li><a href="${base}safety.html" ${isActive("safety", current) ? 'aria-current="page"' : ""}>${__("nav_safety")}</a></li>
+          <li><a href="${base}faq.html" ${isActive("faq", current) ? 'aria-current="page"' : ""}>${__("nav_faq")}</a></li>
+          <li><a href="${base}about.html" ${isActive("about", current) ? 'aria-current="page"' : ""}>${__("nav_about")}</a></li>
+          <li><a href="${base}contact.html" ${isActive("contact", current) ? 'aria-current="page"' : ""}>${__("nav_contact")}</a></li>
         </ul>
         <div class="header-actions">
-          <a class="btn btn-whatsapp btn-sm" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} WhatsApp</a>
-          <a class="btn btn-primary btn-sm" href="tel:${PHONE_TEL}">Call Us</a>
+          <a class="btn btn-whatsapp btn-sm" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${__("chat_whatsapp")}</a>
+          <a class="btn btn-primary btn-sm" href="tel:${PHONE_TEL}">${__("call_us")}</a>
         </div>
       </div>
     </header>
@@ -1113,6 +1134,34 @@ renderHeader = function () {
   }
 };
 
+/* ---------- Init order links (wire up "Order Now" buttons) ---------- */
+function initOrderLinks() {
+  document.querySelectorAll("[data-order-now]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const productId = btn.dataset.orderNow;
+      if (window.ORDERING) {
+        window.ORDERING.addToCart(productId);
+      }
+      window.location.href = btn.getAttribute("href") || "order.html";
+    });
+  });
+}
+
+/* ---------- Init stock badges ---------- */
+function initStockBadges() {
+  if (window.STOCK) {
+    window.STOCK.renderBadges();
+  }
+}
+
+/* ---------- Init language switcher ---------- */
+function initLanguageSwitcher() {
+  if (window.I18N) {
+    window.I18N.init();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderHeader();
   renderFooter();
@@ -1137,4 +1186,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initLazyImages();
   initBackToTop();
   initScrollNav();
+  // Phase 3 features (ordering, stock, i18n, blog — loaded after main.js)
+  if (typeof window.ORDERING !== "undefined" && window.ORDERING.init) {
+    window.ORDERING.init();
+  }
+  initOrderLinks();
+  initStockBadges();
+  initLanguageSwitcher();
+  // Blog will init on blog page
 });

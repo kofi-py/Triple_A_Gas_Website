@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Triple A Gas News & Updates — LPG safety tips, company news, and community updates from Triple A Gas in Ghana."
+    />
+    <title>Blog — Triple A Gas News & Updates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    /></noscript>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/public.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#5D1020" />
+    <meta name="theme-color" content="#5D1020" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://triplaagas.com/blog.html" />
+    <meta property="og:title" content="Blog — Triple A Gas News & Updates" />
+    <meta
+      property="og:description"
+      content="LPG safety tips, company news, and community updates from Triple A Gas in Ghana."
+    />
+    <meta
+      property="og:image"
+      content="https://triplaagas.com/images/offical_logo.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="site-header"></div>
+
+    <section class="page-hero">
+      <div class="container" data-aos="fade-up">
+        <h1 data-i18n="blog_title">Triple A Gas News &amp; Updates</h1>
+        <p data-i18n="blog_desc">
+          Safety tips, company updates, and community news from Triple A Gas.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <div class="section-kicker" data-i18n="latest_posts">
+            Latest Posts
+          </div>
+          <h2 data-i18n="blog_title">Triple A Gas Blog</h2>
+        </div>
+        <div class="grid-2" id="blog-container" style="gap: 24px"></div>
+      </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="section">
+      <div class="container" style="max-width: 600px; text-align: center">
+        <div class="card" data-aos="fade-up" style="padding: 32px">
+          <h2
+            style="
+              font-family: var(--display);
+              font-size: 20px;
+              margin: 0 0 8px;
+            "
+          >
+            📬 Stay Updated
+          </h2>
+          <p style="color: var(--steel-600); margin: 0 0 20px">
+            Get safety tips and company news delivered to your inbox.
+          </p>
+          <form
+            id="newsletter-form"
+            style="display: flex; gap: 10px; max-width: 420px; margin: 0 auto"
+          >
+            <input
+              type="email"
+              placeholder="your@email.com"
+              required
+              style="margin: 0; flex: 1; min-width: 0"
+            />
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+          <p style="font-size: 12px; color: var(--steel-400); margin: 12px 0 0">
+            No spam. Unsubscribe anytime.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="site-footer"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/site-config.js"></script>
+    <script src="js/company-info.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/blog.js"></script>
+    <script>
+      document
+        .getElementById("newsletter-form")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var email = this.querySelector('input[type="email"]').value;
+          if (window.showToast) {
+            window.showToast(
+              "Thanks for subscribing! We'll keep you posted.",
+              "success",
+            );
+          } else {
+            alert("Thanks for subscribing! We'll keep you posted.");
+          }
+          this.reset();
+        });
+    </script>
+    <script>
+      // Register service worker for offline support and caching
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("sw.js")
+            .then(function (reg) {
+              console.log("SW registered:", reg.scope);
+            })
+            .catch(function (err) {
+              console.log("SW registration failed:", err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

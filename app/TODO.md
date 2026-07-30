@@ -80,6 +80,8 @@
 - [x] **Complete Sitemap** — All 7 pages with `changefreq`/`priority`, trailing slash for root
 - [x] **Dynamic API Base** — `main.js` reads `API_BASE` from `SITE_CONFIG` instead of hardcoded localhost
 - [x] **Service Worker Registration** — Added to all pages' `<head>` with `navigator.serviceWorker.register('sw.js')`
+- [x] **i18n.js script added to ALL HTML pages** — Including `blog.html` and `order.html` previously missing
+- [x] **Service Worker Registration added to ALL HTML pages** — Including `blog.html` and `order.html` previously missing
 
 ## 🚀 Next — Phase 5: Advanced Features (Future)
 

@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Order LPG delivery online — choose your cylinder size, pay with MoMo or cash on delivery from Triple A Gas."
+    />
+    <title>Order Online — Triple A Gas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    /></noscript>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/public.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#5D1020" />
+    <meta name="theme-color" content="#5D1020" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://triplaagas.com/order.html" />
+    <meta property="og:title" content="Order Online — Triple A Gas" />
+    <meta
+      property="og:description"
+      content="Order LPG delivery online. Choose your cylinder size, pay with MoMo or cash on delivery."
+    />
+    <meta
+      property="og:image"
+      content="https://triplaagas.com/images/offical_logo.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      .order-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .product-select {
+        display: grid;
+        gap: 12px;
+      }
+
+      .product-option {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        border: 2px solid var(--steel-300);
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+      }
+
+      .product-option:hover {
+        border-color: var(--cylinder-blue-light);
+        background: var(--cylinder-blue-pale);
+      }
+
+      .product-option.selected {
+        border-color: var(--flame);
+        background: var(--flame-pale);
+      }
+
+      .product-option input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--flame);
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .product-option .cyl-icon {
+        width: 24px;
+        flex-shrink: 0;
+        background: var(--cylinder-blue);
+        border-radius: 4px 4px 2px 2px;
+        position: relative;
+      }
+
+      .product-option .cyl-icon::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 7px;
+        background: var(--steel-600);
+        border-radius: 2px 2px 0 0;
+      }
+
+      .product-option .cyl-3 {
+        height: 32px;
+      }
+      .product-option .cyl-6 {
+        height: 40px;
+      }
+      .product-option .cyl-14 {
+        height: 48px;
+      }
+      .product-option .cyl-bulk {
+        height: 56px;
+      }
+
+      .product-option .option-info {
+        flex: 1;
+      }
+      .product-option .option-info h3 {
+        font-family: var(--display);
+        font-size: 15px;
+        margin: 0 0 2px;
+      }
+      .product-option .option-info p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--steel-600);
+      }
+      .product-option .option-price {
+        font-family: var(--mono);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--flame);
+        flex-shrink: 0;
+      }
+
+      .payment-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 16px 0;
+      }
+
+      .payment-option {
+        padding: 16px;
+        border: 2px solid var(--steel-300);
+        border-radius: var(--radius);
+        text-align: center;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .payment-option:hover {
+        border-color: var(--cylinder-blue-light);
+        background: var(--cylinder-blue-pale);
+      }
+
+      .payment-option.selected {
+        border-color: var(--flame);
+        background: var(--flame-pale);
+      }
+
+      .payment-option .pay-icon {
+        font-size: 28px;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .order-summary {
+        background: var(--cylinder-blue-pale);
+        border-radius: var(--radius);
+        padding: 24px;
+      }
+
+      .order-summary h3 {
+        font-family: var(--display);
+        font-size: 16px;
+        margin: 0 0 16px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--steel-100);
+        font-size: 14px;
+      }
+
+      .summary-row:last-child {
+        border-bottom: none;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .summary-row .label {
+        color: var(--steel-600);
+      }
+
+      @media (max-width: 900px) {
+        .order-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .momo-details {
+        display: none;
+        margin-top: 12px;
+        padding: 16px;
+        background: var(--safe-pale);
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .momo-details.show {
+        display: block;
+      }
+
+      .momo-details strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header"></div>
+
+    <section class="page-hero">
+      <div class="container" data-aos="fade-up">
+        <h1 data-i18n="order_now">Order Online</h1>
+        <p data-i18n="order_desc">
+          Order LPG delivery to your doorstep. Choose your cylinder size and
+          delivery area.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="order-layout">
+          <!-- Left: Product Selection + Form -->
+          <div data-aos="fade-right">
+            <div class="section-header" style="margin-bottom: 24px">
+              <div class="section-kicker" data-i18n="order_now">Order Now</div>
+              <h2 data-i18n="your_order">Your Order</h2>
+            </div>
+
+            <form
+              id="order-form"
+              data-form
+              data-success="Order received! We will call you to confirm payment and delivery."
+            >
+              <div class="form-success" role="status"></div>
+
+              <label for="order-name">Full name</label>
+              <input
+                id="order-name"
+                name="name"
+                required
+                placeholder="Ama Owusu"
+                autocomplete="name"
+                data-i18n-placeholder="loading"
+              />
+
+              <label for="order-phone">Phone number</label>
+              <input
+                id="order-phone"
+                name="phone"
+                type="tel"
+                required
+                placeholder="024 000 0000"
+                inputmode="tel"
+                autocomplete="tel"
+              />
+              <p class="form-hint">Ghana numbers: 0XX XXX XXXX or +233...</p>
+
+              <label for="order-area">Delivery area</label>
+              <input
+                id="order-area"
+                name="area"
+                required
+                placeholder="e.g. East Legon, Accra"
+              />
+
+              <label>Select cylinder size</label>
+              <div class="product-select" id="size-select">
+                <label class="product-option" data-size="3 kg">
+                  <input type="radio" name="size" value="3 kg" required />
+                  <span class="cyl-icon cyl-3"></span>
+                  <span class="option-info">
+                    <h3>3 kg</h3>
+                    <p>Starter / student / small kitchen</p>
+                  </span>
+                  <span class="option-price">GH₵ 55</span>
+                </label>
+                <label class="product-option" data-size="6 kg">
+                  <input type="radio" name="size" value="6 kg" />
+                  <span class="cyl-icon cyl-6"></span>
+                  <span class="option-info">
+                    <h3>6 kg</h3>
+                    <p>Everyday household cooking</p>
+                  </span>
+                  <span class="option-price">GH₵ 95</span>
+                </label>
+                <label class="product-option" data-size="14.5 kg">
+                  <input type="radio" name="size" value="14.5 kg" />
+                  <span class="cyl-icon cyl-14"></span>
+                  <span class="option-info">
+                    <h3>14.5 kg</h3>
+                    <p>Family homes &amp; chop bars</p>
+                  </span>
+                  <span class="option-price">GH₵ 145</span>
+                </label>
+                <label class="product-option" data-size="Bulk">
+                  <input type="radio" name="size" value="Bulk / commercial" />
+                  <span class="cyl-icon cyl-bulk"></span>
+                  <span class="option-info">
+                    <h3>Bulk / Tank</h3>
+                    <p>Hotels, factories, institutions</p>
+                  </span>
+                  <span class="option-price">Custom</span>
+                </label>
+              </div>
+
+              <label>Payment method</label>
+              <div class="payment-options" id="payment-select">
+                <div class="payment-option selected" data-payment="cash">
+                  <span class="pay-icon">💵</span>
+                  <span data-i18n="cash">Cash on Delivery</span>
+                </div>
+                <div class="payment-option" data-payment="momo">
+                  <span class="pay-icon">📱</span>
+                  <span data-i18n="momo">Mobile Money (MoMo)</span>
+                </div>
+              </div>
+
+              <div class="momo-details" id="momo-details">
+                <strong>📱 MoMo Payment Details</strong>
+                <p>
+                  Send payment to the MoMo number below and include the
+                  transaction ID in your message:
+                </p>
+                <p
+                  style="
+                    font-family: var(--mono);
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: var(--cylinder-blue);
+                    margin: 12px 0;
+                  "
+                >
+                  024 507 5496
+                </p>
+                <p style="font-size: 12px; color: var(--steel-600)">
+                  (MTN / Vodafone / AirtelTigo)
+                </p>
+              </div>
+
+              <label for="order-note">Delivery notes (optional)</label>
+              <textarea
+                id="order-note"
+                name="note"
+                placeholder="Landmark, specific time, etc."
+              ></textarea>
+
+              <button class="btn btn-primary" type="submit" style="width: 100%">
+                <span data-i18n="place_order">Place Order</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <div data-aos="fade-left">
+            <div class="order-summary" id="order-summary">
+              <h3>Order Summary</h3>
+              <div class="summary-row">
+                <span class="label">Product</span>
+                <span id="summary-product">Not selected</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Price</span>
+                <span id="summary-price">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Delivery</span>
+                <span>Ask at station</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Payment</span>
+                <span id="summary-payment">Cash on Delivery</span>
+              </div>
+              <div class="summary-row" style="margin-top: 8px">
+                <span class="label">Note</span>
+                <span id="summary-note">—</span>
+              </div>
+            </div>
+
+            <div class="callout amber" style="margin-top: 20px">
+              <strong>📍 Delivery Info</strong>
+              We deliver to areas near our 7 stations. Call us to confirm if we
+              cover your specific location. Same-day delivery available in most
+              areas.
+            </div>
+
+            <div class="btn-row" style="margin-top: 16px">
+              <a
+                class="btn btn-whatsapp"
+                href="https://wa.me/233245075496"
+                target="_blank"
+                rel="noopener"
+              >
+                💬 Order via WhatsApp
+              </a>
+              <a class="btn btn-ghost" href="tel:+233245075496"
+                >📞 Call to Order</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="site-footer"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/site-config.js"></script>
+    <script src="js/company-info.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // Product selection UI
+      document.querySelectorAll(".product-option").forEach(function (opt) {
+        opt.addEventListener("click", function () {
+          document.querySelectorAll(".product-option").forEach(function (o) {
+            o.classList.remove("selected");
+          });
+          this.classList.add("selected");
+          this.querySelector('input[type="radio"]').checked = true;
+          updateSummary();
+        });
+      });
+
+      // Payment selection UI
+      document.querySelectorAll(".payment-option").forEach(function (opt) {
+        opt.addEventListener("click", function () {
+          document.querySelectorAll(".payment-option").forEach(function (o) {
+            o.classList.remove("selected");
+          });
+          this.classList.add("selected");
+          var method = this.dataset.payment;
+          document
+            .getElementById("momo-details")
+            .classList.toggle("show", method === "momo");
+          updateSummary();
+        });
+      });
+
+      // Order note live update
+      document
+        .getElementById("order-note")
+        .addEventListener("input", updateSummary);
+
+      function updateSummary() {
+        var selected = document.querySelector(
+          '.product-option input[type="radio"]:checked',
+        );
+        if (selected) {
+          var parent = selected.closest(".product-option");
+          var size = parent.dataset.size;
+          var price = parent.querySelector(".option-price").textContent;
+          document.getElementById("summary-product").textContent = size;
+          document.getElementById("summary-price").textContent = price;
+        }
+
+        var paymentSelected = document.querySelector(
+          ".payment-option.selected",
+        );
+        if (paymentSelected) {
+          document.getElementById("summary-payment").textContent =
+            paymentSelected.dataset.payment === "momo"
+              ? "Mobile Money (MoMo)"
+              : "Cash on Delivery";
+        }
+
+        var note = document.getElementById("order-note").value.trim();
+        document.getElementById("summary-note").textContent = note || "—";
+      }
+
+      updateSummary();
+    </script>
+    <script>
+      // Register service worker for offline support and caching
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("sw.js")
+            .then(function (reg) {
+              console.log("SW registered:", reg.scope);
+            })
+            .catch(function (err) {
+              console.log("SW registration failed:", err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -191,12 +191,10 @@ app.patch("/api/submissions/:id/status", (req, res) => {
 
   const validStatuses = ["new", "read", "contacted", "completed"];
   if (!validStatuses.includes(status)) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        error: `Invalid status. Must be one of: ${validStatuses.join(", ")}`,
-      });
+    return res.status(400).json({
+      success: false,
+      error: `Invalid status. Must be one of: ${validStatuses.join(", ")}`,
+    });
   }
 
   const submissions = loadSubmissions();
@@ -225,6 +223,57 @@ app.get("/api/stats", (req, res) => {
   const orders = submissions.filter((s) => s.type === "delivery-order").length;
 
   res.json({ total, new: newCount, contactForms, orders });
+});
+
+// GET /api/stock — return stock availability per station
+app.get("/api/stock", (req, res) => {
+  const stock = {
+    stations: {
+      1: {
+        status: "in-stock",
+        level: "high",
+        lastUpdated: "2025-03-20 10:30",
+        note: "All sizes available",
+      },
+      2: {
+        status: "in-stock",
+        level: "medium",
+        lastUpdated: "2025-03-20 10:30",
+        note: "14.5kg low stock",
+      },
+      3: {
+        status: "limited",
+        level: "low",
+        lastUpdated: "2025-03-19 16:00",
+        note: "6kg only",
+      },
+      4: {
+        status: "in-stock",
+        level: "high",
+        lastUpdated: "2025-03-20 08:00",
+        note: "All sizes available",
+      },
+      5: {
+        status: "in-stock",
+        level: "medium",
+        lastUpdated: "2025-03-20 09:15",
+        note: "3kg & 14.5kg in stock",
+      },
+      6: {
+        status: "limited",
+        level: "low",
+        lastUpdated: "2025-03-18 14:30",
+        note: "Call to check availability",
+      },
+      7: {
+        status: "in-stock",
+        level: "medium",
+        lastUpdated: "2025-03-20 07:45",
+        note: "6kg & 14.5kg in stock",
+      },
+    },
+  };
+  res.json(stock);
 });
 
 // Health check

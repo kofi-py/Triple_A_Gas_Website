@@ -7,29 +7,30 @@
 const CACHE_NAME = "triple-a-gas-v1";
 
 const PRECACHE_URLS = [
-  "/",
-  "/index.html",
-  "/products.html",
-  "/stations.html",
-  "/safety.html",
-  "/faq.html",
-  "/about.html",
-  "/contact.html",
-  "/404.html",
-  "/css/tokens.css",
-  "/css/public.css",
-  "/js/site-config.js",
-  "/js/main.js",
-  "/js/company-info.js",
-  "/js/testimonials.js",
-  "/js/map.js",
-  "/images/offical_logo-removebg.png",
-  "/images/offical_logo.png",
-  "/images/favicon.ico",
-  "/images/favicon-32x32.png",
-  "/images/favicon-16x16.png",
-  "/images/apple-touch-icon.png",
-  "/images/site.webmanifest",
+  "./index.html",
+  "./products.html",
+  "./stations.html",
+  "./safety.html",
+  "./faq.html",
+  "./about.html",
+  "./contact.html",
+  "./404.html",
+  "./css/tokens.css",
+  "./css/public.css",
+  "./js/site-config.js",
+  "./js/i18n.js",
+  "./js/main.js",
+  "./js/company-info.js",
+  "./js/testimonials.js",
+  "./js/map.js",
+  "./js/stock.js",
+  "./images/offical_logo-removebg.png",
+  "./images/offical_logo.png",
+  "./images/favicon.ico",
+  "./images/favicon-32x32.png",
+  "./images/favicon-16x16.png",
+  "./images/apple-touch-icon.png",
+  "./images/site.webmanifest",
 ];
 
 const API_BASE = "http://localhost:3001/api";
@@ -111,7 +112,7 @@ async function cacheFirst(request) {
   } catch (err) {
     // Offline fallback for navigation requests
     if (request.mode === "navigate") {
-      const fallback = await caches.match("/index.html");
+      const fallback = await caches.match("./index.html");
       if (fallback) return fallback;
     }
     throw err;
