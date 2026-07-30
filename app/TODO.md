@@ -24,70 +24,86 @@
 
 ## ✅ Phase 2 — UX & Interactive Features
 
-- [x] **Dark Mode Toggle** — localStorage-persisted, CSS custom properties swap
-- [x] **Mobile Slide-in Nav Drawer** — overlay + drawer pattern, no dropdown
-- [x] **Toast Notifications** — success/error/warning animated toasts
-- [x] **Particle Background** — canvas particles on hero section
-- [x] **Smooth Anchor Scroll** — header offset-aware
-- [x] **Image Lazy-Load with Blur-Up** — IntersectionObserver + blur placeholder
-- [x] **Back-to-Top Button** — appears after 400px scroll
-- [x] **Scroll-Aware Sticky Nav** — shrinks on scroll
-- [x] **Email Fix** — `hello@triplaagas.com` → `tripleagascompany@yahoo.com`
+- [x] Dark Mode Toggle — localStorage-persisted, CSS custom properties swap
+- [x] Mobile Slide-in Nav Drawer — overlay + drawer, no dropdown
+- [x] Toast Notifications — success/error/warning animated toasts
+- [x] Particle Background — canvas particles on hero section
+- [x] Smooth Anchor Scroll — header offset-aware
+- [x] Image Lazy-Load with Blur-Up — IntersectionObserver + blur placeholder
+- [x] Back-to-Top Button — appears after 400px scroll
+- [x] Scroll-Aware Sticky Nav — shrinks on scroll
+- [x] Email Fix — hello@triplaagas.com → tripleagascompany@yahoo.com
 
-## ✅ Phase 3 — Per-Page Polish (Complete)
+## ✅ Phase 3 — Per-Page Polish
 
-### About Page ✅
-
-- [x] Company timeline with dot markers
-- [x] 3D team card flip on hover
-- [x] NPA License badge visual
-
-### Products Page ✅
-
-- [x] SVG cylinder illustrations
-- [x] Compare sizes modal with overlay
-
-### Safety Page ✅
-
-- [x] Illustrated safety icons
-- [x] Expandable detailed guides
-- [x] Sticky emergency bar
-
-### FAQ Page ✅
-
-- [x] "Was this helpful?" thumbs up/down feedback
-- [x] Expand All / Collapse All button
-
-### Contact Page ✅
-
-- [x] Quick-contact animated pill buttons
-- [x] Animated form validation with `.form-field` wrappers
-
-### 404 Page ✅
-
-- [x] Bouncing cylinder animation (`bounce-cylinder` keyframes applied)
-
-### Stations Page ✅
-
-- [x] Enhanced `.station-directions-link` in JS templates
+- [x] About: Company timeline, 3D team card flip, NPA badge visual
+- [x] Products: SVG cylinder illustrations, compare sizes modal
+- [x] Safety: Illustrated icons, expandable guides, sticky emergency bar
+- [x] FAQ: Thumbs up/down feedback, Expand All / Collapse All
+- [x] Contact: Quick-contact animated pill buttons, animated form validation
+- [x] 404: Bouncing cylinder animation
+- [x] Stations: Enhanced station-directions-link in JS templates
 
 ## ✅ Phase 4 — Technical & Performance Infrastructure
 
-- [x] **Service Worker** (`app/sw.js`) — Cache-first for static assets, network-first for API, offline fallback
-- [x] **PWA Manifest Enhancement** — Added `description`, `categories`, `scope`, `orientation`, `screenshots`, `purpose: maskable`
-- [x] **Font Loading Optimization** — Google Fonts loaded with `media="print"` + `onload="this.media='all'"` + `<noscript>` fallback on all pages, `font-display: swap` in CSS
-- [x] **Environment Config** — `site-config.js` now has `ENV` (dev/prod), `API_BASE` getter that auto-switches, `SITE_URL`, `EMAIL`, company name constants
-- [x] **Complete Sitemap** — All 7 pages with `changefreq`/`priority`, trailing slash for root
-- [x] **Dynamic API Base** — `main.js` reads `API_BASE` from `SITE_CONFIG` instead of hardcoded localhost
-- [x] **Service Worker Registration** — Added to all pages' `<head>` with `navigator.serviceWorker.register('sw.js')`
-- [x] **i18n.js script added to ALL HTML pages** — Including `blog.html` and `order.html` previously missing
-- [x] **Service Worker Registration added to ALL HTML pages** — Including `blog.html` and `order.html` previously missing
+- [x] Service Worker (app/sw.js) — Cache-first for static, network-first for API
+- [x] PWA Manifest Enhancement — description, categories, scope, orientation, screenshots, maskable
+- [x] Font Loading Optimization — media="print" + onload swap + noscript fallback, font-display: swap
+- [x] Environment Config — site-config.js with ENV, API_BASE auto-switch, SITE_URL, EMAIL
+- [x] Complete Sitemap — All pages with changefreq/priority
+- [x] Dynamic API Base — main.js reads from SITE_CONFIG
+- [x] Service Worker Registration on all pages
+- [x] i18n.js script added to ALL HTML pages
 
-## 🚀 Next — Phase 5: Advanced Features (Future)
+## ✅ Phase 5 — Advanced Features
 
-- [ ] Online ordering system with MoMo payment integration
-- [ ] Live stock availability per station
-- [ ] Customer portal with order history & delivery tracking
-- [ ] Multi-language support (English + Twi + Ga)
-- [ ] Blog/news section for company updates & safety tips
-- [ ] Image WebP conversion & CDN deployment
+- [x] Online ordering system (order.html, js/ordering.js) — Cart, MoMo/Cash, backend submission
+- [x] Live stock availability (js/stock.js) — Per-station tracking with GET /api/stock
+- [x] Customer portal (portal/ — login, dashboard, deliveries, inventory, inspections, shift notes)
+- [x] Multi-language support (js/i18n.js) — English, Twi (Asante), Ga (Gã)
+- [x] Blog/news section (blog.html, js/blog.js) — 4 posts, full article view, newsletter
+
+## ✅ Phase 6 — Growth & Enterprise Features (Complete)
+
+### Tier 1 — All Implemented in backend/server.js v2.0.0
+
+#### 1. 📱 WhatsApp Business API Integration
+
+- [x] Twilio SDK integrated for WhatsApp messaging
+- [x] `POST /api/whatsapp/notify` — Send arbitrary WhatsApp message
+- [x] `POST /api/whatsapp/send-order-confirmation` — Auto-notify staff on new orders
+- [x] `POST /api/whatsapp/send-delivery-update` — Notify customer on delivery status
+- [x] Dev mode fallback (logs to console when Twilio not configured)
+- [x] Auto-send on order placement via `/api/order`
+
+#### 2. 💳 Real MoMo Payment Gateway
+
+- [x] `POST /api/payment/initiate` — Initiate payment with transaction tracking
+- [x] `POST /api/payment/verify` — Verify payment status
+- [x] `GET /api/payment/status/:transactionId` — Check transaction status
+- [x] `POST /api/payment/webhook` — Webhook handler for gateway callbacks
+- [x] Transaction persistence in `transactions.json`
+- [x] Order auto-update on payment confirmation
+- [x] Dev mode: auto-confirms after 10 seconds for testing
+- [x] Production-ready: designed for Hubtel/ExpressPay API integration
+
+#### 3. 🔐 Customer Account Portal (JWT Auth)
+
+- [x] `POST /api/auth/register` — Customer registration with bcrypt hashing
+- [x] `POST /api/auth/login` — JWT-based authentication (7-day expiry)
+- [x] `GET /api/auth/me` — Authenticated profile retrieval
+- [x] `PATCH /api/auth/me` — Update profile (name, phone, preferred station, addresses)
+- [x] `GET /api/orders/my` — Authenticated user's order history
+- [x] User data persisted in `users.json`
+- [x] JWT middleware for protected routes
+- [x] Phone/email duplicate detection
+- [x] Ghana phone validation
+
+### 📦 Dependencies (in backend/package.json)
+
+- [x] `bcryptjs` ^2.4.3 — Password hashing
+- [x] `jsonwebtoken` ^9.0.2 — JWT auth tokens
+- [x] `twilio` ^5.4.0 — WhatsApp API
+- [x] `uuid` ^11.0.3 — Transaction ID generation
+- [x] `express` ^4.18.2 — Web framework
+- [x] `cors` ^2.8.5 — CORS middleware
