@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your Triple A Gas customer account — view orders, track deliveries, and manage your profile.">
+    <meta name="robots" content="noindex">
+    <title>Sign In — Triple A Gas Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#5D1020">
+    <meta name="theme-color" content="#5D1020">
+    <style>
+      .account-page {
+        min-height: calc(100vh - var(--header-h) - 80px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+      .account-card {
+        width: 100%;
+        max-width: 440px;
+      }
+      .account-card h1 {
+        font-family: var(--display);
+        font-size: 28px;
+        margin: 0 0 6px;
+      }
+      .account-card .subtitle {
+        color: var(--steel-600);
+        margin: 0 0 28px;
+      }
+      .account-footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--steel-600);
+      }
+      .account-footer a {
+        font-weight: 600;
+      }
+      .logout-msg {
+        background: var(--safe-pale);
+        color: var(--safe);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: none;
+      }
+      .logout-msg.show { display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="site-header" data-base="../"></div>
+    <main class="account-page">
+      <div class="account-card" data-aos="fade-up">
+        <h1 data-i18n="login_title">Welcome back</h1>
+        <p class="subtitle" data-i18n="login_desc">Sign in to your Triple A Gas account to view orders and manage delivery preferences.</p>
+
+        <div class="logout-msg" id="logout-msg">You have been signed out successfully.</div>
+        <div class="form-success" id="login-error" role="alert" style="display:none;"></div>
+
+        <form class="form-card" id="login-form" style="max-width:100%;">
+          <label for="login-email">Email address</label>
+          <input id="login-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" required placeholder="••••••••" autocomplete="current-password">
+
+          <button class="btn btn-primary" type="submit" style="width:100%;">Sign In</button>
+        </form>
+
+        <div class="account-footer">
+          Don't have an account? <a href="register.html">Create one</a><br>
+          <a href="../index.html">← Back to home</a>
+        </div>
+    </main>
+    <div id="site-footer" data-base="../"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../js/site-config.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/account.js"></script>
+    <script>
+      // Show logout message if redirected after logout
+      if (window.location.search.includes('logout=1')) {
+        document.getElementById('logout-msg').classList.add('show');
+      }
+
+      document.getElementById('login-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Signing in…';
+
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const errorEl = document.getElementById('login-error');
+
+        try {
+          const result = await loginCustomer(email, password);
+          if (result.success) {
+            const redirect = new URLSearchParams(window.location.search).get('redirect') || 'dashboard.html';
+            window.location.href = redirect;
+          } else {
+            errorEl.style.display = 'block';
+            errorEl.textContent = result.error || window.__?.('invalid_login') || 'Invalid email or password.';
+            errorEl.classList.add('show');
+          }
+        } catch (err) {
+          errorEl.style.display = 'block';
+          errorEl.textContent = window.__?.('connection_error') || 'Connection error. Please try again.';
+          errorEl.classList.add('show');
+        }
+
+        btn.disabled = false;
+        btn.textContent = original;
+      });
+    </script>
+  </body>
+</html>

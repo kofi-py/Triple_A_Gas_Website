@@ -65,8 +65,8 @@
 
     <section class="page-hero">
       <div class="container" data-aos="fade-up">
-        <h1>Contact us</h1>
-        <p>
+        <h1 data-i18n="contact_hero_title">Contact us</h1>
+        <p data-i18n="contact_hero_desc">
           Phone and WhatsApp are the fastest way to order. Use the form if you
           prefer a callback.
         </p>
@@ -85,8 +85,8 @@
       >
         <div data-aos="fade-right">
           <div class="section-header">
-            <div class="section-kicker">Reach us</div>
-            <h2>We answer the phone</h2>
+            <div class="section-kicker" data-i18n="contact_reach">Reach us</div>
+            <h2 data-i18n="contact_answer">We answer the phone</h2>
           </div>
           <!-- Quick Contact Pills -->
           <div class="contact-pills">
@@ -182,10 +182,10 @@
               </svg>
               Chat on WhatsApp
             </a>
-            <a class="btn btn-ghost" href="stations.html">Find a Station</a>
+            <a class="btn btn-ghost" href="stations.html" data-i18n="contact_find_station">Find a Station</a>
           </div>
           <div class="callout amber" style="margin-top: 28px">
-            <strong>Gas emergency</strong>
+            <strong data-i18n="contact_emergency">Gas emergency</strong>
             If you smell gas, follow the steps on our
             <a href="safety.html">Safety</a> page, then call 024 507 5496.
           </div>
@@ -200,7 +200,7 @@
         >
           <div class="form-success" role="status"></div>
           <div class="form-field">
-            <label for="cname">Full name</label>
+            <label for="cname" data-i18n="form_name_label">Full name</label>
             <input
               id="cname"
               name="name"
@@ -212,7 +212,7 @@
             <div class="field-error">Please enter your name</div>
           </div>
           <div class="form-field">
-            <label for="cphone">Phone number</label>
+            <label for="cphone" data-i18n="form_phone_label">Phone number</label>
             <input
               id="cphone"
               name="phone"
@@ -226,9 +226,9 @@
               Enter a valid Ghana number (e.g. 024 000 0000)
             </div>
           </div>
-          <p class="form-hint">Ghana numbers: 0XX XXX XXXX or +233...</p>
+          <p class="form-hint" data-i18n="form_hint_text">Ghana numbers: 0XX XXX XXXX or +233...</p>
           <div class="form-field">
-            <label for="cemail">Email (optional)</label>
+            <label for="cemail" data-i18n="form_email_label">Email (optional)</label>
             <input
               id="cemail"
               name="email"
@@ -240,7 +240,7 @@
             <div class="field-error">Enter a valid email address</div>
           </div>
           <div class="form-field">
-            <label for="cmsg">How can we help?</label>
+            <label for="cmsg" data-i18n="form_message_label">How can we help?</label>
             <textarea
               id="cmsg"
               name="message"
@@ -251,7 +251,7 @@
             <div class="field-error">Please describe how we can help</div>
           </div>
           <button class="btn btn-primary" type="submit" style="width: 100%">
-            Send message
+            <span data-i18n="form_send">Send message</span>
           </button>
         </form>
       </div>

@@ -1,23 +1,33 @@
 /* Triple A Gas — shared public JS */
 
-/* ---------- i18n helper (safe, falls back to key in English) ---------- */
+/* ---------- i18n helper (safe, falls back to hardcoded English) ---------- */
+var __EN = {
+  nav_home: "Home",
+  nav_products: "Products",
+  nav_stations: "Find a Station",
+  nav_safety: "Safety",
+  nav_faq: "FAQ",
+  nav_about: "About",
+  nav_contact: "Contact",
+  nav_blog: "Blog",
+  call_us: "Call Us",
+  chat_whatsapp: "Chat on WhatsApp",
+  close: "Close",
+  loading: "Loading...",
+  search: "Search...",
+  send_message: "Send a message",
+};
+
 function __(key) {
+  // 1. Try I18N.t() if available
   try {
     if (window.I18N && typeof window.I18N.t === "function") {
-      return window.I18N.t(key);
+      var val = window.I18N.t(key);
+      if (val && val !== key) return val;
     }
   } catch (e) {}
-  // Fallback: return English key from I18N or key itself
-  try {
-    if (
-      window.I18N &&
-      window.I18N.translations &&
-      window.I18N.translations.en &&
-      window.I18N.translations.en[key]
-    ) {
-      return window.I18N.translations.en[key];
-    }
-  } catch (e) {}
+  // 2. Fallback to hardcoded English
+  if (__EN[key]) return __EN[key];
   return key;
 }
 
@@ -33,6 +43,33 @@ function formatLocalPhone(phone) {
     .trim();
 }
 
+const STATION_DIRECTIONS_I18N = {
+  Agbogba: {
+    tw: "Fi Accra Mall junction wɔ Tetteh Quarshie Interchange no so, kɔ atifi fam fa N4 so kɔ Aburi. Fa nifa so wɔ Peduase junction kɔ Agbogba kwan so. Kɔ tee bɛyɛ km 3, fa Valley View University campus no wo benkum so. Station no wɔ benkum so, Flowers Haatso agyiraehyɛde no akyi pɛɛ — hwehwɛ Triple A Gas canopy no.",
+    ga: "Fi Accra Mall junction wɔ Tetteh Quarshie Interchange lɛ ŋa, ya atifi fa N4 lɛ kɛya Aburi. Fa nifa ni wɔ Peduase junction nɛ oyaa Agbogba gbɛ lɛ. Ya kɛya km 3, fa Valley View University campus lɛ o benkum ni. Station lɛ yɛ benkum ni, Flowers Haatso agyiraehyɛde lɛ akyi kɛji — hwehwɛ Triple A Gas canopy lɛ.",
+  },
+  Apam: {
+    tw: "Sɛ wufi Accra reba N1 (Cape Coast kwan) so a, fa Kasoa na kɔ tee bɛyɛ km 40 kɔ Apam junction. Fa nifa so kɔ Apam kurow mu na di kwan kɛse no akyi fa Apam Anglican Asɔre no ho. Station no wɔ w'anim bɛyɛ m 800 wɔ benkum so, Apam lorry station no ho.",
+    ga: "Sɛ ofi Accra ba N1 (Cape Coast gbɛ) lɛ so a, fa Kasoa nɛ oyaa kɛya km 40 kɔ Apam junction. Fa nifa ni kɔ Apam maŋ mli nɛ odi gbɛ kɛse lɛ akyi fa Apam Anglican Asɔre lɛ ho. Station lɛ yɛ o anɔ bɛyɛ m 800 wɔ benkum ni, Apam lorry station lɛ ŋa.",
+  },
+  Antoa: {
+    tw: "Fi Kumasi kurow mfimfini gua so, fa Mampong kwan (Route R112) so kɔ atifi fam. Sɛ wokɔ bɛyɛ km 18 a, wobedu Antoa junction wɔ Kwabre. Fa benkum so wɔ Antoa signpost no ho na kɔ tee bɛyɛ km 1.5. Gas station no wɔ wo nifa so, Antoa Nkwanta mpɔtam hɔ beae no akyi pɛɛ.",
+    ga: "Fi Kumasi maŋ mfimfini gua lɛ ŋa, fa Mampong gbɛ (Route R112) lɛ kɔ atifi. Sɛ oya kɛya km 18 a, obaaduru Antoa junction wɔ Kwabre. Fa benkum ni wɔ Antoa signpost lɛ ho nɛ oyaa km 1.5. Gas station lɛ yɛ o nifa ni, Antoa Nkwanta mantsɛ he lɛ akyi kɛji.",
+  },
+  Bonwire: {
+    tw: "Fi Kumasi, kɔ apuee fam fa N6 so kɔ Ejisu. Sɛ wodu Ejisu roundabout no a, fa ɔkwan a edi kan no kɔ Bonwire kwan so. Kɔ tee bɛyɛ km 12 fa Ejisu municipality no mu. Station no wɔ Bonwire kurow no ano wɔ benkum so, Bonwire Kente nwene beae no ho. Hwehwɛ Triple A Gas agyiraehyɛde tuntum no.",
+    ga: "Fi Kumasi, ya apuee fa N6 lɛ kɛya Ejisu. Sɛ oduru Ejisu roundabout lɛ a, fa gbɛ fɔɔ lɛ kɔ Bonwire gbɛ lɛ so. Ya kɛya km 12 fa Ejisu municipality lɛ mli. Station lɛ yɛ Bonwire maŋ lɛ ano wɔ benkum ni, Bonwire Kente nwene he lɛ ŋa. Hwehwɛ Triple A Gas agyiraehyɛde blue lɛ.",
+  },
+  Bogoso: {
+    tw: "Fi Takoradi, fa N1 so kɔ atɔe fam kɔ Côte d'Ivoire na fa Tarkwa. Sɛ wokɔ bɛyɛ km 50 a, hwehwɛ Bogoso kwan a ɛwɔ wo nifa so. Kɔ Bogoso kurow mu na fa kwan a ɛkɔ Kokoase mpɔtam no so. Station no wɔ Kokoase kwan so bɛyɛ km 2 fi Bogoso roundabout kɛse no ho, wɔ benkum so wɔ Bogoso Community Health Centre no nkyɛn.",
+    ga: "Fi Takoradi, fa N1 lɛ ya atɔe kɔ Côte d'Ivoire nɛ ofa Tarkwa. Sɛ oya km 50 a, hwehwɛ Bogoso gbɛ ni yɛ o nifa ni. Ya Bogoso maŋ mli nɛ ofa gbɛ ni kɔ Kokoase mantsɛ lɛ so. Station lɛ yɛ Kokoase gbɛ lɛ so, km 2 kɛjɛ Bogoso roundabout kɛse lɛ ŋa, wɔ benkum ni Bogoso Community Health Centre lɛ ŋa.",
+  },
+  Prestea: {
+    tw: "Fi Prestea intersection kɛse a ɛwɔ Tarkwa-Asankrangwa kwan so no, fa kwan a ɛkɔ Asoampa mpɔtam no so. Di Asoampa kwan no akyi bɛyɛ km 1.8 fa Prestea Government Hospital no ho. Triple A Gas station no wɔ nifa so, Asoampa Evangelical Asɔre no akyi pɛɛ; wobɛhu cylinder a wɔde asi anim no.",
+    ga: "Fi Prestea intersection kɛse ni yɛ Tarkwa-Asankrangwa gbɛ lɛ so, fa gbɛ ni kɔ Asoampa mantsɛ lɛ so. Di Asoampa gbɛ lɛ akyi kɛya km 1.8 fa Prestea Government Hospital lɛ ho. Triple A Gas station lɛ yɛ nifa ni, Asoampa Evangelical Asɔre lɛ akyi kɛji; o baahu cylinder ni wɔ tsɔ anim lɛ.",
+  },
+};
+
 function buildStationsFromCompanyInfo() {
   const locations = window.COMPANY_INFO?.locations || [];
   return locations.map((loc) => ({
@@ -44,14 +81,18 @@ function buildStationsFromCompanyInfo() {
     town: loc.city,
     region: loc.region,
     address: loc.address,
-    directions: loc.directions || "",
+    directions:
+      loc.directionsI18n?.[window.I18N?.currentLang] ||
+      STATION_DIRECTIONS_I18N[loc.city]?.[window.I18N?.currentLang] ||
+      loc.directions ||
+      "",
     phone: formatLocalPhone(loc.phone),
     hours: "Confirm before travelling",
     status: loc.type === "Headquarters" ? "safe" : "hazard",
     stock: "Availability to confirm",
     mapUrl:
       loc.googleMapsUrl ||
-      `https://www.openstreetmap.org/?mlat=${loc.coordinates.lat}&mlon=${loc.coordinates.lng}#map=15/${loc.coordinates.lat}/${loc.coordinates.lng}`,
+      `https://www.google.com/maps/search/?api=1&query=${loc.coordinates.lat},${loc.coordinates.lng}`,
     coordinates: loc.coordinates,
   }));
 }
@@ -154,6 +195,8 @@ function renderHeader() {
           <li><a href="${base}faq.html" ${isActive("faq", current) ? 'aria-current="page"' : ""}>${__("nav_faq")}</a></li>
           <li><a href="${base}about.html" ${isActive("about", current) ? 'aria-current="page"' : ""}>${__("nav_about")}</a></li>
           <li><a href="${base}contact.html" ${isActive("contact", current) ? 'aria-current="page"' : ""}>${__("nav_contact")}</a></li>
+          <li><a href="${base}blog.html" ${isActive("blog", current) ? 'aria-current="page"' : ""}>${__("nav_blog")}</a></li>
+          <li><a href="${base}account/login.html" class="nav-account-link">👤 Sign In</a></li>
         </ul>
         <div class="header-actions">
           <a class="btn btn-whatsapp btn-sm" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${__("chat_whatsapp")}</a>
@@ -163,15 +206,7 @@ function renderHeader() {
     </header>
   `;
 
-  const toggle = document.getElementById("nav-toggle");
-  const links = document.getElementById("nav-links");
-  if (toggle && links) {
-    toggle.addEventListener("click", () => {
-      const open = links.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open);
-      toggle.textContent = open ? "✕" : "☰";
-    });
-  }
+  // Nav toggle listener is handled by initMobileDrawer()
 }
 
 function renderFooter() {
@@ -197,7 +232,8 @@ function renderFooter() {
               <li><a href="${base}stations.html">Find a Station</a></li>
               <li><a href="${base}safety.html">Safety</a></li>
               <li><a href="${base}faq.html">FAQ</a></li>
-              <li><a href="${base}about.html">About</a></li>
+<li><a href="${base}about.html">About</a></li>
+              <li><a href="${base}blog.html">Blog</a></li>
             </ul>
           </div>
           <div>
@@ -412,7 +448,7 @@ function initStationSearch() {
         <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
           <a class="station-directions-link" href="${s.mapUrl}" target="_blank" rel="noopener">📍 Get directions</a>
           <details style="margin-top:8px;">
-            <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">Driving directions</summary>
+            <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">${__("driving_directions")}</summary>
             <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);line-height:1.55;">${s.directions}</p>
           </details>
         </div>`
@@ -422,6 +458,9 @@ function initStationSearch() {
     `,
       )
       .join("");
+    grid.querySelectorAll(".station-directions-link").forEach((link) => {
+      link.textContent = __("get_directions");
+    });
     refreshAos();
   }
 
@@ -474,7 +513,7 @@ function initStationTeaser() {
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--steel-100);">
         <a class="station-directions-link" href="${s.mapUrl}" target="_blank" rel="noopener">📍 Get directions</a>
         <details style="margin-top:8px;">
-          <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">Driving directions</summary>
+          <summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--cylinder-blue);">${__("driving_directions")}</summary>
           <p style="margin:8px 0 0;font-size:13px;color:var(--steel-600);line-height:1.55;">${s.directions}</p>
         </details>
       </div>`
@@ -484,6 +523,9 @@ function initStationTeaser() {
   `,
     )
     .join("");
+  el.querySelectorAll(".station-directions-link").forEach((link) => {
+    link.textContent = __("get_directions");
+  });
   refreshAos();
 }
 
@@ -744,8 +786,9 @@ function initMobileDrawer() {
         <li><a href="stations.html">Find a Station</a></li>
         <li><a href="safety.html">Safety</a></li>
         <li><a href="faq.html">FAQ</a></li>
-        <li><a href="about.html">About</a></li>
+<li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="blog.html">Blog</a></li>
       </ul>
       <div class="nav-drawer-footer">
         <a href="tel:${PHONE_TEL}">📞 Call ${PHONE}</a>

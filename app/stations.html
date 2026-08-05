@@ -15,10 +15,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/public.css" />
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
@@ -64,8 +60,8 @@
     <div id="site-header"></div>
     <section class="page-hero">
       <div class="container" data-aos="fade-up">
-        <h1>Find a Station</h1>
-        <p>
+        <h1 data-i18n="stations_hero_title">Find a Station</h1>
+        <p data-i18n="stations_hero_desc">
           Triple A Gas operates 7 retail outlets across Greater Accra, Central,
           Ashanti, and Western regions. Use the map or list below to find your
           nearest branch — confirm availability before travelling.
@@ -75,21 +71,29 @@
     <section class="section section-alt">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
-          <div class="section-kicker">Interactive map</div>
-          <h2>Our Locations</h2>
+          <div class="section-kicker" data-i18n="stations_map_title">Interactive map</div>
+          <h2 data-i18n="stations_map_heading">Our Locations</h2>
           <p>
             Triple A Gas operates 7 retail outlets across Ghana. Use the map to
             find the branch nearest to you.
           </p>
         </div>
-        <div id="station-map" data-aos="fade-up"></div>
+        <iframe
+          id="station-map"
+          class="google-station-map"
+          title="Triple A Gas station locations on Google Maps"
+          src="https://www.google.com/maps?q=Triple+A+Gas+Ghana&z=7&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          data-aos="fade-up"
+        ></iframe>
       </div>
     </section>
     <section class="section">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
-          <div class="section-kicker">All stations</div>
-          <h2>Find &amp; Contact</h2>
+          <div class="section-kicker" data-i18n="stations_all">All stations</div>
+          <h2 data-i18n="stations_find">Find &amp; Contact</h2>
         </div>
         <div class="search-bar" data-aos="fade-up">
           <label
@@ -138,9 +142,9 @@
     <section class="section section-alt">
       <div class="container">
         <div class="section-header" data-aos="fade-up">
-          <div class="section-kicker">Station gallery</div>
-          <h2>See our stations</h2>
-          <p>Real photos from our stations across Ghana.</p>
+          <div class="section-kicker" data-i18n="stations_gallery">Station gallery</div>
+          <h2 data-i18n="stations_gallery_title">See our stations</h2>
+          <p data-i18n="stations_gallery_desc">Real photos from our stations across Ghana.</p>
         </div>
         <div id="station-galleries"></div>
       </div>
@@ -148,22 +152,21 @@
     <div class="safety-strip" data-aos="fade-up">
       <div class="container">
         <div>
-          <h2>Need gas today?</h2>
+          <h2 data-i18n="stations_need_gas">Need gas today?</h2>
           <p>
             Call your nearest branch to confirm current availability and opening
             hours.
           </p>
         </div>
-        <a class="btn btn-primary" href="tel:+233244011050">Call now</a>
+        <a class="btn btn-primary" href="tel:+233244011050" data-i18n="stations_call_now">Call now</a>
       </div>
     </div>
     <div id="site-footer"></div>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/site-config.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/company-info.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/map.js"></script>
+    <script src="js/google-map.js"></script>
   </body>
 </html>

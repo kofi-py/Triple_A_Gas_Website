@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your Triple A Gas account — order history, profile management, and delivery tracking.">
+    <meta name="robots" content="noindex">
+    <title>My Account — Triple A Gas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#5D1020">
+    <meta name="theme-color" content="#5D1020">
+    <style>
+      .dash-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 36px;
+        align-items: start;
+        padding: 40px 0;
+      }
+      .dash-side {
+        background: var(--paper);
+        border: 1px solid var(--steel-100);
+        border-radius: var(--radius);
+        padding: 24px;
+      }
+      .dash-side h2 {
+        font-family: var(--display);
+        font-size: 16px;
+        margin: 0 0 18px;
+      }
+      .dash-side .user-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--cylinder-blue-pale);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--cylinder-blue);
+        margin: 0 auto 12px;
+      }
+      .dash-side .user-name {
+        text-align: center;
+        font-weight: 700;
+        font-size: 17px;
+      }
+      .dash-side .user-email {
+        text-align: center;
+        font-size: 13px;
+        color: var(--steel-600);
+        margin-bottom: 16px;
+      }
+      .dash-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .dash-nav li {
+        margin-bottom: 4px;
+      }
+      .dash-nav a {
+        display: block;
+        padding: 10px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--ink);
+        transition: background 0.12s;
+      }
+      .dash-nav a:hover,
+      .dash-nav a.active {
+        background: var(--cylinder-blue-pale);
+        color: var(--cylinder-blue);
+      }
+      .dash-nav .logout-link {
+        color: var(--danger);
+      }
+      .dash-nav .logout-link:hover {
+        background: var(--danger-pale);
+      }
+      .dash-main h1 {
+        font-family: var(--display);
+        font-size: 26px;
+        margin: 0 0 6px;
+      }
+      .dash-main .subtitle {
+        color: var(--steel-600);
+        margin: 0 0 28px;
+      }
+      .order-card {
+        background: var(--paper);
+        border: 1px solid var(--steel-100);
+        border-radius: var(--radius);
+        padding: 18px 20px;
+        margin-bottom: 12px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 16px;
+        align-items: center;
+        transition: box-shadow 0.15s;
+      }
+      .order-card:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+      .order-card .order-icon {
+        font-size: 28px;
+      }
+      .order-card .order-info h3 {
+        font-family: var(--display);
+        font-size: 15px;
+        margin: 0 0 4px;
+      }
+      .order-card .order-info p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--steel-600);
+      }
+      .order-card .order-status {
+        text-align: right;
+      }
+      .dash-panel { display: none; }
+      .dash-panel.active { display: block; }
+      .profile-field {
+        margin-bottom: 16px;
+      }
+      .profile-field label {
+        font-size: 12px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+        color: var(--steel-600);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .profile-field .value {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .dash-tabs {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--steel-100);
+        padding-bottom: 0;
+      }
+      .dash-tab {
+        padding: 10px 18px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: var(--steel-600);
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition: color 0.12s, border-color 0.12s;
+      }
+      .dash-tab:hover { color: var(--ink); }
+      .dash-tab.active {
+        color: var(--cylinder-blue);
+        border-bottom-color: var(--cylinder-blue);
+      }
+      .order-loading {
+        text-align: center;
+        padding: 40px;
+        color: var(--steel-600);
+      }
+      @media (max-width: 800px) {
+        .dash-layout { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header" data-base="../"></div>
+    <section class="section">
+      <div class="container">
+        <div class="dash-layout">
+          <!-- Sidebar -->
+          <aside class="dash-side">
+            <div class="user-avatar" id="dash-avatar">—</div>
+            <div class="user-name" id="dash-name">Loading…</div>
+            <div class="user-email" id="dash-email"></div>
+            <ul class="dash-nav">
+              <li><a href="#" class="active" data-panel="orders">📦 My Orders</a></li>
+              <li><a href="#" data-panel="profile">👤 Profile</a></li>
+              <li><a href="#" data-panel="settings">⚙️ Settings</a></li>
+              <li><a href="../order.html">🛒 New Order</a></li>
+              <li><a href="#" class="logout-link" id="dash-logout">🚪 Sign Out</a></li>
+            </ul>
+          </aside>
+
+          <!-- Main Content -->
+          <div class="dash-main">
+            <h1 data-i18n="dashboard_title">My Account</h1>
+            <p class="subtitle" data-i18n="dashboard_desc">Manage your orders, profile, and delivery preferences.</p>
+
+            <!-- Orders Panel -->
+            <div class="dash-panel active" id="panel-orders">
+              <h2 style="font-family:var(--display);font-size:18px;margin:0 0 16px;">Order History</h2>
+              <div id="orders-container">
+                <div class="order-loading">Loading your orders…</div>
+            </div>
+
+            <!-- Profile Panel -->
+            <div class="dash-panel" id="panel-profile">
+              <h2 style="font-family:var(--display);font-size:18px;margin:0 0 16px;">Profile</h2>
+              <div class="profile-field">
+                <label>Full Name</label>
+                <div class="value" id="prof-name">—</div>
+              <div class="profile-field">
+                <label>Email</label>
+                <div class="value" id="prof-email">—</div>
+              <div class="profile-field">
+                <label>Phone</label>
+                <div class="value" id="prof-phone">—</div>
+              <div class="profile-field">
+                <label>Preferred Station</label>
+                <div class="value" id="prof-station">Not set</div>
+              <button class="btn btn-ghost btn-sm" onclick="switchPanel('settings')">Edit Profile →</button>
+            </div>
+
+            <!-- Settings Panel -->
+            <div class="dash-panel" id="panel-settings">
+              <h2 style="font-family:var(--display);font-size:18px;margin:0 0 16px;">Edit Profile</h2>
+              <div class="form-success" id="settings-success" role="alert" style="display:none;"></div>
+              <form id="settings-form" style="max-width:480px;">
+                <label for="edit-name">Full name</label>
+                <input id="edit-name" name="name" required>
+
+                <label for="edit-phone">Phone number</label>
+                <input id="edit-phone" name="phone" type="tel" required placeholder="024 000 0000">
+
+                <label for="edit-station">Preferred station</label>
+                <select id="edit-station" name="preferredStation">
+                  <option value="">Not set</option>
+                  <option value="Agbogba">Agbogba (Head Office) — Greater Accra</option>
+                  <option value="Klagon">Klagon — Greater Accra</option>
+                  <option value="Apam">Apam — Central</option>
+                  <option value="Antoa">Antoa — Ashanti</option>
+                  <option value="Bonwire">Bonwire — Ashanti</option>
+                  <option value="Bogoso">Bogoso — Western</option>
+                  <option value="Prestea">Prestea — Western</option>
+                </select>
+
+                <button class="btn btn-primary" type="submit" style="width:100%;">Save Changes</button>
+              </form>
+            </div>
+        </div>
+    </section>
+    <div id="site-footer" data-base="../"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../js/site-config.js"></script>
+    <script src="../js/company-info.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/account.js"></script>
+    <script>
+      // Panel navigation
+      function switchPanel(id) {
+        document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.dash-nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById('panel-' + id).classList.add('active');
+        document.querySelector('.dash-nav a[data-panel="' + id + '"]')?.classList.add('active');
+      }
+
+      document.querySelectorAll('.dash-nav a[data-panel]').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          switchPanel(link.dataset.panel);
+        });
+      });
+
+      // Logout
+      document.getElementById('dash-logout').addEventListener('click', e => {
+        e.preventDefault();
+        clearCustomerSession();
+        window.location.href = 'login.html?logout=1';
+      });
+
+      // Load profile
+      async function loadProfile() {
+        const result = await fetchProfile();
+        if (!result.success) {
+          window.location.href = 'login.html';
+          return;
+        }
+        const u = result.user;
+        document.getElementById('dash-avatar').textContent = u.name.charAt(0).toUpperCase();
+        document.getElementById('dash-name').textContent = u.name;
+        document.getElementById('dash-email').textContent = u.email;
+        document.getElementById('prof-name').textContent = u.name;
+        document.getElementById('prof-email').textContent = u.email;
+        document.getElementById('prof-phone').textContent = u.phone;
+        document.getElementById('prof-station').textContent = u.preferredStation || 'Not set';
+        document.getElementById('edit-name').value = u.name;
+        document.getElementById('edit-phone').value = u.phone;
+        if (u.preferredStation) document.getElementById('edit-station').value = u.preferredStation;
+      }
+
+      // Load orders
+      async function loadOrders() {
+        const container = document.getElementById('orders-container');
+        const result = await fetchMyOrders();
+        if (!result.success || !result.orders.length) {
+          container.innerHTML = `
+            <div style="text-align:center;padding:40px;color:var(--steel-600);">
+              <div style="font-size:48px;margin-bottom:12px;">📦</div>
+              <p style="font-size:16px;font-weight:600;">No orders yet</p>
+              <p style="font-size:14px;">Place your first order and it will appear here.</p>
+              <a class="btn btn-primary btn-sm" href="../order.html" style="margin-top:12px;">Order Now</a>
+            </div>
+          `;
+          return;
+        }
+        container.innerHTML = result.orders.map(o => {
+          const statusColor = o.status === 'completed' ? 'safe' : o.status === 'read' ? 'hazard' : 'blue';
+          const payStatus = o.paymentStatus === 'paid' ? '✅ Paid' : '⏳ Pending';
+          const delStatus = o.deliveryStatus === 'delivered' ? '✅ Delivered' : o.deliveryStatus === 'out_for_delivery' ? '🚚 Out for delivery' : '📋 Pending';
+          return `
+            <div class="order-card">
+              <div class="order-icon">🫙</div>
+              <div class="order-info">
+                <h3>${o.cylinderSize || 'LPG Order'}</h3>
+                <p>${o.deliveryArea || 'N/A'} · ${o.createdAt || ''}</p>
+                <p>💰 ${payStatus} · ${delStatus}</p>
+              </div>
+              <div class="order-status">
+                <span class="badge badge-${statusColor}">${o.status}</span>
+              </div>
+          `;
+        }).join('');
+      }
+
+      // Save profile
+      document.getElementById('settings-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+
+        const data = {
+          name: document.getElementById('edit-name').value.trim(),
+          phone: document.getElementById('edit-phone').value.trim(),
+          preferredStation: document.getElementById('edit-station').value || null,
+        };
+
+        const result = await updateProfile(data);
+        const successEl = document.getElementById('settings-success');
+        if (result.success) {
+          successEl.style.display = 'block';
+          successEl.textContent = 'Profile updated successfully!';
+          successEl.classList.add('show');
+          loadProfile();
+        } else {
+          successEl.style.display = 'block';
+          successEl.textContent = result.error || 'Update failed.';
+          successEl.style.background = 'var(--danger-pale)';
+          successEl.style.color = 'var(--danger)';
+        }
+
+        btn.disabled = false;
+        btn.textContent = original;
+      });
+
+      // Init
+      loadProfile();
+      loadOrders();
+    </script>
+  </body>
+</html>

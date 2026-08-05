@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a Triple A Gas customer account for faster ordering and delivery tracking.">
+    <meta name="robots" content="noindex">
+    <title>Create Account — Triple A Gas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#5D1020">
+    <meta name="theme-color" content="#5D1020">
+    <style>
+      .account-page {
+        min-height: calc(100vh - var(--header-h) - 80px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+      .account-card {
+        width: 100%;
+        max-width: 480px;
+      }
+      .account-card h1 {
+        font-family: var(--display);
+        font-size: 28px;
+        margin: 0 0 6px;
+      }
+      .account-card .subtitle {
+        color: var(--steel-600);
+        margin: 0 0 28px;
+      }
+      .account-footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--steel-600);
+      }
+      .account-footer a { font-weight: 600; }
+      .password-hint {
+        font-size: 12px;
+        color: var(--steel-600);
+        margin: -12px 0 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header" data-base="../"></div>
+    <main class="account-page">
+      <div class="account-card" data-aos="fade-up">
+        <h1 data-i18n="register_title">Create your account</h1>
+        <p class="subtitle" data-i18n="register_desc">Register for faster ordering, order history, and delivery preferences.</p>
+
+        <div class="form-success" id="register-error" role="alert" style="display:none;"></div>
+        <div class="form-success" id="register-success" role="alert" style="display:none;"></div>
+
+        <form class="form-card" id="register-form" style="max-width:100%;">
+          <label for="reg-name">Full name</label>
+          <input id="reg-name" name="name" required placeholder="Ama Owusu" autocomplete="name">
+
+          <label for="reg-email">Email address</label>
+          <input id="reg-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+
+          <label for="reg-phone">Phone number</label>
+          <input id="reg-phone" name="phone" type="tel" required placeholder="024 000 0000" autocomplete="tel">
+          <p class="form-hint">Ghana number: 0XX XXX XXXX or +233...</p>
+
+          <label for="reg-password">Password</label>
+          <input id="reg-password" name="password" type="password" required minlength="6" placeholder="At least 6 characters" autocomplete="new-password">
+          <p class="password-hint">Must be at least 6 characters</p>
+
+          <button class="btn btn-primary" type="submit" style="width:100%;">Create Account</button>
+        </form>
+
+        <div class="account-footer">
+          Already have an account? <a href="login.html">Sign in</a><br>
+          <a href="../index.html">← Back to home</a>
+        </div>
+    </main>
+    <div id="site-footer" data-base="../"></div>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../js/site-config.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/account.js"></script>
+    <script>
+      document.getElementById('register-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Creating account…';
+
+        const name = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const phone = document.getElementById('reg-phone').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const errorEl = document.getElementById('register-error');
+        const successEl = document.getElementById('register-success');
+
+        errorEl.style.display = 'none';
+        successEl.style.display = 'none';
+
+        try {
+          const result = await registerCustomer(name, email, phone, password);
+          if (result.success) {
+            successEl.style.display = 'block';
+            successEl.textContent = 'Account created! Redirecting to your dashboard…';
+            successEl.classList.add('show');
+            setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+          } else {
+            errorEl.style.display = 'block';
+            errorEl.textContent = result.error || 'Registration failed. Please try again.';
+            errorEl.classList.add('show');
+          }
+        } catch (err) {
+          errorEl.style.display = 'block';
+          errorEl.textContent = window.__?.('connection_error') || 'Connection error. Please try again.';
+          errorEl.classList.add('show');
+        }
+
+        btn.disabled = false;
+        btn.textContent = original;
+      });
+    </script>
+  </body>
+</html>

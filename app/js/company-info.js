@@ -68,6 +68,10 @@ window.COMPANY_INFO = {
       coordinates: { lat: 5.65, lng: -0.05 },
       directions:
         "From the Tema Motorway (George Bush Highway), exit at the Ashaiman junction and head east towards Klagon. Follow the main Klagon road for about 2.5 km. The station is situated on the right-hand side just after the Klagon market area, directly opposite the Shell filling station.",
+      directionsI18n: {
+        tw: "Fi Tema Motorway (George Bush Highway) so, fa Ashaiman junction no so na kɔ apuee fam kɔ Klagon. Di Klagon kwan kɛse no akyi bɛyɛ km 2.5. Station no wɔ wo nifa so, wɔ Klagon gua no akyi pɛɛ, Shell filling station no anim pɛɛ.",
+        ga: "Fi Tema Motorway (George Bush Highway) lɛ ŋa, tswa wɔ Ashaiman junction nɛ oyaa apuee kɛya Klagon. Di Klagon gbɛ kɛse lɛ akɛya km 2.5. Station lɛ yɛ o nifa ni, Klagon gua lɛ akyi kɛji, Shell filling station lɛ enyɔŋ pɛɛ.",
+      },
     },
     {
       id: 3,
