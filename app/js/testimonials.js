@@ -34,6 +34,21 @@ window.TESTIMONIALS = [
   },
 ];
 
+window.TESTIMONIAL_TRANSLATIONS = {
+  tw: [
+    { text: "Manya me gas afi Triple A Gas bɛboro mfe abien. Wɔde no ba bere so, na adwumayɔfo no yɛ adamfofa ne adwumayɔ yie. Mɛkamfo wɔn kyerɛ obiara a ɔrehwehwɛ LPG a wobetumi de wɔn ho ato so.", highlight: "Wɔde nneɛma ba bere so bɛboro mfe abien" },
+    { text: "Banbɔ hwɛ a wɔyɛyɛ mɛ cylinder ho ansa na wɔahyɛ mu no maa me koma tɔɔ me yam. Gas adetɔfo nyinaa nnye bere nhwɛ valve ne hose. Adwuma pa!", highlight: "Banbɔ sohwɛ a emu dɔ" },
+    { text: "Sɛ chop bar wura no, mehia gas a ɔba daa. Triple A Gas nnyaa me da. Wɔn bulk supply bo ye, na wɔde ba bere so daa.", highlight: "Bulk gas a wobetumi de wɔn ho ato so ma adwuma" },
+    { text: "Efi frɛ a edi kan no so de kosi cylinder no delivery, wɔyɛ adwuma yie. Wɔkyerɛɛ me sɛnea mede samina nsuo bɛhwɛ gas a efi mu. Wɔn adetɔfoɔ nkyerɛkyerɛ no ahye me.", highlight: "Wɔkyerɛɛ me banbɔ ho ade" },
+  ],
+  ga: [
+    { text: "Me naaye me gas kɛjɛ Triple A Gas shikpon mli bɛjɛ nyɛmɛi enɛ. Wɔ kɔkɔba lɛ yɛ shiɛ lɛ, ni wɔn nitsumɔlɔi yɛ mɔi heɔ amɔhe ni wɔnaa nitsumɔ yɛie.", highlight: "Kɔkɔba ni yɛ shiɛ lɛ" },
+    { text: "Hewale kwɛmɔ ni wɔyɛɛ me cylinder lɛ he ni wɔhe mli lɛ mɔ mɔni yɛ me. Gas shikafoi fɔɔ kɛbaaye shiɛ ni wɔkwɛ valve kɛ hose lɛ. Nitsumɔ paa!", highlight: "Hewale kwɛmɔ ni emli dɔ" },
+    { text: "Me ji chop bar hewɔlɔ, hewɔ gas ni yɛ daa. Triple A Gas bɛjɛ naa me da. Wɔn bulk supply nɔyeli yɛ, ni wɔ kɔkɔba lɛ yɛ shiɛ lɛ daa.", highlight: "Bulk gas ni mɔi heɔ amɔhe ma nitsumɔ" },
+    { text: "Je tsɛɛ ni ɔyɛ fɔɔ kɛɛyashi cylinder kɔkɔba lɛ, wɔnaa nitsumɔ yɛie. Wɔtsɛmɔɔ me bɔ ni mebaakɛɛ gas ni jeɔ mli kɛ samina tswɛ. Wɔn customer education lɛ ahye me.", highlight: "Wɔtsɛmɔɔ me hewale he" },
+  ],
+};
+
 function escapeHtml(str) {
   if (!str) return "";
   var div = document.createElement("div");
@@ -47,7 +62,13 @@ function renderTestimonials() {
   var container = document.getElementById("testimonials-container");
   if (!container || !window.TESTIMONIALS) return;
 
-  var testimonials = window.TESTIMONIALS;
+  var lang = window.I18N?.currentLang || "en";
+  var translated = window.TESTIMONIAL_TRANSLATIONS?.[lang];
+  var testimonials = window.TESTIMONIALS.map(function (testimonial, index) {
+    return translated?.[index]
+      ? Object.assign({}, testimonial, translated[index])
+      : testimonial;
+  });
 
   function stars(n) {
     return (
@@ -121,6 +142,26 @@ function renderTestimonials() {
   var dots = container.querySelectorAll(".testimonial-dot");
   var prevBtn = container.querySelector(".testimonial-arrow-prev");
   var nextBtn = container.querySelector(".testimonial-arrow-next");
+
+  var translateLabel = function (key, fallback) {
+    var value = window.I18N?.t?.(key);
+    return value && value !== key ? value : fallback;
+  };
+  prevBtn.setAttribute(
+    "aria-label",
+    translateLabel("testimonial_previous", "Previous testimonial"),
+  );
+  nextBtn.setAttribute(
+    "aria-label",
+    translateLabel("testimonial_next", "Next testimonial"),
+  );
+  dots.forEach(function (dot, index) {
+    dot.setAttribute(
+      "aria-label",
+      translateLabel("testimonial_go_to", "Go to testimonial") + " " +
+        (index + 1),
+    );
+  });
 
   function goTo(index) {
     if (index < 0) index = slides.length - 1;

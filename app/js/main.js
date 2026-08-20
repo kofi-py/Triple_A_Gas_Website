@@ -221,33 +221,33 @@ function renderFooter() {
           <div>
             <div class="footer-brand">
               ${GAUGE_SVG}
-            <div class="brand-text">TRIPLE A GAS<span>Reliable cooking gas</span></div>
+            <div class="brand-text">TRIPLE A GAS<span>${__("footer_tagline")}</span></div>
             </div>
-            <p style="margin:0;max-width:32ch;line-height:1.55;">Dependable, safety-first LPG for households and businesses across Ghana.</p>
+            <p style="margin:0;max-width:32ch;line-height:1.55;">${__("footer_desc")}</p>
           </div>
           <div>
-            <h4>Explore</h4>
+            <h4>${__("explore")}</h4>
             <ul>
-              <li><a href="${base}products.html">Products</a></li>
-              <li><a href="${base}stations.html">Find a Station</a></li>
-              <li><a href="${base}safety.html">Safety</a></li>
-              <li><a href="${base}faq.html">FAQ</a></li>
-<li><a href="${base}about.html">About</a></li>
-              <li><a href="${base}blog.html">Blog</a></li>
+              <li><a href="${base}products.html">${__("nav_products")}</a></li>
+              <li><a href="${base}stations.html">${__("nav_stations")}</a></li>
+              <li><a href="${base}safety.html">${__("nav_safety")}</a></li>
+              <li><a href="${base}faq.html">${__("nav_faq")}</a></li>
+<li><a href="${base}about.html">${__("nav_about")}</a></li>
+              <li><a href="${base}blog.html">${__("nav_blog")}</a></li>
             </ul>
           </div>
           <div>
-            <h4>Contact</h4>
+            <h4>${__("contact_title")}</h4>
             <a class="footer-phone" href="tel:${PHONE_TEL}">${PHONE}</a>
-            <p style="margin:0 0 6px;">Head Office, Accra</p>
+            <p style="margin:0 0 6px;">${__("head_office_accra")}</p>
             <a href="mailto:tripleagascompany@yahoo.com">tripleagascompany@yahoo.com</a>
           </div>
           <div>
-            <h4>Order</h4>
+            <h4>${__("order_title")}</h4>
             <ul>
-              <li><a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} Chat on WhatsApp</a></li>
-              <li><a href="${base}contact.html">Request delivery</a></li>
-              <li><a href="${base}stations.html">Nearest outlet</a></li>
+              <li><a href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${__("chat_whatsapp")}</a></li>
+              <li><a href="${base}contact.html">${__("request_delivery")}</a></li>
+              <li><a href="${base}stations.html">${__("nearest_outlet")}</a></li>
             </ul>
           </div>
         </div>
@@ -269,11 +269,10 @@ function renderFooter() {
 function initTypewriter() {
   const el = document.getElementById("typewriter-text");
   if (!el) return;
-  const phrases = [
-    "Reliable LPG for Ghanaian homes and businesses.",
-    "Safety-first cooking gas, delivered to your door.",
-    "Trusted LPG supply since 2005.",
-  ];
+  const phrases = ["typewriter_1", "typewriter_2", "typewriter_3"]
+    .map((key) => __(key))
+    .filter(Boolean);
+  if (!phrases.length) return;
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
